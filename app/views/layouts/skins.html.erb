@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <title>Schoolify</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <link href="assets/video-js2.0.2.css" rel="stylesheet">
+  <link href="assets/tube.css" rel="stylesheet">
+  <link href="assets/vim.css" rel="stylesheet">
+  <script src="assets/video2.0.2.js"></script>
+  <script src="assets/videojs/video.js/dist/ie8/videojs-ie8.min.js"></script>
+
+  <script type="text/javascript">
+  // Add VideoJS to all video tags on the page when the DOM is ready
+  VideoJS.setupAllWhenReady();
+  </script>
+</head>
+<body>
+<%= yield %>
+</body>
+</html>
+

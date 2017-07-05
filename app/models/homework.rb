@@ -1,0 +1,2 @@
+class Homework < Section
+end

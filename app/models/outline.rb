@@ -1,0 +1,2 @@
+class Outline < Section
+end

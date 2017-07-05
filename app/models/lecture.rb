@@ -1,0 +1,2 @@
+class Lecture < Section
+end

@@ -1,0 +1,68 @@
+mysqld_safe --defaults-file=/home/simon/Desktop/Depot/config/my.cnf --user=mysql &
+
+=====================================================
+
+ControlBar.prototype.options_ = {
+  children: ['playToggle', 'currentTimeDisplay', 'timeDivider', 'durationDisplay', 'progressControl', 'liveDisplay', 'remainingTimeDisplay', 'customControlSpacer', 'playbackRateMenuButton', 'chaptersButton', 'descriptionsButton', 'subtitlesButton', 'captionsButton', 'audioTrackButton', 'fullscreenToggle', 'volumeMenuButton']
+};
+=====================================================
+<div class="second" </div>
+<div class="first" ></div>
+.second {
+  float: right;
+}
+
+.first {
+  float: right;
+}
+
+result: first is left of second
+=======================================================
+dpkg -i package.deb #安装包 
+dpkg -r package #删除包 
+dpkg -P package #删除包（包括配置文件） 
+dpkg -L package #列出与该包关联的文件 
+dpkg -l package #显示该包的版本 
+dpkg --unpack package.deb #解开deb包的内容 
+dpkg -S keyword #搜索所属的包内容 
+dpkg -l #列出当前已安装的包 
+dpkg -c package.deb #列出deb包的内容 
+dpkg --configure package #配置包
+
+=======================================================
+CDN节点
+
+复制js代码不要从firebug js response中复制，打开链接再复制
+
+chapter has many sections
+章有许多节
+section has many paragraphs
+
+==========an ajax triggers two actions=============================================
+function action1()
+{
+// handle some stuff
+action2();
+}
+
+function action2()
+{// handle some more stuff}
+
+if ($_POST['someButton'])
+{action1();}
+
+As ScallioXTX said, you can combine these two things server-side. Call one PHP script and let it do its thing and then forward to the other one. Of course, only the last one can produce any visible output.
+=======================================================
+rails g model Course title:string subtitle:string category_id:integer user_id:integer
+rails g model Chapter title:string course_id:integer position:integer
+rails g model Section title:string chapter_id:integer position:integer course_id:integer type:string
+rails g model Paragraph title:string section_id:integer chapter_id:integer course_id:integer bookmark_id:integer video_only:boolean content:text content_type:string position:integer
+rails g model Bookmark course_id:integer paragraph_id:integer user_id:integer
+
+rails g model User name:string
+rails g model Category name:string course_count:integer
+
+rails runner script/load_course.rb
+
+
+

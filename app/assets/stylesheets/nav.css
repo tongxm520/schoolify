@@ -1,0 +1,182 @@
+.course-index {
+    border-radius: 3px 0 0 3px;
+    border-right: 1px solid #d1d5d3;
+    display: table-cell;
+    transition: all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s;
+    width:25%;
+}
+.course-index .sr {
+    background: #fff none repeat scroll 0 0;
+    color: #000;
+}
+.course-index .accordion .course-navigation .button-chapter {
+    background-color: #e1e5e3;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    border: 0 none;
+    border-radius: 0;
+    box-shadow: 0 1px 0 #fff inset, 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+    box-sizing: border-box;
+    color: #4f7573;
+    display: block;
+    padding: 0;
+    transition: background-color 0.1s linear 0s;
+    width: 100%;
+}
+.course-index .accordion .course-navigation .button-chapter .group-heading {
+    display: block;
+    padding: 15px 20px 15px 40px;
+    position: relative;
+    text-align: left;
+}
+.course-index .accordion .course-navigation .button-chapter .group-heading .icon {
+    color: #c8c8c8;
+    font-size: 0.875em;
+    left: 20px;
+    position: absolute;
+    top: 20px;
+}
+.course-index .accordion .course-navigation .button-chapter.is-open {
+    background: #fff none repeat scroll 0 0;
+    box-shadow: none;
+}
+.course-index .accordion .course-navigation .button-chapter.active .group-heading {
+    color: #313533;
+}
+.course-index .accordion .course-navigation .button-chapter:hover, .course-index .accordion .course-navigation .button-chapter:focus {
+    background: #fff none repeat scroll 0 0;
+}
+.course-index .accordion .course-navigation .button-chapter:active {
+    outline: medium none;
+}
+.course-index .accordion .course-navigation .chapter-content-container {
+    background: #fff none repeat scroll 0 0;
+}
+.course-index .accordion .course-navigation .chapter-content-container.is-open {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu {
+    display: none;
+    overflow: hidden;
+    padding: 0 14px;
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item {
+    background: inherit;
+    margin: 4px 0;
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item a {
+    border-radius: 5px;
+    color: #313533;
+    display: block;
+    font-family: "Source Sans","Open Sans",Verdana,Geneva,sans-serif,sans-serif;
+    padding: 5px 10px;
+    position: relative;
+}
+
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item a p{
+  margin: 0;
+  line-height: 1.4em;
+}
+
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item a p.subtitle {
+    color: #5e5e5e;
+    display: block;
+    margin: 0;
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item a p.subtitle:empty {
+    display: none;
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item a p.subtitle .verified {
+    color: #25b85a;
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item a p.subtitle .rejected {
+    color: #d44040;
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item a p.subtitle .error {
+    color: #d44040;
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item a:hover, .course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item div.info-wrapper section.handouts ol li div.hitarea:hover + h4, div.info-wrapper section.handouts ol li .course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item div.hitarea:hover + h4, .course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item div.info-wrapper section.handouts ol li div.hitarea:focus + h4, div.info-wrapper section.handouts ol li .course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item div.hitarea:focus + h4, .course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item a:focus {
+    background: #f1f1f1 none repeat scroll 0 0;
+    color: #313533;
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item a:hover .subtitle, .course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item div.info-wrapper section.handouts ol li div.hitarea:hover + h4 .subtitle, div.info-wrapper section.handouts ol li .course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item div.hitarea:hover + h4 .subtitle, .course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item div.info-wrapper section.handouts ol li div.hitarea:focus + h4 .subtitle, div.info-wrapper section.handouts ol li .course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item div.hitarea:focus + h4 .subtitle, .course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item a:focus .subtitle {
+    color: #5e5e5e;
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item.graded .menu-icon {
+    bottom: 10px;
+    color: #4f7573;
+    position: absolute;
+    right: 10px;
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item.active a {
+    background: #e4e4e4 none repeat scroll 0 0;
+}
+.course-index .accordion .course-navigation .chapter-content-container .chapter-menu .menu-item:last-of-type {
+    padding-bottom: 10px;
+}
+
+/*******************************************************/
+.wrapper-course-modes {
+    border-bottom: 1px solid #c8c8c8;
+    padding: 5px;
+}
+
+.courseware-bookmarks-button .bookmarks-list-button {
+    font-size: 13px;
+    padding: 5px 10px;
+}
+
+.ion-bookmark:before {
+  font-size: 18px;
+}
+
+.courseware-bookmarks-button .bookmarks-list-button, .course-content .bookmark-button {
+    background-color: transparent;
+    border: 1px solid #1d3433;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #1d3433;
+    letter-spacing: 0;
+    padding: 8px 20px;
+    text-align: center;
+}
+
+.courseware-bookmarks-button .bookmarks-list-button, .course-content .bookmark-button {
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.25s ease-in-out 0s, background 0.25s ease-in-out 0s, box-shadow 0.25s ease-in-out 0s;
+}
+
+.course-content .bookmark-button:hover,.courseware-bookmarks-button .bookmarks-list-button:hover,.course-content .bookmark-button.is-active,.courseware-bookmarks-button .bookmarks-list-button.is-active {
+    background-color: #417673;
+    color: #fff;
+}
+
+/**********************************************************/
+.course-index .accordion .course-navigation .button-chapter .group-heading .icon {
+    color: #c8c8c8;
+    font-size: 0.875em;
+    left: 20px;
+    position: absolute;
+    top: 20px;
+}
+
+.chapter-fa {
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1em;
+    font-family: "Ionicons";
+    color: #c8c8c8;
+    position: absolute;
+    left: 20px;
+    top: 15px;
+}
+
+.course-index .accordion .course-navigation a span .ion-arrow-right-b:before{
+  font-size: 20px;
+}
+
+.course-index .accordion .course-navigation a span .ion-arrow-down-b:before{
+  font-size: 20px;
+}

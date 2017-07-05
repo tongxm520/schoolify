@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <title>Schoolify</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <link href="assets/videocss/video.js/dist/video-js-new.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+  <script src="assets/videojs/video.js/dist/video.js?time=<%=Time.now.to_i%>"></script>
+  <script src="assets/videojs/video.js/dist/ie8/videojs-ie8.min.js?time=<%=Time.now.to_i%>"></script>
+  <script src="assets/navigation.js?time=<%=Time.now.to_i%>"></script>
+  <link href="assets/video-skin.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+  <link href="assets/videojs-matrix.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+  <link href="assets/course.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+  <link href="assets/nav.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+  <link href="assets/course-content.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+  <link href="assets/css/ionicons.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+</head>
+<body class="view-in-course">
+<%= yield %>
+</body>
+</html>
+

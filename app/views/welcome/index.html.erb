@@ -1,0 +1,464 @@
+<div id="su-header">
+  <div class="su-container">
+    <a href="http://localhost:3000">
+      <img width="152" height="23" alt="Schoolify Center" src="assets/schoolify.png">
+    </a>
+  </div>
+</div>
+
+<header class="global slim" id="global-navigation">
+  <nav aria-label="Global" class="nav-wrapper">
+		<h1 class="logo">
+		  <a href="/"> 
+		    <img height="50" alt="Lagunita, Courses List" src="assets/logo.png">
+		  </a>
+		</h1>
+
+		<h2 class="course-header"><span class="provider">ComputerScience:</span>
+		  <span class="course-number">MMDS</span>
+		  <span class="course-name">Mining Massive Datasets</span>
+		</h2>
+
+		<ol class="user">
+		  <li class="primary">
+		    <a class="user-link" href="/dashboard">
+		      <span class="sr">Dashboard for:</span>
+		      <img alt="Profile image for simontung" src="assets/head.png" class="user-image-frame">
+		      <div class="label-username">simontung</div>
+		    </a>
+		  </li>
+		  <li class="primary">
+		    <button aria-expanded="false" aria-haspopup="true" class="dropdown ion-arrow-down-b"><span class="sr">More options dropdown</span></button>
+		    <ul role="menu" aria-label="More Options" class="dropdown-menu">
+		        <li><a href="/dashboard">Dashboard</a></li>
+		        <li><a href="/u/simontung">Profile</a></li>
+		        <li><a href="/account/settings">Account</a></li>
+		      <li><a role="menuitem" href="/logout">Sign Out</a></li>
+		    </ul>
+		  </li>
+		</ol>
+  </nav>
+</header>
+
+<div id="content" class="content-wrapper">
+	<div class="proctored_exam_status">
+		<div class="exam-timer">
+		  <div class="exam-text">
+		    You are taking "
+		    <a href="/courses/course-v1:ComputerScience+MMDS+SelfPaced/jump_to/block-v1:ComputerScience+MMDS+SelfPaced+type@sequential+block@580e203abd3843389833fc4040d55549">
+		      To The Final; Read Directions FIRST
+		    </a>
+		    " as a timed exam. The timer on the right shows the time remaining in
+		    the exam. To receive credit on a problem, you must click "Check" or "Final
+		    Check" on it before you select "End My Exam".
+		  </div>
+		  <div class="pull-right turn_in_exam" id="turn_in_exam_id">
+		    <span>
+		      <button class="exam-button-turn-in-exam btn btn-pl-primary">
+		        End My Exam
+		      </button>
+		    </span>
+		    <span aria-live="assertive" class="sr timer-announce">
+		      you have 2 hours and 30 minutes remaining
+		    </span>
+		    <span id="time_remaining_id">
+		      <b>
+		        2:29:49
+		      </b>
+		    </span>
+		  </div>
+		</div>
+	</div>
+
+	<nav aria-label="Course Material" class="courseware wrapper-course-material">
+		<div class="course-material">
+		  <ol class="course-tabs">
+		        <li>
+		           <a class="" href="/courses/course-v1:ComputerScience+MMDS+SelfPaced/info">
+		               Home
+		           </a>
+		        </li>
+		        <li>
+		           <a class="active" href="/courses/course-v1:ComputerScience+MMDS+SelfPaced/courseware">
+		               Course
+		                 <span class="sr">, current location</span>
+		           </a>
+		        </li>
+		        <li>
+		           <a class="" href="/courses/course-v1:ComputerScience+MMDS+SelfPaced/discussion/forum">
+		               Discussion
+		           </a>
+		        </li>
+		        <li>
+		           <a class="" href="/courses/course-v1:ComputerScience+MMDS+SelfPaced/progress">
+		               Progress
+		           </a>
+		        </li>
+		  </ol>
+		</div>
+	</nav>
+
+	<div class="container">
+    <div class="course-wrapper" role="presentation">
+      <div class="course-index">
+        <div class="wrapper-course-modes">
+          <div class="courseware-bookmarks-button" data-bookmarks-api-url="/api/bookmarks/v1/bookmarks/">
+						<button type="button" class="ion-bookmark bookmarks-list-button is-inactive" aria-pressed="false">
+							Bookmarks
+						</button>
+				  </div>
+        </div>
+        <div class="accordion">
+          <%=render :partial => "courses/course_nav"%>
+        </div>
+      </div>
+      <%=render :partial => "courses/course_content"%>
+      <!--video
+				id="default-player"
+				class="video-js vjs-default-skin vjs-big-play-centered video-js-box vjs-paused"
+				controls
+				preload="auto"
+				poster="assets/fish.jpeg"
+				data-setup='{}'>
+			<source src="uploads/DistributedFileSystems.mp4" type="video/mp4"></source>
+			<p class="vjs-no-js">
+				To view this video please enable JavaScript, and consider upgrading to a
+				web browser that
+				<a href="http://videojs.com/html5-video-support/" target="_blank">
+					supports HTML5 video
+				</a>
+			</p>
+		</video-->
+    </div>
+	</div>
+
+  <div class="container-footer">
+    <div class="course-license">
+      &copy; <span class="license-text">All Rights Reserved</span>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+/*player.ready(function(){
+    //在回调函数中，this代表当前播放器，
+    //可以调用方法，也可以绑定事件。
+})
+
+if(player.readyState() < 1) {
+  // do not have metadata yet so loadedmetadata event not fired yet (I presume)
+  // wait for loadedmetdata event
+  player.one("loadedmetadata", onLoadedMetadata);
+}
+else {
+  // metadata already loaded
+  onLoadedMetadata();
+}
+
+function onLoadedMetadata() {
+  alert(player.duration());
+  //视频总的时长，加载完成视频才可以知道视频时长，且在flash情况下无效
+}*/
+
+
+/*
+The improvement I’m referring to is returning the video to show the poster frame when it’s finished playing all the way through. By default the video plays through but just stops on a blank screen at the end. The code provided below does a number of things:
+
+– Shows the poster frame
+– Reverts the position of the video to zero seconds
+– Hide the controls
+– Shows the play button
+– Cancels out of full screen
+
+The only other thing we need to do then is to allow the user to play the video successfully again for a second time. To do this we need to add some actions for when the user plays the video. 
+*/
+
+/*
+var _player;
+$(document).ready(function() { 
+  jQuery('.dropdown').click(function(){
+    if(jQuery('.dropdown').attr('aria-expanded')==='true'){
+      jQuery('.dropdown').removeClass('active');
+      jQuery('.dropdown-menu').removeClass('expanded');
+      jQuery('.dropdown').attr('aria-expanded','false');
+    }else if(jQuery('.dropdown').attr('aria-expanded')==='false'){
+      jQuery('.dropdown').addClass('active');
+      jQuery('.dropdown-menu').addClass('expanded');
+      jQuery('.dropdown').attr('aria-expanded','true');
+    } 
+  });
+  
+  videojs("default-player",{}, function(){  
+    _player = this; 
+    _player.addClass('vjs-matrix'); 
+    //_player.play();
+
+    _player.on('ended', function(){
+      var videoposter = "assets/fish.jpeg";
+      $('.vjs-poster').css({
+        'background-image': 'url('+videoposter+')',
+        'display': 'block'
+      });
+      _player.posterImage.show()
+      _player.controlBar.hide();
+
+      $('.vjs-big-play-button').css({
+        'display': 'block'
+      }); 
+      _player.bigPlayButton.show();
+
+      _player.currentTime(0);  
+      exitFullscreen(); 
+    });  
+      
+    _player.on('play', function(){  
+      _player.posterImage.hide();  
+      _player.controlBar.show();  
+      _player.bigPlayButton.hide();  
+    });  
+  });  
+  jQuery(".vjs-time-control.vjs-time-divider").removeClass("vjs-time-control").show();
+});  
+
+// Whack fullscreen
+function exitFullscreen() {
+  if(document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if(document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+}
+*/
+
+</script>
+
+<style text="css">
+body.view-in-course .course-license {
+    margin: 0 auto;
+    max-width: 1180px;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.content-wrapper .course-license, .content-wrapper .xblock-license {
+    color: #5e5e5e;
+    display: block;
+    padding: 5px 0;
+    text-align: right;
+    width: auto;
+}
+
+/***********pagination button********************************************/
+
+#course-content .sequence-bottom .sequence-nav-button.button-previous {
+    padding-left: 30px;
+}
+#course-content .sequence-bottom .sequence-nav-button {
+    padding: 8px 10px;
+    text-align: center;
+    text-indent: 0;
+    width: 110px;
+    cursor: pointer;
+}
+
+#course-content .sequence-bottom .sequence-nav-button.button-next {
+    padding-right: 30px;
+}
+
+#course-content .sequence-bottom {
+    width: 220px;
+}
+
+#course-content .sequence-bottom .sequence-nav-button .icon {
+    position: absolute;
+    top: 16px;
+}
+
+#course-content .sequence-bottom .sequence-nav-button.button-previous .icon {
+    left: 15px;
+}
+
+#course-content .sequence-bottom .sequence-nav-button.button-next .icon {
+    right: 15px;
+}
+
+
+.nav-utilities, .xmodule_display.xmodule_CourseModule .sequence-nav-button, .xmodule_display.xmodule_VideoModule .video .video-pre-roll, .xmodule_display.xmodule_VideoModule .a11y-menu-container .a11y-menu-list, .xmodule_display.xmodule_SequenceModule .sequence-nav-button, .modal-backdrop {
+    z-index: 1000;
+}
+
+
+.light-button, div.history-controls input[type="submit"], a.light-button, .gray-button, input[type="reset"], input[type="submit"], input[type="button"],button.check.Final.Submit, button.save, .button, form input[type="reset"], form input[type="submit"], form input[type="button"], form button, form .button,.xmodule_display.xmodule_SequenceModule  button.sequence-nav-button {
+    background-clip: padding-box;
+    background-color: #f1f1f1;
+    background-image: linear-gradient(#f1f1f1, #d9d1d1);
+    border: 1px solid #d2c9c9;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 0 #fff inset;
+    color: #333;
+    display: inline-block;
+    font-size: 0.8125em;
+    font-weight: bold;
+    padding: 7px 18px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fcfbfb;
+}
+
+.type-fa{
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.35em;
+    font-size: 32px;
+    font-family: "Ionicons";
+}
+
+/********.proctored_exam_status******************/
+.btn-blue, .view-teams .action-primary, .instructor-dashboard-wrapper-2 section#certificates.idash-section .btn-blue, .btn-pink, .proctored_exam_status .exam-timer .exam-button-turn-in-exam, .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary, .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary, div.info-wrapper section.updates > ol .show-older-updates, div.info-wrapper section.updates section .show-older-updates, .btn-secondary, .view-teams .card .card-actions .action-view {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.25s ease-in-out 0s, background 0.25s ease-in-out 0s, box-shadow 0.25s ease-in-out 0s;
+}
+.btn-blue:hover, .view-teams .action-primary:hover, .instructor-dashboard-wrapper-2 section#certificates.idash-section .btn-blue:hover, .btn-pink:hover, .proctored_exam_status .exam-timer .exam-button-turn-in-exam:hover, .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary:hover, .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary:hover, .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary:hover, .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary:hover, div.info-wrapper section.updates > ol .show-older-updates:hover, div.info-wrapper section.updates section .show-older-updates:hover, .btn-secondary:hover, .view-teams .card .card-actions .action-view:hover, .btn-blue:active, .view-teams .action-primary:active, .instructor-dashboard-wrapper-2 section#certificates.idash-section .btn-blue:active, .btn-pink:active, .proctored_exam_status .exam-timer .exam-button-turn-in-exam:active, .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary:active, .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary:active, .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary:active, .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary:active, div.info-wrapper section.updates > ol .show-older-updates:active, div.info-wrapper section.updates section .show-older-updates:active, .btn-secondary:active, .view-teams .card .card-actions .action-view:active, .btn-blue:focus, .view-teams .action-primary:focus, .instructor-dashboard-wrapper-2 section#certificates.idash-section .btn-blue:focus, .btn-pink:focus, .proctored_exam_status .exam-timer .exam-button-turn-in-exam:focus, .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary:focus, .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary:focus, .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary:focus, .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary:focus, div.info-wrapper section.updates > ol .show-older-updates:focus, div.info-wrapper section.updates section .show-older-updates:focus, .btn-secondary:focus, .view-teams .card .card-actions .action-view:focus {
+    text-decoration: none;
+}
+.disabled.btn-blue, .view-teams .disabled.action-primary, .instructor-dashboard-wrapper-2 section#certificates.idash-section .disabled.btn-blue, .disabled.btn-pink, .proctored_exam_status .exam-timer .disabled.exam-button-turn-in-exam, .course-wrapper .course-content div.timed-exam .disabled.exam-action-button.btn-pl-primary, .course-wrapper .course-content div.proctored-exam .disabled.exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.timed-exam .disabled.exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.proctored-exam .disabled.exam-action-button.btn-pl-primary, div.info-wrapper section.updates > ol .disabled.show-older-updates, div.info-wrapper section.updates section .disabled.show-older-updates, .disabled.btn-secondary, .view-teams .card .card-actions .disabled.action-view, .btn-blue[disabled], .view-teams .action-primary[disabled], .instructor-dashboard-wrapper-2 section#certificates.idash-section .btn-blue[disabled], .btn-pink[disabled], .proctored_exam_status .exam-timer .exam-button-turn-in-exam[disabled], .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary[disabled], .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary[disabled], .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary[disabled], .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary[disabled], div.info-wrapper section.updates > ol .show-older-updates[disabled], div.info-wrapper section.updates section .show-older-updates[disabled], .btn-secondary[disabled], .view-teams .card .card-actions .action-view[disabled] {
+    cursor: default;
+    pointer-events: none;
+}
+.btn-blue, .view-teams .action-primary, .instructor-dashboard-wrapper-2 section#certificates.idash-section .btn-blue, .btn-pink, .proctored_exam_status .exam-timer .exam-button-turn-in-exam, .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary, .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary, div.info-wrapper section.updates > ol .show-older-updates, div.info-wrapper section.updates section .show-older-updates, .btn-secondary, .view-teams .card .card-actions .action-view {
+    border-radius: 2px;
+}
+
+.btn-blue, .view-teams .action-primary, .instructor-dashboard-wrapper-2 section#certificates.idash-section .btn-blue, .btn-pink, .proctored_exam_status .exam-timer .exam-button-turn-in-exam, .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary, .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary, div.info-wrapper section.updates > ol .show-older-updates, div.info-wrapper section.updates section .show-older-updates, .btn-secondary, .view-teams .card .card-actions .action-view {
+    border: medium none;
+    padding: 15px 20px;
+    text-align: center;
+}
+.disabled.btn-blue, .view-teams .disabled.action-primary, .instructor-dashboard-wrapper-2 section#certificates.idash-section .disabled.btn-blue, .disabled.btn-pink, .proctored_exam_status .exam-timer .disabled.exam-button-turn-in-exam, .course-wrapper .course-content div.timed-exam .disabled.exam-action-button.btn-pl-primary, .course-wrapper .course-content div.proctored-exam .disabled.exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.timed-exam .disabled.exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.proctored-exam .disabled.exam-action-button.btn-pl-primary, div.info-wrapper section.updates > ol .disabled.show-older-updates, div.info-wrapper section.updates section .disabled.show-older-updates, .disabled.btn-secondary, .view-teams .card .card-actions .disabled.action-view, .is-disabled.btn-blue, .view-teams .is-disabled.action-primary, .instructor-dashboard-wrapper-2 section#certificates.idash-section .is-disabled.btn-blue, .is-disabled.btn-pink, .proctored_exam_status .exam-timer .is-disabled.exam-button-turn-in-exam, .course-wrapper .course-content div.timed-exam .is-disabled.exam-action-button.btn-pl-primary, .course-wrapper .course-content div.proctored-exam .is-disabled.exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.timed-exam .is-disabled.exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.proctored-exam .is-disabled.exam-action-button.btn-pl-primary, div.info-wrapper section.updates > ol .is-disabled.show-older-updates, div.info-wrapper section.updates section .is-disabled.show-older-updates, .is-disabled.btn-secondary, .view-teams .card .card-actions .is-disabled.action-view, .btn-blue[disabled], .view-teams .action-primary[disabled], .instructor-dashboard-wrapper-2 section#certificates.idash-section .btn-blue[disabled], .btn-pink[disabled], .proctored_exam_status .exam-timer .exam-button-turn-in-exam[disabled], .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary[disabled], .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary[disabled], .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary[disabled], .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary[disabled], div.info-wrapper section.updates > ol .show-older-updates[disabled], div.info-wrapper section.updates section .show-older-updates[disabled], .btn-secondary[disabled], .view-teams .card .card-actions .action-view[disabled] {
+    background: #a4a6a8 none repeat scroll 0 0;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.proctored_exam_status .exam-timer .exam-button-turn-in-exam, .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary, .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary, div.info-wrapper section.updates > ol .show-older-updates, div.info-wrapper section.updates section .show-older-updates, .btn-secondary, .view-teams .card .card-actions .action-view {
+    background-color: transparent;
+    border: 1px solid #1d3433;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #1d3433;
+    letter-spacing: 0;
+    padding: 8px 20px;
+    text-align: center;
+}
+.proctored_exam_status .exam-timer .exam-button-turn-in-exam:hover, .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary:hover, .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary:hover, .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary:hover, .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary:hover, div.info-wrapper section.updates > ol .show-older-updates:hover, div.info-wrapper section.updates section .show-older-updates:hover, .btn-secondary:hover, .view-teams .card .card-actions .action-view:hover, .proctored_exam_status .exam-timer .exam-button-turn-in-exam:focus, .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary:focus, .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary:focus, .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary:focus, .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary:focus, div.info-wrapper section.updates > ol .show-older-updates:focus, div.info-wrapper section.updates section .show-older-updates:focus, .btn-secondary:focus, .view-teams .card .card-actions .action-view:focus {
+    background-color: #2f5553;
+    border: 1px solid transparent;
+    color: #e1e5e3;
+    text-decoration: none;
+}
+.proctored_exam_status .exam-timer .exam-button-turn-in-exam, .course-wrapper .course-content div.timed-exam .exam-action-button.btn-pl-primary, .course-wrapper .course-content div.proctored-exam .exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.timed-exam .exam-action-button.btn-pl-primary, .course-wrapper .courseware-results-wrapper div.proctored-exam .exam-action-button.btn-pl-primary {
+    background-color: #1d3433;
+    color: #e1e5e3;
+}
+
+.proctored_exam_status.is-fixed {
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.proctored_exam_status .exam-timer {
+    background-color: #e5eaec;
+    border-left: 4px solid #c5d5d4;
+    color: #474747;
+    font-size: 14px;
+    margin: 0 auto;
+    padding: 20px 40px;
+}
+.proctored_exam_status .exam-timer .exam-text {
+    display: inline-block;
+    width: calc(100% - 250px);
+}
+.proctored_exam_status .exam-timer a {
+    color: #0979ba;
+}
+.proctored_exam_status .exam-timer .pull-right {
+    color: #5e5e5e;
+}
+.proctored_exam_status .exam-timer .pull-right b {
+    color: #2f2f2f;
+}
+.proctored_exam_status .exam-timer .turn_in_exam {
+    margin-top: -6px;
+}
+.proctored_exam_status .exam-timer.low-time {
+    background-color: #4f585c;
+    color: #c8c8c8;
+}
+.proctored_exam_status .exam-timer.low-time a {
+    color: #fff;
+    text-decoration: underline;
+}
+.proctored_exam_status .exam-timer.low-time .pull-right {
+    color: #c8c8c8;
+}
+.proctored_exam_status .exam-timer.low-time .pull-right b {
+    color: #fff;
+}
+.proctored_exam_status .exam-timer.low-time .pull-right .exam-button-turn-in-exam {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+}
+.proctored_exam_status .exam-timer.low-time .pull-right .exam-button-turn-in-exam:hover {
+    background-color: #fff;
+    border: 1px solid #fff;
+    color: #2f5553;
+}
+.proctored_exam_status .exam-timer.warning {
+    border-left-color: #b52a67;
+}
+.proctored_exam_status .exam-timer.critical {
+    border-left-color: #d44040;
+    color: #fff;
+}
+.proctored_exam_status .exam-timer .exam-button-turn-in-exam {
+    background-image: none;
+    border: 0 none;
+    box-shadow: none;
+    margin-right: 20px;
+    padding: 4px 15px;
+    text-shadow: none;
+}
+.proctored_exam_status .exam-timer .exam-button-turn-in-exam:hover, .proctored_exam_status .exam-timer .exam-button-turn-in-exam:focus {
+    border: 0 none;
+}
+
+.proctored_exam_status .exam-timer .pull-right {
+    float: right;
+}
+/********.proctored_exam_status******************/
+
+.xmodule_display.xmodule_CapaModule div.problem p.equality {
+    float: left;
+}
+
+div#seq_content .bookmark-button-wrapper button.bookmark-button {
+  float:right;
+}
+
+div#seq_content .vert-mod  {
+  clear:both;
+}
+
+
+</style>
+
+
+

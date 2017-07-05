@@ -1,0 +1,42 @@
+<nav aria-label="Course" class="course-navigation">
+  <%@chapters.each_with_index do |ch,i|%>
+  <%arr=ch.title.downcase.gsub(":","").split(/\s/)
+  child= arr + ["child"]
+  parent= arr + ["parent"]
+  aria_label= i>0 ? ch.title : ch.title+" current chapter"
+  btn= i>0 ? "button-chapter chapter" : "button-chapter chapter active is-open"
+  heading = i>0 ? "group-heading" : "group-heading active"
+  menu = i>0 ? "chapter-menu" : "chapter-menu is-open"
+  container = i>0 ? "chapter-content-container" : "chapter-content-container is-open"
+  expanded = i>0 ? "false" : "true"
+  arrow= i>0 ? "ion-arrow-right-b" : "ion-arrow-down-b"
+  %>
+  
+  <a aria-expanded="<%=expanded%>" aria-controls="<%=child.join('-') %>" id="<%=parent.join('-') %>" class="<%=btn%>" role="button" href="#<%=child.join('-') %>">
+    <span aria-label="<%=aria_label%>" class="<%=heading%>">
+      <span aria-hidden="true" class="<%=arrow%> chapter-fa">
+      </span>
+      <%=ch.title%>
+    </span>
+  </a>
+  <div aria-label="<%=ch.title%> submenu" role="group" tabindex="-1" id="<%=child.join('-') %>" class="<%=container%>">
+    <%if i> 0%>
+    <div class="<%=menu%>">
+    <%else%>
+    <div class="<%=menu%>" style="display: block;">
+    <%end%>
+      <%@chapter_hash[ch.id].each_with_index do |sec,j|%>
+      <%item= i==0&&j==0 ? "menu-item active" : "menu-item"%>
+      <div class="<%=item%>">
+        <a href="/courses/course-v1:ComputerScience+MMDS+SelfPaced/courseware/1d6e3a115a53484e90c9e389d2985514/293f6c08738c4af88196f485d703876c/">
+          <p>
+            <%=sec.title%>              
+          </p>
+        </a>
+      </div>
+      <%end%>
+    </div>
+  </div>
+  <%end%>
+</nav>
+

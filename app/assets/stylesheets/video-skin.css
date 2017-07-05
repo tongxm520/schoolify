@@ -1,0 +1,93 @@
+
+
+/* Time Display
+--------------------------------------------------------------------------------
+*/
+.vjs-default-skin .vjs-time-controls {
+  font-size: 1em;
+  /* Align vertically by making the line height the same as the control bar */
+  line-height: 3em;
+}
+.vjs-default-skin .vjs-current-time {
+  display: block;
+  float: left;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.vjs-default-skin .vjs-duration {
+  display: block;
+  float: left;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+/* Remaining time is in the HTML, but not included in default design */
+.vjs-default-skin .vjs-remaining-time {
+  display: none;
+  float: left;
+}
+
+.vjs-default-skin .vjs-time-divider {
+  float: left;
+  line-height: 3em;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+
+/* Removing curved corners on progress control and time control to join them. */
+.vjs-default-skin .vjs-control-bar > .vjs-progress-control {
+  -webkit-box-flex: auto;
+  -moz-box-flex: auto;
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-width: 4em;
+}
+
+/* Progress
+-------------------------------------------------------------------------------- */
+.vjs-progress-control .vjs-progress-holder { /* Box containing play and load progresses */
+  position: relative; 
+  padding: 0; 
+  overflow:hidden; 
+  cursor: pointer !important;
+  height: 9px; 
+  border: 1px solid #777;
+  margin: 7px 1px 0 5px; /* Placement within the progress control item */
+  border-radius: 5px; 
+  -webkit-border-radius: 5px; 
+  -moz-border-radius: 5px;
+  width: 100%;
+}
+
+
+
+.vjs-progress-control .vjs-load-progress {
+  opacity: 0.8;
+  /* CSS Gradient */
+  /* Default */ background-color: #555;
+  /* Webkit  */ background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#aaa));
+  /* Firefox */ background: -moz-linear-gradient(top,  #555,  #aaa);
+}
+
+
+/* Placement of Control Items 
+   - Left side of pogress bar, use left & width
+   - Rigth side of progress bar, use right & width
+   - Expand with the video (like progress bar) use left & right */
+.vjs-control-bar > div.vjs-play-control       { left: 5px;   width: 25px;  }
+.vjs-control-bar > div.vjs-progress-control   { left: 5px;  right: 165px; } 
+/* Using left & right so it expands with the width of the video */
+
+
+
+
+

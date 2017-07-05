@@ -1,0 +1,192 @@
+Streaming Video on Demand with nginx and RTMP Module
+
+In this tutorial we will show a simple way to stream different types of video files using the Nginx server and RTMP modules.
+
+Before starting the work, we will try to offer a small overview over the advantages of using RTMP versus HTTP video delivery.
+
+Real Time Messaging Protocol (RTMP) was initially developed by Macromedia, for streaming on-demand and live media to Adobe Flash applications. It is a TCP-based protocol which maintains persistent connections and is defined as a “stateful” protocol. This means that from the first time a client connects until the time it disconnects, the streaming server keeps track of the client’s actions. On the other side, HTTP is a “stateless” application protocol used to deliver hypermedia information across the Internet worldwide.
+
+Advantages of HTTP over RTMP:
+
+Less likely to be blocked by firewalls at different levels in the network; RTMP uses default port 1935, which can be blocked sometimes, especially within corporate firewalls Supported by more CDNs (it supports easier mirroring and edge caching)
+More expertise in customizing HTTP
+
+Advantages of RTMP over HTTP:
+Ability to provide multicast support Security and IP protection, using TLS/SSL or RTMPE Seeking: particularly advantageous for long-duration content because the viewer doesn’t have to wait for the video file to load before jumping ahead, as is the case for HTTP-delivered video Reconnect: if there is a network disruption, the client can re-establish a connection, while the video continues to play from the buffer; when the client re-connects, the buffer will begin filling to avoid any disruption in video or audio flow
+
+And now, let’s start to build our streaming server.
+
+To achieve this, we will compile the Nginx source code together with RTMP modules on a Ubuntu 12.04 box.
+
+Logged in as root:
+	
+cd ~
+mkdir nginx
+cd nginx
+
+Install the necessary software and dependencies:
+	
+# for compiler and git
+apt-get install git gcc make
+ 
+#for the HTTP rewrite module which requires the PCRE library
+apt-get install libpcre3-dev
+ 
+# for SSL modules
+apt-get install libssl-dev
+
+Clone Nginx RTMP module source code from Github:
+	
+git clone https://github.com/arut/nginx-rtmp-module
+
+Download the Nginx source code and extract it from the archive. At the time when we are writing this blog post, the current version is 1.4.3:
+	
+wget http://nginx.org/download/nginx-1.4.3.tar.gz
+tar zxpvf nginx-1.4.3.tar.gz
+cd nginx-1.4.3
+
+Let’s compile Nginx:
+
+	
+./configure --add-module=/root/nginx/nginx-rtmp-module/ --with-http_ssl_module --prefix=/usr/local/nginx-streaming/
+make
+make install
+
+Now it is the time to create a configuration file for Nginx. Go to:
+
+	
+cd /usr/local/nginx-streaming/conf
+mv nginx.conf nginx.cong.bkp
+nano nginx.conf
+
+and paste the configuration below. This configuration is suggested by the documentation of the RTMP module.
+
+	
+worker_processes  1;
+ 
+events {
+    worker_connections  1024;
+}
+ 
+rtmp {
+    server {
+        listen 1935;
+ 
+        chunk_size 4000;
+ 
+        # video on demand for flv files
+        application vod {
+            play /var/flvs;
+        }
+ 
+        # video on demand for mp4 files
+        application vod2 {
+            play /var/mp4s;
+        }
+    }
+}
+ 
+# HTTP can be used for accessing RTMP stats
+http {
+    access_log /var/log/nginx/access-streaming.log;
+    error_log /var/log/nginx/error-streaming.log;
+ 
+    server {
+        # in case we have another web server on port 80
+        listen      8080;
+ 
+        # This URL provides RTMP statistics in XML
+        location /stat {
+            rtmp_stat all;
+            rtmp_stat_stylesheet stat.xsl;
+        }
+ 
+        location /stat.xsl {
+            # XML stylesheet to view RTMP stats.
+            # Copy stat.xsl wherever you want
+            # and put the full directory path here
+            root /var/www/;
+        }
+ 
+        location /hls {
+            # Serve HLS fragments
+            types {
+                application/vnd.apple.mpegurl m3u8;
+                video/mp2t ts;
+            }
+            alias /tmp/app;
+            expires -1;
+        }
+    }
+}
+
+To be able to see some nice statistics about the streaming, we must to copy stats.xml in the folder specified in the configuration above.
+	
+mkdir /var/www
+cp /root/nginx/nginx-rtmp-module/stat.xsl /var/www/
+
+And (re)start the Nginx server with:
+
+	
+/usr/local/nginx-streaming/sbin/nginx
+
+It’s time to play!
+
+As we defined in the Nginx configuration, the server can find some mp4 files in /var/mp4s or flv files in /var/flvs.
+
+You can download an mp4 file here, right click and save it in /var/mp4s with the name sample.mp4.
+
+Now, if you have a video player which supports RTMP protocol (eg: VLC), you can play it directly there.
+
+From the VLC menu, Media->Open Network Stream.
+
+In the URL field we input:
+
+	
+rtmp://<IP_OF_THE_SERVER>:1935/vod2/sample.mp4
+
+Where <IP_OF_THE_SERVER> is the IP or the hostname of the server where we installed Nginx.
+
+If you want to show this video on a website, you can use a flash player as Flowplayer or JW Player.
+
+Below we will show how to use Flowplayer to achieve this. First we need to download flowplayer.rtmp-3.2.12.swf (see the download link at the bottom of the page).
+
+The html code below shows how to implement RTMP using Flowplayer. You should just replace the /path/to/background.png, the <IP_OF_THE_SERVER> and the /path/to/flowplayer.rtmp-3.2.12.swf.
+	
+<html>
+<head>
+    <!-- flowplayer javascript component -->
+    <script src="http://releases.flowplayer.org/js/flowplayer-3.2.12.min.js"></script>
+</head>
+ 
+<body>
+<div id="player" style="width:644px;height:276px;margin:0 auto;text-align:center">
+    <img src="/path/to/background.png" height="260" width="489" /></div>
+<script>
+ 
+$f("player", "http://releases.flowplayer.org/swf/flowplayer-3.2.16.swf", {
+    clip: {
+        url: 'sample.mp4',
+        scaling: 'fit',
+        provider: 'hddn'
+    },
+ 
+    plugins: {
+        hddn: {
+            url: "/path/to/flowplayer.rtmp-3.2.12.swf",
+            // netConnectionUrl defines where the streams are found
+            netConnectionUrl: 'rtmp://<IP_OF_THE_SERVER>:1935/vod2'
+        }
+    },
+    canvas: {
+        backgroundGradient: 'none'
+    }
+});
+</script>
+</body>
+</html>
+
+That’s all.
+
+Of course the solution presented in the post above is minimalist and if you need to scale globally with your Video on Demand product, probably you need a CDN solution.
+

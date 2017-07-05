@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'VideoJS';
+  src: url('font/vjs.eot');
+  src: url('font/vjs.eot?#iefix') format('embedded-opentype'), 
+    url('font/vjs.woff') format('woff'),     
+    url('font/vjs.ttf') format('truetype');
+}
+
+/* Make the demo a little prettier */
+body { background: #222; text-align: center; }
+.video-js { margin: 20px auto; }
+
