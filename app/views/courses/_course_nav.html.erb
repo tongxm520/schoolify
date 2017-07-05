@@ -1,6 +1,6 @@
 <nav aria-label="Course" class="course-navigation">
   <%@chapters.each_with_index do |ch,i|%>
-  <%arr=ch.title.downcase.gsub(":","").split(/\s/)
+  <%arr=ch.title.downcase.gsub(/:|,/,"").split(/\s/)
   child= arr + ["child"]
   parent= arr + ["parent"]
   aria_label= i>0 ? ch.title : ch.title+" current chapter"
