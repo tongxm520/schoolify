@@ -1,0 +1,925 @@
+<div class="vert-mod">
+  <div data-id="block-v1:ComputerScience+MMDS+SelfPaced+type@video+block@9e0e334bcfee4ac793656be336e1734d"
+  class="vert vert-0">
+    <div data-course-id="course-v1:ComputerScience+MMDS+SelfPaced" data-type="Video"
+    data-usage-id="block-v1:ComputerScience+MMDS+SelfPaced+type@video+block@9e0e334bcfee4ac793656be336e1734d"
+    data-runtime-version="1" data-request-token="a01add4e7e6611e7b50f06b20e489035"
+    data-block-type="video" data-init="XBlockToXModuleShim" data-runtime-class="LmsRuntime"
+    class="xblock xblock-student_view xblock-student_view-video xmodule_display xmodule_VideoModule xblock-initialized">
+      <h3>
+        Video
+      </h3>
+      <div tabindex="-1" data-poster="null" data-bumper-metadata="null" data-metadata=""
+      class="video is-captions-rendered is-initialized" id="video_9e0e334bcfee4ac793656be336e1734d">
+        <div class="focus_grabber first" tabindex="-1">
+        </div>
+        <div class="tc-wrapper">
+          <a class="nav-skip sr" href="#before-transcript_9e0e334bcfee4ac793656be336e1734d">
+            Skip to a navigable version of this video's transcript.
+          </a>
+          <article class="video-wrapper">            
+            <section class="video-player">
+              <div id="9e0e334bcfee4ac793656be336e1734d">
+                <video style="height: 307.688px; width: 547px; top: 70.1563px; left: 0px;">
+                  <source src="https://s3-us-west-1.amazonaws.com/prod-edx/MMDS/Videos/2+-+1+-+Distributed+File+Systems+(15_50).mp4?1502436604082">
+                  </source>
+                  This browser cannot play .mp4, .ogg, or .webm files.Try using a different
+                  browser, such as Google Chrome.
+                </video>
+              </div>
+              <h4 class="video-error is-hidden">
+                No playable video sources found.
+              </h4>
+            </section>            
+          </article>
+          <div aria-label="Activating an item in this group will spool the video to the corresponding time point. To skip transcript, go to previous item."
+          role="region" class="subtitles" style="max-height: 448px;">
+            <ol class="subtitles-menu" id="transcript-captions">
+              <li class="spacing" style="height: 214px;" tabindex="-1">
+              </li>
+              <li role="link" data-index="0" data-start="810" tabindex="0">
+                Welcome to Mining Massive Datasets.
+              </li>
+              <li role="link" data-index="1" data-start="2890" tabindex="0">
+                I'm Anand Rajaraman and today's topic is Map-Reduce.
+              </li>
+              <li role="link" data-index="2" data-start="6480" tabindex="0">
+                In the last few years Map-Reduce has emerged as a leading paradigm for
+              </li>
+              <li role="link" data-index="3" data-start="10100" tabindex="0">
+                mining really massive data sets.
+              </li>
+              <li role="link" data-index="4" data-start="12250" tabindex="0">
+                But before we get into Map-Reduce proper, let's spend a few minutes trying
+                to
+              </li>
+              <li role="link" data-index="5" data-start="15690" tabindex="0">
+                understand why we need Map-Reduce in the first place.
+              </li>
+              <li role="link" data-index="6" data-start="17580" tabindex="0">
+                Let's start with the basics.
+              </li>
+              <li role="link" data-index="7" data-start="21460" tabindex="0">
+                Now we're all familiar with the basic computational model of CPU and
+              </li>
+              <li role="link" data-index="8" data-start="24950" tabindex="0">
+                memory, right?
+              </li>
+              <li role="link" data-index="9" data-start="26350" tabindex="0">
+                The algorithm runs on the CPU, and accesses data that's in memory.
+              </li>
+              <li role="link" data-index="10" data-start="31190" tabindex="0">
+                Now we may need to bring the data in from disk into memory, but
+              </li>
+              <li role="link" data-index="11" data-start="34784" tabindex="0">
+                once the data is in memory, fits in there fully.
+              </li>
+              <li role="link" data-index="12" data-start="37691" tabindex="0">
+                So you don't need to access disk again, and
+              </li>
+              <li role="link" data-index="13" data-start="39911" tabindex="0" class="current">
+                the algorithm just runs in the data that's on memory.
+              </li>
+              <li role="link" data-index="14" data-start="43240" tabindex="0">
+                Now there's a familiar model that we use to implement all kinds of algorithms,
+                and
+              </li>
+              <li role="link" data-index="15" data-start="47273" tabindex="0">
+                machined learning, and statistics.
+              </li>
+              <li role="link" data-index="16" data-start="49084" tabindex="0">
+                And pretty much everything else.
+              </li>
+              <li role="link" data-index="17" data-start="51850" tabindex="0">
+                All right?
+              </li>
+              <li role="link" data-index="18" data-start="52520" tabindex="0">
+                Now, what happened to the data is so
+              </li>
+              <li role="link" data-index="19" data-start="54630" tabindex="0">
+                big, that it can't all fit in memory at the same time.
+              </li>
+              <li role="link" data-index="20" data-start="57820" tabindex="0">
+                That's where data mining comes in.
+              </li>
+              <li role="link" data-index="21" data-start="59460" tabindex="0">
+                And classical data mining algorithms.
+              </li>
+              <li role="link" data-index="22" data-start="62410" tabindex="0">
+                Look at the disk in addition to looking at CPU and memory.
+              </li>
+              <li role="link" data-index="23" data-start="65230" tabindex="0">
+                So the data's on disk,
+              </li>
+              <li role="link" data-index="24" data-start="66670" tabindex="0">
+                you can only bring in a portion of the data into memory at a time.
+              </li>
+              <li role="link" data-index="25" data-start="70510" tabindex="0">
+                And you can process it in batches, and you know, write back results to
+                disk.
+              </li>
+              <li role="link" data-index="26" data-start="74930" tabindex="0">
+                And this is the realm of classical data mining algorithms.
+              </li>
+              <li role="link" data-index="27" data-start="77700" tabindex="0">
+                But sometimes even this is not sufficient.
+              </li>
+              <li role="link" data-index="28" data-start="80190" tabindex="0">
+                Let's look at an example.
+              </li>
+              <li role="link" data-index="29" data-start="83210" tabindex="0">
+                So think about Google, crawling and indexing the web, right?
+              </li>
+              <li role="link" data-index="30" data-start="88260" tabindex="0">
+                Let's say, google has crawled 10 billion web pages.
+              </li>
+              <li role="link" data-index="31" data-start="92510" tabindex="0">
+                And let's further say, that the average size of a web page is 20 KB.
+              </li>
+              <li role="link" data-index="32" data-start="97860" tabindex="0">
+                Now, these are representative numbers from real life.
+              </li>
+              <li role="link" data-index="33" data-start="101450" tabindex="0">
+                Now if you take ten billion webpages, each of 20 KB,
+              </li>
+              <li role="link" data-index="34" data-start="104780" tabindex="0">
+                you have, total data set size of 200 TB.
+              </li>
+              <li role="link" data-index="35" data-start="109480" tabindex="0">
+                Now, when you have 200 TB, let's assume that they're using
+              </li>
+              <li role="link" data-index="36" data-start="112300" tabindex="0">
+                the classical computational model, classical data mining model.
+              </li>
+              <li role="link" data-index="37" data-start="115260" tabindex="0">
+                And all this data is stored on a single disk, and
+              </li>
+              <li role="link" data-index="38" data-start="117740" tabindex="0">
+                we have read tend to be processed inside a CPU.
+              </li>
+              <li role="link" data-index="39" data-start="121240" tabindex="0">
+                Now the fundamental limitation here is the bandwidth,
+              </li>
+              <li role="link" data-index="40" data-start="125330" tabindex="0">
+                the data bandwidth between the disk and the CPU.
+              </li>
+              <li role="link" data-index="41" data-start="128030" tabindex="0">
+                The data has to be read from the disk into the CPU, and
+              </li>
+              <li role="link" data-index="42" data-start="132450" tabindex="0">
+                the disk read bandwidth for most modern SATA disk representative number.
+              </li>
+              <li role="link" data-index="43" data-start="137070" tabindex="0">
+                Is around 50MB a second.
+              </li>
+              <li role="link" data-index="44" data-start="139430" tabindex="0">
+                So, so we can read data at 50MB a second.
+              </li>
+              <li role="link" data-index="45" data-start="142130" tabindex="0">
+                How long does it take to read 200TB at 50MB a second?
+              </li>
+              <li role="link" data-index="46" data-start="145680" tabindex="0">
+                Can do some simple math, and
+              </li>
+              <li role="link" data-index="47" data-start="147050" tabindex="0">
+                the answer is 4 million seconds which is more than 46 days.
+              </li>
+              <li role="link" data-index="48" data-start="151020" tabindex="0">
+                Remember, this is an awfully long time, and
+              </li>
+              <li role="link" data-index="49" data-start="152890" tabindex="0">
+                is just the time to read the data into memory.
+              </li>
+              <li role="link" data-index="50" data-start="155940" tabindex="0">
+                To do something useful with the data, it's going to take even longer.
+              </li>
+              <li role="link" data-index="51" data-start="159830" tabindex="0">
+                Right, so clearly this is unacceptable.
+              </li>
+              <li role="link" data-index="52" data-start="161870" tabindex="0">
+                You can't take four to six days just to read the data.
+              </li>
+              <li role="link" data-index="53" data-start="164330" tabindex="0">
+                So you need a better solution.
+              </li>
+              <li role="link" data-index="54" data-start="165640" tabindex="0">
+                Now the obvious thing that you think of is that it can split the data
+                into chunks.
+              </li>
+              <li role="link" data-index="55" data-start="170610" tabindex="0">
+                And you can have multiple disks and CPUs.
+              </li>
+              <li role="link" data-index="56" data-start="173310" tabindex="0">
+                you, you stripe the data across multiple disks.
+              </li>
+              <li role="link" data-index="57" data-start="176090" tabindex="0">
+                And you can read it, and, and process it in parallel in multiple CPUs.
+              </li>
+              <li role="link" data-index="58" data-start="180150" tabindex="0">
+                That will cut down, this time by a lot.
+              </li>
+              <li role="link" data-index="59" data-start="182460" tabindex="0">
+                For example, if you had a 1,000 disks and CPUs, in four thousa-,
+              </li>
+              <li role="link" data-index="60" data-start="186668" tabindex="0">
+                4 million seconds.
+              </li>
+              <li role="link" data-index="61" data-start="188080" tabindex="0">
+                And we were completely in parallel, in 4 million seconds, you could do
+                the job in,
+              </li>
+              <li role="link" data-index="62" data-start="193600" tabindex="0">
+                4 million by 1,000, which is 4,000 seconds.
+              </li>
+              <li role="link" data-index="63" data-start="197940" tabindex="0">
+                And that's just about an hour which is, which is very acceptable time.
+              </li>
+              <li role="link" data-index="64" data-start="202610" tabindex="0">
+                Right? So
+              </li>
+              <li role="link" data-index="65" data-start="203490" tabindex="0">
+                this is the fundamental idea behind the idea of cluster computing.
+              </li>
+              <li role="link" data-index="66" data-start="207250" tabindex="0">
+                Right? And this is,
+              </li>
+              <li role="link" data-index="67" data-start="208100" tabindex="0">
+                this tiered architecture that has emerged for
+              </li>
+              <li role="link" data-index="68" data-start="210280" tabindex="0">
+                cluster computing is something like this.
+              </li>
+              <li role="link" data-index="69" data-start="212140" tabindex="0">
+                You have the racks consisting of commodity Linux nodes.
+              </li>
+              <li role="link" data-index="70" data-start="216087" tabindex="0">
+                As you go with commodity Linux nodes because they are very cheap.
+              </li>
+              <li role="link" data-index="71" data-start="219610" tabindex="0">
+                And you can, you can buy thousands and thousands of them and, and rack
+                them up.
+              </li>
+              <li role="link" data-index="72" data-start="224428" tabindex="0">
+                you, you have many of these racks.
+              </li>
+              <li role="link" data-index="73" data-start="227170" tabindex="0">
+                Each rack has 16 to 64 of these commodity Linux nodes and
+              </li>
+              <li role="link" data-index="74" data-start="233760" tabindex="0">
+                these nodes are connected by a switch.
+              </li>
+              <li role="link" data-index="75" data-start="236602" tabindex="0">
+                and, the, the, the switch in a rack is typically a gigabit switch.
+              </li>
+              <li role="link" data-index="76" data-start="239851" tabindex="0">
+                So there's 1 Gbps bandwidth between any pair of nodes in rack.
+              </li>
+              <li role="link" data-index="77" data-start="246160" tabindex="0">
+                Of course 16 to 64 nodes is not sufficient.
+              </li>
+              <li role="link" data-index="78" data-start="248950" tabindex="0">
+                So you have multiple racks, and all the,
+              </li>
+              <li role="link" data-index="79" data-start="252460" tabindex="0">
+                the racks themselves are connected by backbone switches.
+              </li>
+              <li role="link" data-index="80" data-start="255390" tabindex="0">
+                And the backbones is,
+              </li>
+              <li role="link" data-index="81" data-start="256700" tabindex="0">
+                is a higher bandwidth switch can do two to ten gigabits between racks.
+              </li>
+              <li role="link" data-index="82" data-start="262520" tabindex="0">
+                Right? So so we have 16 to 64 nodes in a rack.
+              </li>
+              <li role="link" data-index="83" data-start="266000" tabindex="0">
+                And then you, you rack up multiple racks, and, and you get a data center.
+              </li>
+              <li role="link" data-index="84" data-start="270580" tabindex="0">
+                So this is the standard classical architecture that has emerged over
+              </li>
+              <li role="link" data-index="85" data-start="274140" tabindex="0">
+                the last few years.
+              </li>
+              <li role="link" data-index="86" data-start="275638" tabindex="0">
+                For you know, for storing and mining very large data sets.
+              </li>
+              <li role="link" data-index="87" data-start="280832" tabindex="0">
+                Now once you have this kind of cluster this doesn't solve the problem
+                completely.
+              </li>
+              <li role="link" data-index="88" data-start="284350" tabindex="0">
+                Because cluster computing comes with it's own challenges.
+              </li>
+              <li role="link" data-index="89" data-start="289422" tabindex="0">
+                But before we get there, let's get us, you know, ideal of the scale, right?
+              </li>
+              <li role="link" data-index="90" data-start="293963" tabindex="0">
+                In 2011 somebody estimated that Google had a million machines,
+              </li>
+              <li role="link" data-index="91" data-start="298253" tabindex="0">
+                million nodes like this.
+              </li>
+              <li role="link" data-index="92" data-start="300490" tabindex="0">
+                In stacked up you know, is, is somewhat like this.
+              </li>
+              <li role="link" data-index="93" data-start="303670" tabindex="0">
+                So, so it gives, so that gives you a sense of the scale of modern data
+                centers and,
+              </li>
+              <li role="link" data-index="94" data-start="308120" tabindex="0">
+                and, and clusters, right?
+              </li>
+              <li role="link" data-index="95" data-start="309790" tabindex="0">
+                So here's, here's a picture.
+              </li>
+              <li role="link" data-index="96" data-start="311500" tabindex="0">
+                This is what, it looks like inside a data center.
+              </li>
+              <li role="link" data-index="97" data-start="315240" tabindex="0">
+                So the, the, what you see there is, is the back up racks, and
+              </li>
+              <li role="link" data-index="98" data-start="318610" tabindex="0">
+                you can see the connections, between, between the racks.
+              </li>
+              <li role="link" data-index="99" data-start="322460" tabindex="0">
+                Now, once you have such a big cluster,
+              </li>
+              <li role="link" data-index="100" data-start="326630" tabindex="0">
+                you actually have to do computations on the cluster.
+              </li>
+              <li role="link" data-index="101" data-start="329320" tabindex="0">
+                Right?
+              </li>
+              <li role="link" data-index="102" data-start="329940" tabindex="0">
+                And clustered computing comes with its own, challenges.
+              </li>
+              <li role="link" data-index="103" data-start="333390" tabindex="0">
+                The first and the most major challenge is that nodes can fail.
+              </li>
+              <li role="link" data-index="104" data-start="337420" tabindex="0">
+                Right?
+              </li>
+              <li role="link" data-index="105" data-start="337940" tabindex="0">
+                Now a single, node doesn't fail that often.
+              </li>
+              <li role="link" data-index="106" data-start="341140" tabindex="0">
+                Right? If you,
+              </li>
+              <li role="link" data-index="107" data-start="341940" tabindex="0">
+                if you just connect, the next node and
+              </li>
+              <li role="link" data-index="108" data-start="343980" tabindex="0">
+                let it stay up, it can probably stay up for, three years without failing.
+              </li>
+              <li role="link" data-index="109" data-start="348000" tabindex="0">
+                Three years is about a 1,000 days.
+              </li>
+              <li role="link" data-index="110" data-start="349940" tabindex="0">
+                So that's, you know, once in a 1,000 days failure isn't such a big deal.
+              </li>
+              <li role="link" data-index="111" data-start="354160" tabindex="0">
+                But now imagine that you have a 1,000 servers in a cluster.
+              </li>
+              <li role="link" data-index="112" data-start="357160" tabindex="0">
+                And in your, and if you assume that these, servers fail, independent of
+                each other.
+              </li>
+              <li role="link" data-index="113" data-start="362970" tabindex="0">
+                You're going to get approximately one failure a day.
+              </li>
+              <li role="link" data-index="114" data-start="365500" tabindex="0">
+                Which is, still isn't such a big deal.
+              </li>
+              <li role="link" data-index="115" data-start="366840" tabindex="0">
+                You can probably deal with it.
+              </li>
+              <li role="link" data-index="116" data-start="368360" tabindex="0">
+                But now imagine something on the scale of Google which has a million servers,
+              </li>
+              <li role="link" data-index="117" data-start="371710" tabindex="0">
+                in its cluster.
+              </li>
+              <li role="link" data-index="118" data-start="372710" tabindex="0">
+                So if you have a million servers, you're going to get a 1,000 failures
+                per day.
+              </li>
+              <li role="link" data-index="119" data-start="375990" tabindex="0">
+                Now a 1,000 failures per day is a lot and
+              </li>
+              <li role="link" data-index="120" data-start="378127" tabindex="0">
+                you need some kind of infrastructure to deal with that kind of failure
+                rate.
+              </li>
+              <li role="link" data-index="121" data-start="382430" tabindex="0">
+                Your failures on that scale introduce two kinds of problems.
+              </li>
+              <li role="link" data-index="122" data-start="385950" tabindex="0">
+                The first problem is that if, you know, if nodes are going to fail and
+              </li>
+              <li role="link" data-index="123" data-start="388610" tabindex="0">
+                you're going to store your data on these nodes.
+              </li>
+              <li role="link" data-index="124" data-start="390840" tabindex="0">
+                How do you keep the data and store persistently?
+              </li>
+              <li role="link" data-index="125" data-start="394060" tabindex="0">
+                What does this mean?
+              </li>
+              <li role="link" data-index="126" data-start="395120" tabindex="0">
+                Persistence means that once you store the data,
+              </li>
+              <li role="link" data-index="127" data-start="397430" tabindex="0">
+                you're guaranteed you can read it again.
+              </li>
+              <li role="link" data-index="128" data-start="399430" tabindex="0">
+                But if the node in which you stored the data fails, then you can't read
+                the data.
+              </li>
+              <li role="link" data-index="129" data-start="403460" tabindex="0">
+                You might even lose the data.
+              </li>
+              <li role="link" data-index="130" data-start="404640" tabindex="0">
+                So how do you keep the data stored persistently if like,
+              </li>
+              <li role="link" data-index="131" data-start="408050" tabindex="0">
+                these nodes can fail.
+              </li>
+              <li role="link" data-index="132" data-start="409350" tabindex="0">
+                Now the second problem is is is one of availability.
+              </li>
+              <li role="link" data-index="133" data-start="413450" tabindex="0">
+                So, let's say you're running one of the computations, and this computation
+                is, a,
+              </li>
+              <li role="link" data-index="134" data-start="418520" tabindex="0">
+                you know, analyzing massive amounts of data.
+              </li>
+              <li role="link" data-index="135" data-start="421850" tabindex="0">
+                And it's chugging through the computation and
+              </li>
+              <li role="link" data-index="136" data-start="423510" tabindex="0">
+                it's going, you know, run half way through the computation.
+              </li>
+              <li role="link" data-index="137" data-start="426180" tabindex="0">
+                And, you know, at this critical point, a couple of nodes fail, right?
+              </li>
+              <li role="link" data-index="138" data-start="430690" tabindex="0">
+                And that node had data that is necessary for the computation.
+              </li>
+              <li role="link" data-index="139" data-start="434050" tabindex="0">
+                Now how we deal with this problem.
+              </li>
+              <li role="link" data-index="140" data-start="435720" tabindex="0">
+                Now in the first place you may have to go back and
+              </li>
+              <li role="link" data-index="141" data-start="437590" tabindex="0">
+                restart the computation all over again.
+              </li>
+              <li role="link" data-index="142" data-start="439590" tabindex="0">
+                But if you restart it now and, and, and
+              </li>
+              <li role="link" data-index="143" data-start="442060" tabindex="0">
+                the computation turns again when the computation is running.
+              </li>
+              <li role="link" data-index="144" data-start="445860" tabindex="0">
+                So kind of need an infrastructure that can hide these kinds of node failures
+                and
+              </li>
+              <li role="link" data-index="145" data-start="450690" tabindex="0">
+                let the computation go to go to completion even if nodes fail.
+              </li>
+              <li role="link" data-index="146" data-start="455990" tabindex="0">
+                The second challenge of cluster computing is that
+              </li>
+              <li role="link" data-index="147" data-start="459800" tabindex="0">
+                the network itself can become a bottleneck.
+              </li>
+              <li role="link" data-index="148" data-start="462450" tabindex="0">
+                Now remember, there is this 1 Gbps network bandwidth.
+              </li>
+              <li role="link" data-index="149" data-start="465981" tabindex="0">
+                That is available between individual nodes in a rack and
+              </li>
+              <li role="link" data-index="150" data-start="469253" tabindex="0">
+                a smaller bandwidth that's available between individual racks.
+              </li>
+              <li role="link" data-index="151" data-start="472923" tabindex="0">
+                Though if you have 10 TB of data, and you have to move it
+              </li>
+              <li role="link" data-index="152" data-start="475953" tabindex="0">
+                across a 1 Gbps network connection, that takes approximately a day.
+              </li>
+              <li role="link" data-index="153" data-start="480100" tabindex="0">
+                You can do the math and figure that out.
+              </li>
+              <li role="link" data-index="154" data-start="482450" tabindex="0">
+                You know a complex computation might need to move a lot of data, and
+              </li>
+              <li role="link" data-index="155" data-start="487110" tabindex="0">
+                that can slow the computation down.
+              </li>
+              <li role="link" data-index="156" data-start="488420" tabindex="0">
+                So you need a framework that you know, doesn't move data around so
+              </li>
+              <li role="link" data-index="157" data-start="492270" tabindex="0">
+                much while it's doing computation.
+              </li>
+              <li role="link" data-index="158" data-start="495670" tabindex="0">
+                The third problem is that distributed programming can be really really
+                hard.
+              </li>
+              <li role="link" data-index="159" data-start="499990" tabindex="0">
+                Even sophisticated programmers find it hard to write distributed programs
+              </li>
+              <li role="link" data-index="160" data-start="504370" tabindex="0">
+                correctly and avoid race conditions and various kinds of complications.
+              </li>
+              <li role="link" data-index="161" data-start="508240" tabindex="0">
+                So here's a simple problem that hides most of the complexity of
+              </li>
+              <li role="link" data-index="162" data-start="511770" tabindex="0">
+                distributed programming.
+              </li>
+              <li role="link" data-index="163" data-start="513190" tabindex="0">
+                And, and makes it easy to write you know,
+              </li>
+              <li role="link" data-index="164" data-start="515960" tabindex="0">
+                algorithms that can mine very massive data sets.
+              </li>
+              <li role="link" data-index="165" data-start="518919" tabindex="0">
+                So we look at three problems that you know that we face when,
+              </li>
+              <li role="link" data-index="166" data-start="523950" tabindex="0">
+                when we're dealing with cluster computing.
+              </li>
+              <li role="link" data-index="167" data-start="525800" tabindex="0">
+                And, Map-Reduce addresses all three of these challenges.
+              </li>
+              <li role="link" data-index="168" data-start="531070" tabindex="0">
+                Right? First of all,
+              </li>
+              <li role="link" data-index="169" data-start="531730" tabindex="0">
+                the first problem that we saw was that, was one of persistence and
+              </li>
+              <li role="link" data-index="170" data-start="534810" tabindex="0">
+                availability of nodes can fade.
+              </li>
+              <li role="link" data-index="171" data-start="536540" tabindex="0">
+                The Map-Reduce model addresses this problem by storing data redundantly
+                on
+              </li>
+              <li role="link" data-index="172" data-start="540230" tabindex="0">
+                multiple nodes.
+              </li>
+              <li role="link" data-index="173" data-start="541000" tabindex="0">
+                The same data is stored on multiple nodes so that even if you lose one
+                of
+              </li>
+              <li role="link" data-index="174" data-start="544700" tabindex="0">
+                those nodes, the data is still available on another node.
+              </li>
+              <li role="link" data-index="175" data-start="547820" tabindex="0">
+                The second problem that we saw was one of network bottlenecks.
+              </li>
+              <li role="link" data-index="176" data-start="551970" tabindex="0">
+                And this happens when you move around data a lot.
+              </li>
+              <li role="link" data-index="177" data-start="553986" tabindex="0">
+                What the Map-Reduce model does is it moves the computation close to the
+                data.
+              </li>
+              <li role="link" data-index="178" data-start="558970" tabindex="0">
+                And avoids copying data around the network.
+              </li>
+              <li role="link" data-index="179" data-start="561910" tabindex="0">
+                And this minimizes the network bottle neck problem.
+              </li>
+              <li role="link" data-index="180" data-start="564520" tabindex="0">
+                And thirdly, the Map-Reduce model also provides a very
+              </li>
+              <li role="link" data-index="181" data-start="567170" tabindex="0">
+                simple programming model that hides the complexity of all the online magic.
+              </li>
+              <li role="link" data-index="182" data-start="572070" tabindex="0">
+                So let's look at each of these pieces in turn.
+              </li>
+              <li role="link" data-index="183" data-start="574870" tabindex="0">
+                The first piece is the redundant storage infrastructure.
+              </li>
+              <li role="link" data-index="184" data-start="578160" tabindex="0">
+                Now redundant storage is provided by what's called a distributed file
+                system.
+              </li>
+              <li role="link" data-index="185" data-start="581900" tabindex="0">
+                Now distributed file system is a file system that stores data you know,
+              </li>
+              <li role="link" data-index="186" data-start="586950" tabindex="0">
+                across a cluster, but stores each piece of data multiple times.
+              </li>
+              <li role="link" data-index="187" data-start="590550" tabindex="0">
+                So, the distributed file system provides a global file namespace.
+              </li>
+              <li role="link" data-index="188" data-start="594140" tabindex="0">
+                It provides redundancy and availability.
+              </li>
+              <li role="link" data-index="189" data-start="596120" tabindex="0">
+                There are multiple implementations of distributed file systems.
+              </li>
+              <li role="link" data-index="190" data-start="599220" tabindex="0">
+                Google's GFS is or Google File System, or GFS is one example.
+              </li>
+              <li role="link" data-index="191" data-start="603490" tabindex="0">
+                Hadoop's HDFS is another example.
+              </li>
+              <li role="link" data-index="192" data-start="606370" tabindex="0">
+                And these are the two most popular distributed file systems out there.
+              </li>
+              <li role="link" data-index="193" data-start="612230" tabindex="0">
+                Our typical usage pattern that these distributed file systems are optimized
+                for
+              </li>
+              <li role="link" data-index="194" data-start="616730" tabindex="0">
+                is huge files.
+              </li>
+              <li role="link" data-index="195" data-start="618278" tabindex="0">
+                That are in the 100s to, of GB to TB.
+              </li>
+              <li role="link" data-index="196" data-start="621850" tabindex="0">
+                But the, even though the files are really huge,
+              </li>
+              <li role="link" data-index="197" data-start="624070" tabindex="0">
+                the data is very rarely updated in place.
+              </li>
+              <li role="link" data-index="198" data-start="626380" tabindex="0">
+                Right, once, once data is written you know it's, it's very, very often.
+              </li>
+              <li role="link" data-index="199" data-start="630830" tabindex="0">
+                But when it's updated, it's updated through appends.
+              </li>
+              <li role="link" data-index="200" data-start="633450" tabindex="0">
+                It's never updated in place.
+              </li>
+              <li role="link" data-index="201" data-start="635430" tabindex="0">
+                And for example let, let, imagine the Google scenario once again.
+              </li>
+              <li role="link" data-index="202" data-start="641198" tabindex="0">
+                When Google encounters a new webpage it, it adds the webpage to a depository.
+              </li>
+              <li role="link" data-index="203" data-start="646272" tabindex="0">
+                Doesn't ever go and
+              </li>
+              <li role="link" data-index="204" data-start="647351" tabindex="0">
+                update the content of the webpage that it already has crawled, right?
+              </li>
+              <li role="link" data-index="205" data-start="651170" tabindex="0">
+                So a typical usage pattern consists of writing the data once,
+              </li>
+              <li role="link" data-index="206" data-start="655660" tabindex="0">
+                reading it multiple times and appending to it occasionally.
+              </li>
+              <li role="link" data-index="207" data-start="659380" tabindex="0">
+                Lets go into the hood of a distributed file system to see how it actually
+                works.
+              </li>
+              <li role="link" data-index="208" data-start="663090" tabindex="0">
+                Data is kept in chunks that are spread across machines.
+              </li>
+              <li role="link" data-index="209" data-start="666010" tabindex="0">
+                So if you take any file, the file is divided into chunks, and
+              </li>
+              <li role="link" data-index="210" data-start="669900" tabindex="0">
+                these chunks are spread across multiple machines.
+              </li>
+              <li role="link" data-index="211" data-start="672120" tabindex="0">
+                So the machines themselves are called chunk servers in this context.
+              </li>
+              <li role="link" data-index="212" data-start="676480" tabindex="0">
+                So here's, here's an example.
+              </li>
+              <li role="link" data-index="213" data-start="678010" tabindex="0">
+                There are multiple multiple chunks servers.
+              </li>
+              <li role="link" data-index="214" data-start="682468" tabindex="0">
+                Chunk server 1, 2, 3, and 4.
+              </li>
+              <li role="link" data-index="215" data-start="685150" tabindex="0">
+                And here's the file 1.
+              </li>
+              <li role="link" data-index="216" data-start="690060" tabindex="0">
+                And file 1 is divided into six chunks in this case, C0, C1, C2, C3, C4
+                and C5.
+              </li>
+              <li role="link" data-index="217" data-start="698091" tabindex="0">
+                And these chunks as you can see four of the chunks happen to be on Chunk
+                server 1.
+              </li>
+              <li role="link" data-index="218" data-start="702810" tabindex="0">
+                One of them is on Chunks server 2 and, one of them is on Chunks server
+                3.
+              </li>
+              <li role="link" data-index="219" data-start="707730" tabindex="0">
+                Now this is not sufficient.
+              </li>
+              <li role="link" data-index="220" data-start="709710" tabindex="0">
+                You actually have to store multiple copies of each of these chunks and
+                so
+              </li>
+              <li role="link" data-index="221" data-start="715480" tabindex="0">
+                we replicate these chunks so here copy, here is a copy of C1.
+              </li>
+              <li role="link" data-index="222" data-start="721080" tabindex="0">
+                On Chunk server 2, a copy of C2 in Chunk server 3, and so on.
+              </li>
+              <li role="link" data-index="223" data-start="724360" tabindex="0">
+                So each chunk, in this case is replicated twice.
+              </li>
+              <li role="link" data-index="224" data-start="729100" tabindex="0">
+                And if you notice carefully you'll see that replicas of
+              </li>
+              <li role="link" data-index="225" data-start="732980" tabindex="0">
+                a chunk are never on the same chunk server.
+              </li>
+              <li role="link" data-index="226" data-start="735640" tabindex="0">
+                They're always on different chunks of, so
+              </li>
+              <li role="link" data-index="227" data-start="738216" tabindex="0">
+                C1 has one replica on Chunk server 1 and one on Chunk server 2.
+              </li>
+              <li role="link" data-index="228" data-start="742698" tabindex="0">
+                C0 has one on Chunk server 1, and one on Chunk server N, and so on.
+              </li>
+              <li role="link" data-index="229" data-start="748960" tabindex="0">
+                And here is here is another file, D.
+              </li>
+              <li role="link" data-index="230" data-start="752740" tabindex="0">
+                D has two chunks, D0 and D1.
+              </li>
+              <li role="link" data-index="231" data-start="755680" tabindex="0">
+                And that's replicated twice.
+              </li>
+              <li role="link" data-index="232" data-start="758040" tabindex="0">
+                And so and so that's stored on different chunks server [INAUDIBLE].
+              </li>
+              <li role="link" data-index="233" data-start="766730" tabindex="0">
+                Now so, so you serve you serve from chunk files and
+              </li>
+              <li role="link" data-index="234" data-start="771850" tabindex="0">
+                store them on, on these, on these chunk servers.
+              </li>
+              <li role="link" data-index="235" data-start="774860" tabindex="0">
+                Now we turn some of the chunk servers, also act as compute servers.
+              </li>
+              <li role="link" data-index="236" data-start="779096" tabindex="0">
+                And when, whenever your computation has to access data.
+              </li>
+              <li role="link" data-index="237" data-start="783430" tabindex="0">
+                That computation is actually scheduled on the chunk server that
+              </li>
+              <li role="link" data-index="238" data-start="786750" tabindex="0">
+                actually contains the data.
+              </li>
+              <li role="link" data-index="239" data-start="789060" tabindex="0">
+                This way you avoid moving data to where the computation needs to run,
+              </li>
+              <li role="link" data-index="240" data-start="793120" tabindex="0">
+                but instead you move the computation to where the data is.
+              </li>
+              <li role="link" data-index="241" data-start="796850" tabindex="0">
+                And that's how you put a wide under the city data movement in the system.
+              </li>
+              <li role="link" data-index="242" data-start="802890" tabindex="0">
+                This isn't clear when you look at look at some examples.
+              </li>
+              <li role="link" data-index="243" data-start="808920" tabindex="0">
+                So the sum of this, each file is split into contiguous chunks.
+              </li>
+              <li role="link" data-index="244" data-start="813710" tabindex="0">
+                And the chunks are typically 16 to 64 MB in in size.
+              </li>
+              <li role="link" data-index="245" data-start="818850" tabindex="0">
+                On each chunk is replicated,
+              </li>
+              <li role="link" data-index="246" data-start="820830" tabindex="0">
+                in our example we saw each chunk replicated twice.
+              </li>
+              <li role="link" data-index="247" data-start="824580" tabindex="0">
+                But it could be 2x or 3x replication.
+              </li>
+              <li role="link" data-index="248" data-start="826790" tabindex="0">
+                3x is the most common.
+              </li>
+              <li role="link" data-index="249" data-start="829210" tabindex="0">
+                And we saw that the chunks were actually kept on different chunk servers.
+              </li>
+              <li role="link" data-index="250" data-start="834641" tabindex="0">
+                But, but when you replicate 3x, you know, the system usually makes an
+                effort.
+              </li>
+              <li role="link" data-index="251" data-start="839080" tabindex="0">
+                To keep at least one replica in a entirely different rack if possible
+                and
+              </li>
+              <li role="link" data-index="252" data-start="844240" tabindex="0">
+                why do we do that?
+              </li>
+              <li role="link" data-index="253" data-start="844970" tabindex="0">
+                We do that because it's you know,
+              </li>
+              <li role="link" data-index="254" data-start="847893" tabindex="0">
+                the most common scenario is that a single node can fail.
+              </li>
+              <li role="link" data-index="255" data-start="852069" tabindex="0">
+                But it's also possible that the switch on a rack can fail, and
+              </li>
+              <li role="link" data-index="256" data-start="855212" tabindex="0">
+                when the switch on a rack fails, the entire rack becomes inaccessible.
+              </li>
+              <li role="link" data-index="257" data-start="859568" tabindex="0">
+                And then if you have all the chunks for a, for in all the replicas of
+                a chunk in
+              </li>
+              <li role="link" data-index="258" data-start="863489" tabindex="0">
+                one rack then that whole chunk can become inaccessible.
+              </li>
+              <li role="link" data-index="259" data-start="866492" tabindex="0">
+                So if you keep replicas of a chunk on different racks then even if
+              </li>
+              <li role="link" data-index="260" data-start="870674" tabindex="0">
+                a switch fails then it can still access that chunk.
+              </li>
+              <li role="link" data-index="261" data-start="874050" tabindex="0">
+                Right so the system tries to make sure that,
+              </li>
+              <li role="link" data-index="262" data-start="876720" tabindex="0">
+                that the replicas of a chunk are actually kept on different racks.
+              </li>
+              <li role="link" data-index="263" data-start="882240" tabindex="0">
+                The second component of a distributed file system is, is a master node.
+              </li>
+              <li role="link" data-index="264" data-start="885840" tabindex="0">
+                Now the master node is also known as the, it's called a master node in
+              </li>
+              <li role="link" data-index="265" data-start="890110" tabindex="0">
+                the Google file system, it's a called a Name Node in Hadoop's HDFS.
+              </li>
+              <li role="link" data-index="266" data-start="893710" tabindex="0">
+                But the master node stores metadata about where the files are stored.
+              </li>
+              <li role="link" data-index="267" data-start="898970" tabindex="0">
+                And for
+              </li>
+              <li role="link" data-index="268" data-start="899680" tabindex="0">
+                example, if my you know, it'll know that file one is divided into six
+                chunks.
+              </li>
+              <li role="link" data-index="269" data-start="905210" tabindex="0">
+                And here is, here are the locations of each of the six chunks, and
+              </li>
+              <li role="link" data-index="270" data-start="908260" tabindex="0">
+                here are the locations of the replicas.
+              </li>
+              <li role="link" data-index="271" data-start="910160" tabindex="0">
+                And the master node itself may be replicated because otherwise it
+              </li>
+              <li role="link" data-index="272" data-start="914170" tabindex="0">
+                might become a single point of failure.
+              </li>
+              <li role="link" data-index="273" data-start="917170" tabindex="0">
+                The final component of a distributed file system is a client library.
+              </li>
+              <li role="link" data-index="274" data-start="920550" tabindex="0">
+                Now, when the, when a client, or, or an algorithm that needs to
+              </li>
+              <li role="link" data-index="275" data-start="924070" tabindex="0">
+                access the data tries to access a file it goes through the client library.
+              </li>
+              <li role="link" data-index="276" data-start="928420" tabindex="0">
+                The client library talks to the master and
+              </li>
+              <li role="link" data-index="277" data-start="930990" tabindex="0">
+                finds the chunk servers that actually store the chunks.
+              </li>
+              <li role="link" data-index="278" data-start="934188" tabindex="0">
+                And once that's done the client is directly connected to the chunk servers.
+              </li>
+              <li role="link" data-index="279" data-start="940211" tabindex="0">
+                Where it can access the data without going through the master nodes.
+              </li>
+              <li role="link" data-index="280" data-start="943060" tabindex="0">
+                So the data access actually happens in peer-to-peer fashion without going
+              </li>
+              <li role="link" data-index="281" data-start="946364" tabindex="0">
+                through the master node
+              </li>
+              <li class="spacing" style="height: 190px;" tabindex="-1">
+              </li>
+            </ol>
+          </div>
+        </div>       
+        <div class="focus_grabber last" tabindex="-1">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

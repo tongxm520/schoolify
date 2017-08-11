@@ -2872,9 +2872,8 @@ var ControlBar = function (_Component) {
  * @private
  */
 
-
 ControlBar.prototype.options_ = {
-  children: ['playToggle','progressControl', 'currentTimeDisplay', 'timeDivider', 'durationDisplay', 'liveDisplay', 'remainingTimeDisplay', 'customControlSpacer', 'playbackRateMenuButton', 'chaptersButton', 'descriptionsButton', 'subtitlesButton', 'captionsButton', 'audioTrackButton','volumeMenuButton','fullscreenToggle']
+  children: ['playToggle','progressControl', 'currentTimeDisplay', 'timeDivider', 'durationDisplay', 'liveDisplay', 'remainingTimeDisplay', 'customControlSpacer', 'playbackRateMenuButton', 'chaptersButton', 'descriptionsButton', 'subtitlesButton',  'audioTrackButton','fullscreenToggle','captionsButton','volumeMenuButton']
 };
 
 _component2['default'].registerComponent('ControlBar', ControlBar);

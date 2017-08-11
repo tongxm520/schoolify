@@ -1,5 +1,3 @@
-
-
 /* Time Display
 --------------------------------------------------------------------------------
 */
@@ -31,61 +29,206 @@
   line-height: 3em;
   font-weight: bold;
   font-size: 1.1em;
+  color: #0f0;
 }
 
-
-/* Removing curved corners on progress control and time control to join them. */
-.vjs-default-skin .vjs-control-bar > .vjs-progress-control {
-  -webkit-box-flex: auto;
-  -moz-box-flex: auto;
-  -webkit-flex: auto;
-  -ms-flex: auto;
-  flex: auto;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  min-width: 4em;
+/* Progress------------------------------------------*/
+.vjs-default-skin .vjs-progress-control {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: auto;
+  font-size: 0.3em;
+  height: 1em;
+  /* Set above the rest of the controls. */
+  top: -1em;
+  /* Shrink the bar slower than it grows. */
+  /* transition */
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+}
+/* On hover, make the progress bar grow to something that's more clickable.
+    This simply changes the overall font for the progress bar, and this
+    updates both the em-based widths and heights, as wells as the icon font */
+.vjs-default-skin:hover .vjs-progress-control {
+  font-size: .9em;
+  /* Even though we're not changing the top/height, we need to include them in
+      the transition so they're handled correctly. */
+  /* transition */
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+/* Box containing play and load progresses. Also acts as seek scrubber. */
+.vjs-default-skin .vjs-progress-holder {  
+  height: 100%;   
+}
+/* Progress Bars */
+.vjs-default-skin .vjs-progress-holder .vjs-play-progress,
+.vjs-default-skin .vjs-progress-holder .vjs-load-progress {
+  position: absolute;
+  display: block;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* Needed for IE6 */
+  left: 0;
+  top: 0;
+}
+.vjs-default-skin .vjs-play-progress {
+  /*
+    Using a data URI to create the white diagonal lines with a transparent
+      background. Surprisingly works in IE8.
+      Created using http://www.patternify.com
+    Changing the first color value will change the bar color.
+    Also using a paralax effect to make the lines move backwards.
+      The -50% left position makes that happen.
+  */
+  background: #B40C1E url() -50% 0 repeat;
+}
+.vjs-default-skin .vjs-load-progress {
+  background: #757575;
 }
 
-/* Progress
--------------------------------------------------------------------------------- */
-.vjs-progress-control .vjs-progress-holder { /* Box containing play and load progresses */
-  position: relative; 
-  padding: 0; 
-  overflow:hidden; 
-  cursor: pointer !important;
-  height: 9px; 
-  border: 1px solid #777;
-  margin: 7px 1px 0 5px; /* Placement within the progress control item */
-  border-radius: 5px; 
-  -webkit-border-radius: 5px; 
-  -moz-border-radius: 5px;
-  width: 100%;
+.vjs-progress-control .vjs-slider{
+  margin: 0;
+}/*to fix progress bar fully fill the width of video*/
+
+
+/*progress bar handle*/
+.video-js .vjs-play-progress:before{
+  /*content: "\f111";*/
+  content: "";
+  background: #cb598d none repeat scroll 0 0;
+  border: 0 none;
+  border-radius: 4px;
+  box-shadow: none;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  transform-origin: left bottom 0;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
 }
 
-
-
-.vjs-progress-control .vjs-load-progress {
-  opacity: 0.8;
-  /* CSS Gradient */
-  /* Default */ background-color: #555;
-  /* Webkit  */ background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#aaa));
-  /* Firefox */ background: -moz-linear-gradient(top,  #555,  #aaa);
+.video-js .vjs-play-progress:before {
+    position: absolute;
+    top: -0.111111111111111em;
+    right: -0.5em;
+    font-size: 0.9em; 
 }
 
+.vjs-default-skin:hover .vjs-play-progress:before{
+  border: 1px solid #fbcb09; 
+  background: #DB8BAF none repeat scroll 0 0; 
+  font-weight: bold; 
+  color: #c77405;
+  width: 13.3333px;
+  height: 13.3333px;
+}
 
-/* Placement of Control Items 
-   - Left side of pogress bar, use left & width
-   - Rigth side of progress bar, use right & width
-   - Expand with the video (like progress bar) use left & right */
-.vjs-control-bar > div.vjs-play-control       { left: 5px;   width: 25px;  }
-.vjs-control-bar > div.vjs-progress-control   { left: 5px;  right: 165px; } 
-/* Using left & right so it expands with the width of the video */
+.video-js .vjs-time-tooltip,
+.video-js .vjs-play-progress:before,
+.video-js .vjs-play-progress:after {
+  z-index: 2; }
+
+.video-js .vjs-progress-holder .vjs-play-progress,
+.video-js .vjs-progress-holder .vjs-load-progress,
+.video-js .vjs-progress-holder .vjs-tooltip-progress-bar,
+.video-js .vjs-progress-holder .vjs-load-progress div {
+  position: absolute;
+  display: block;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 0;
+  left: 0;
+  top: 0; 
+}
+
+.clearfix:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
+.clearfix { 
+   clear: both;
+}
+
+/********replace float:right********************/
+.vjs-default-skin .vjs-volume-menu-button{
+  position:absolute;
+  right:0;
+  top:0;
+  margin-right: 8em;
+}
+
+.vjs-default-skin .vjs-fullscreen-control{
+  position:absolute;
+  right:0;
+  top:0;
+}
+
+.vjs-default-skin .vjs-captions-button{
+  position:absolute;
+  right:0;
+  top:0;
+  margin-right: 4em;
+}
+
+/*.vjs-default-skin .vjs-volume-menu-button{
+  float:right;
+  margin-right: 4em;
+}
+
+.vjs-default-skin .vjs-fullscreen-control{
+  float:right;
+}*/
+/*******replace float:right*********************/
+
+
+.video-js .vjs-progress-control .vjs-mouse-display {
+  display: none;
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background-color: #DB8BAF;
+  z-index: 1; }
+
+.vjs-no-flex .vjs-progress-control .vjs-mouse-display {
+  z-index: 0; }
+
+.video-js .vjs-progress-control:hover .vjs-mouse-display {
+  display: block; }
+
+.video-js.vjs-user-inactive .vjs-progress-control .vjs-mouse-display,
+.video-js.vjs-user-inactive .vjs-progress-control .vjs-mouse-display:after {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 1s, opacity 1s;
+  -moz-transition: visibility 1s, opacity 1s;
+  -o-transition: visibility 1s, opacity 1s;
+  transition: visibility 1s, opacity 1s; }
+
+.video-js.vjs-user-inactive.vjs-no-flex .vjs-progress-control .vjs-mouse-display,
+.video-js.vjs-user-inactive.vjs-no-flex .vjs-progress-control .vjs-mouse-display:after {
+  display: none; }
+
+
+
+
+
+
+
+
 
 
 

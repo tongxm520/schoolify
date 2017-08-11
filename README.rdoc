@@ -63,6 +63,59 @@ rails g model User name:string
 rails g model Category name:string course_count:integer
 
 rails runner script/load_course.rb
+=======================================================
+Video.js Auto loading subtitles/captions
+
+So SRT files happened to work with versions of VideoJS up to 4.11, even though they weren't officially supported, but SRTs no longer work in 4.12 (because of the use of vtt.js, which greatly improves support for WebVTT files). This isn't specifically documented.
+
+<video id="dotsub_example" class="video-js vjs-default-skin" width="640" height="264"  poster="http://video-js.zencoder.com/oceans-clip.png" controls preload="auto" data-setup='[]'>
+   <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
+   <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm; codecs="vp8, vorbis"' />
+   <source src="http://video-js.zencoder.com/oceans-clip.ogg" type='video/ogg; codecs="theora, vorbis"' />
+   <track kind='captions' src='https://dotsub.com/media/5d5f008c-b5d5-466f-bb83-2b3cfa997992/c/chi_hans/vtt' srclang='zh' label='Chinese' default />
+   <track kind='captions' src='https://dotsub.com/media/5d5f008c-b5d5-466f-bb83-2b3cfa997992/c/eng/vtt' srclang='en' label='English' />
+   <track kind='captions' src='https://dotsub.com/media/5d5f008c-b5d5-466f-bb83-2b3cfa997992/c/spa/vtt' srclang='es' label='Spanish' />
+   <track kind='captions' src='https://dotsub.com/media/5d5f008c-b5d5-466f-bb83-2b3cfa997992/c/fre_ca/vtt' srclang='fr' label='French' />
+</video>
+
+There are lots of sites that will convert your SRT to a WebVTT that will work for videojs: https://atelier.u-sub.net/srt2vtt/
+=======================================================
+Rails 框架本身做了很多安全措施，在默认情况下，template 里的所有字符串都会被过滤：
+<%= danger_string %> <!-- 安全 -->
+<%= raw danger_string %> <!-- 危险 -->
+
+就告诉模板系统关掉了安全过滤，这是非常危险的。通常谈到 raw 的时候都因为要输出 html 内容，这时候应该用 sanitize，这是一个基于白名单的过滤方法：
+
+<%= sanitize danger_string %> <!-- 只要不开危险的标签属性名单就安全 -->
+
+sanitize 可以在方法级别和全局级别设置白名单标签和属性，详细可以看文档 http://api.rubyonrails.org/classes/ActionView/Helpers/SanitizeHelper.html
+总结：如果你不知道自己知不知道自己在干什么，别用 raw 和 html_safe，用 sanitize。
+补充1：helper 里面也要避免 raw，避免在 helper 拼接 HTML 
+补充2：sanitize 要放在字符串处理链的末尾
+=======================================================
+vjs-text-track-display
+@typedef {Object} TextTrackCue
+./app/assets/javascripts/videojs/video.js/es5/tracks/track.js
 
 
+line:5079 
+ChaptersButton.prototype.findChaptersTrack = function findChaptersTrack() {
+  var tracks = this.player_.textTracks() || [];
+
+  for (var i = tracks.length - 1; i >= 0; i--) {
+    // We will always choose the last track as our chaptersTrack
+    var track = tracks[i];
+
+    if (track.kind === this.kind_) {
+      return track;
+    }
+  }
+};
+
+
+line:19162
+startTime: cue.startTime,
+endTime: cue.endTime,
+text: cue.text,
+id: cue.id
 

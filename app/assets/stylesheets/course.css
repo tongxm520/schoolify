@@ -127,10 +127,16 @@ ul li, ol li {
     word-wrap: normal;
 }
 
+section.introduction h1.sr {
+    min-height: 100px;
+}
+
 .course-index .sr {
     background: #fff none repeat scroll 0 0;
     color: #000;
 }
+
+
 /**********.container******************************************/
 .container::after {
     clear: both;
@@ -514,8 +520,48 @@ header.global .user .dropdown-menu li:last-child { border-bottom: none }
 /*****dropdown-menu***********************************************/
 
 
+/*********paragraph bookmark icon*********************************/
+.course-content .bookmark-icon.bookmarked {
+    left: 5px;
+    position: absolute;
+    top: -3px;
+}
+.fa-fw {
+    text-align: center;
+    width: 1.28571em;
+}
+.fa {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-feature-settings: normal;
+    font-kerning: auto;
+    font-language-override: normal;
+    font-size: inherit;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-synthesis: weight style;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1;
+    text-rendering: auto;
+    transform: translate(0px, 0px);
+}
+
+.xmodule_display.xmodule_CourseModule .is-hidden,.xmodule_display.xmodule_SequenceModule .is-hidden{
+  display:none;
+}
+/*********paragraph bookmark icon*********************************/
+
+div.bookmark-button-wrapper button.bookmark-button {
+  margin-bottom: 10px;
+}
 
 
-
+/**************video***************************************/
+.course-wrapper .course-content .vert-mod .vert:after, .course-wrapper .courseware-results-wrapper .vert-mod .vert:after {
+    clear: both;
+}
+/**************video***************************************/
 
 

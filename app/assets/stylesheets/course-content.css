@@ -28,12 +28,7 @@
 .tran, div.book-wrapper section.book-sidebar {
     transition: all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s;
 }
-.fa-chevron-next:before {
-    content: "";
-}
-.fa-chevron-prev:before {
-    content: "";
-}
+
 .xmodule_display.xmodule_StaticTabModule * {
     line-height: 1.4em;
 }
@@ -341,6 +336,15 @@
     display: table-cell;
     min-width: 20px;
 }
+
+.xmodule_display.xmodule_CourseModule .sequence-nav ol li a.active,.xmodule_display.xmodule_SequenceModule .sequence-nav ol li a.active{
+  z-index: 10;
+}
+
+.xmodule_display.xmodule_CourseModule .sequence-nav ol li a p,.xmodule_display.xmodule_SequenceModule .sequence-nav ol li a p{
+  z-index: 100;
+}
+
 .xmodule_display.xmodule_CourseModule .sequence-nav ol li a {
     background-position: center 14px;
     background-repeat: no-repeat;
@@ -2676,6 +2680,7 @@ body.touch-based-device .xmodule_display.xmodule_CourseModule .sequence-nav ol l
     line-height: 1.41575em;
     margin-bottom: 8px;
     padding: 0;
+    cursor: pointer;
 }
 .xmodule_display.xmodule_VideoModule .video .subtitles .subtitles-menu li.current {
     color: #333;
@@ -4712,6 +4717,8 @@ body.touch-based-device .xmodule_display.xmodule_CourseModule .sequence-nav ol l
     right: 0;
     text-shadow: 0 -1px 0 #000;
     top: 48px;
+    -webkit-transition: all 0.1s cubic-bezier(0.77, 0, 0.175, 1) 0s;
+    -moz-transition: all 0.1s cubic-bezier(0.77, 0, 0.175, 1) 0s;
     transition: all 0.1s cubic-bezier(0.77, 0, 0.175, 1) 0s;
     visibility: hidden;
     white-space: pre;
@@ -4730,6 +4737,10 @@ body.touch-based-device .xmodule_display.xmodule_CourseModule .sequence-nav ol l
     position: absolute;
     right: 18px;
     top: -5px;
+    -webkit-transform: rotate(-45deg);/* for Chrome || Safari */
+    -moz-transform: rotate(-45deg);/* for Firefox */
+    -ms-transform: rotate(-45deg);/* for IE */
+    -o-transform: rotate(-45deg);/* for Opera */
     transform: rotate(45deg);
     width: 10px;
 }

@@ -65,6 +65,39 @@
     margin-top: -1em;
     margin-left: -1.5em;
 }
+
+
+/* Progress--------------------------------------------------- */
+.vjs-progress-control .vjs-progress-holder { /* Box containing play and load progresses */
+  position: relative; 
+  padding: 0; 
+  overflow:hidden; 
+  cursor: pointer !important;
+  height: 9px; 
+  border: 1px solid #777;
+  margin: 7px 1px 0 5px; /* Placement within the progress control item */
+  border-radius: 5px; 
+  -webkit-border-radius: 5px; 
+  -moz-border-radius: 5px;
+  width: 100%;
+}
+
+.vjs-progress-control .vjs-load-progress {
+  opacity: 0.8;
+  /* CSS Gradient */
+  /* Default */ background-color: #555;
+  /* Webkit  */ background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#aaa));
+  /* Firefox */ background: -moz-linear-gradient(top,  #555,  #aaa);
+}
+
+
+/* Placement of Control Items 
+   - Left side of pogress bar, use left & width
+   - Rigth side of progress bar, use right & width
+   - Expand with the video (like progress bar) use left & right */
+.vjs-control-bar > div.vjs-play-control       { left: 5px;   width: 25px;  }
+.vjs-control-bar > div.vjs-progress-control   { left: 5px;  right: 165px; } 
+/* Using left & right so it expands with the width of the video */
 </style>
 
 
@@ -84,7 +117,33 @@
  */
 
 
-
+<h3>Video</h3>
+<video
+		id="default-player"
+		class="video-js vjs-default-skin vjs-big-play-centered video-js-box vjs-paused"
+		controls
+		preload="auto"
+		poster="assets/ocean.jpeg"
+    width="545" 
+    height="450"
+		data-setup='{}'>
+	<source src="uploads/DistributedFileSystems.mp4" type="video/mp4"></source>
+  <track kind='captions' src='uploads/Distributed+File+Systems+(15_50).vtt' srclang='zh' label='Chinese' default />
+	<p class="vjs-no-js">
+		To view this video please enable JavaScript, and consider upgrading to a
+		web browser that
+		<a href="http://videojs.com/html5-video-support/" target="_blank">
+			supports HTML5 video
+		</a>
+	</p>
+</video>
+<%=sanitize "I&#39;m Anand Rajaraman and today&#39;s topic is Map-Reduce."%>
+<div>
+<div id="activeCue_id"></div>
+<div id="activeCue_start"></div>
+<div id="activeCue_end"></div>
+<div id="activeCue_text"></div>
+</div>
 
 
 
