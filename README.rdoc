@@ -93,29 +93,13 @@ sanitize 可以在方法级别和全局级别设置白名单标签和属性，�
 补充1：helper 里面也要避免 raw，避免在 helper 拼接 HTML 
 补充2：sanitize 要放在字符串处理链的末尾
 =======================================================
-vjs-text-track-display
-@typedef {Object} TextTrackCue
-./app/assets/javascripts/videojs/video.js/es5/tracks/track.js
+<script type="text/javascript">
+</script>
+单词不能拼写错 不然js执行不了
+=======================================================
 
 
-line:5079 
-ChaptersButton.prototype.findChaptersTrack = function findChaptersTrack() {
-  var tracks = this.player_.textTracks() || [];
-
-  for (var i = tracks.length - 1; i >= 0; i--) {
-    // We will always choose the last track as our chaptersTrack
-    var track = tracks[i];
-
-    if (track.kind === this.kind_) {
-      return track;
-    }
-  }
-};
 
 
-line:19162
-startTime: cue.startTime,
-endTime: cue.endTime,
-text: cue.text,
-id: cue.id
+
 

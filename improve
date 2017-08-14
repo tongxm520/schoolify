@@ -1,0 +1,85 @@
+Please send a CV, cover letter and your current timezone to jarrad@designerwardrobe.co.nz
+CV(Curriculum Vitae)Resume  履历 简历
+cover letter 求职信
+
+
+5+ years experience with Ruby on Rails, along with other common libraries such as RSpec and Resque 
+3+ years experience with JavaScript and frameworks like ReactJS, AngularJS, etc.
+Good understanding of server-side templating with Liquid or Slim
+Solid understanding of both object-oriented programming and Ruby’s functional programming style
+Proficiency with databases (SQL, NoSQL)
+Familiarity with concepts like MVC, Mocking, ORM, RESTful
+Knowledge about accessibility, security compliance and user authentication
+Experience setting up and deploying staging/production environments
+Understanding of fundamental design principles behind a scalable application
+Strong unit testing and debugging skills
+Experience with agile software development (Scrum, continuous integration, etc.)
+Fluency in English (spoken and written)
+------------------------------------------------------------
+Ruby on Rails
+JavaScript
+jQuery
+SQL
+Git
+Postgres & MySQL
+Unit tests
+React
+Memory profiling
+Performance profiling
+TDD
+Background workers
+Writing design docs
+Wire-framing
+Caching
+API implementation
+Heroku
+Docker
+AWS services
+------------------------------------------------------------
+Automated Tests: You have experience writing automated tests in Ruby and Javascript.
+Front-end Development Skills: Our application suite utilizes quite a bit of Javascript (CoffeeScript). 
+
+We deploy our applications to production on average 25 times per day.
+We have over 250 private repositories in Github, ranging from forks of gems, our own internal gems as well as auxiliary applications.
+Our production stack is hosted on AWS and QA clusters on DigitalOcean.
+Hundreds of thousands of healthcare professionals will utilize the products you build.
+We host unstructured "hack days" periodically, which is time reserved for you to scratch a code itch.
+A couple times a year we run a co-op where you can pick a few people you'd like to work with and drive a specific company goal.
+Every new engineer ships code to production on day one. Our mentorship program ensures you're immersed in the team's culture early on. 
+
+Mid-Level Backend Engineer
+Senior Rails Programmer (Freelance)
+
+An ability to build and improve a REST/JSON API.
+Testing and TDD experience, preferably with RSpec.
+Asynchronous job processing and management via SideKiq / SideKiq Pro.
+Comfortable with asynchronous communication tools such as Slack and Screenhero.
+Ability to debug front-end clients to your API, specifically Angular/Javascript
+Knowledge about image processing, color matching and RMagick
+Strength in Postgres-flavored SQL and query tuning
+
+Create and maintain our existing Rspec test suites
+Work with Rails, Heroku, Postgres, Sidekiq, Magento, WooCommerce, and more.
+
+Our stack :
+Back-end: Ruby on Rails (Rails 4.X)
+Front-end: HAML, SASS, Coffee Script, HTML5, JQuery, etc.
+Database: PostgreSQL
+Source control: Git + github.com
+Code review: github.com
+
+Experience with the following a plus: jQuery, TDD/BDD, mobile development, E-commerce, designing an API, Postgres or Redis 
+
+redis + Sidekiq
+memcache
+nginx+thin
+Postgres/mysql
+REST/JSON
+Liquid or Slim
+mongodb
+Angular/Javascript/jquery
+TDD/RSpec
+Front-end: HAML, SASS, Coffee Script, HTML5, JQuery, etc.
+了解Docker技术优先
+
+

@@ -5,6 +5,8 @@ class WelcomeController < ApplicationController
     ids=@chapters.map &:id
     @chapter_hash=Section.where(['chapter_id in (?)', ids]).order("position asc").group_by &:chapter_id
 
+    @captions=Lecture.new.extract_captions
+
     render layout: "default"
   end
 

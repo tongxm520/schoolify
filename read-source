@@ -1,0 +1,48 @@
+video.js
+vjs-text-track-display
+@typedef {Object} TextTrackCue
+./app/assets/javascripts/videojs/video.js/es5/tracks/track.js
+
+video.js
+line:5079 
+ChaptersButton.prototype.findChaptersTrack = function findChaptersTrack() {
+  var tracks = this.player_.textTracks() || [];
+
+  for (var i = tracks.length - 1; i >= 0; i--) {
+    // We will always choose the last track as our chaptersTrack
+    var track = tracks[i];
+
+    if (track.kind === this.kind_) {
+      return track;
+    }
+  }
+};
+
+video.js
+line:19162
+startTime: cue.startTime,
+endTime: cue.endTime,
+text: cue.text,
+id: cue.id
+
+
+lms-modules.js
+line:19431
+scrollCaption: function()
+
+
+lms-modules.js
+line:21008
+require(["video/00_video_storage.js", "video/01_initialize.js", "video/025_focus_grabber.js", "video/035_video_accessible_menu.js", "video/04_video_control.js", "video/04_video_full_screen.js", "video/05_video_quality_control.js", "video/06_video_progress_slider.js", "video/07_video_volume_control.js", "video/08_video_speed_control.js", "video/09_video_caption.js", "video/09_play_placeholder.js", "video/09_play_pause_control.js", "video/09_play_skip_control.js", "video/09_skip_control.js", "video/09_bumper.js", "video/09_save_state_plugin.js", "video/09_events_plugin.js", "video/09_events_bumper_plugin.js", "video/09_poster.js", "video/10_commands.js", "video/095_video_context_menu.js"]
+
+
+lms-modules.js
+line:18983
+this.subtitlesEl = $(this.template);
+
+video.js
+line:4339
+SeekBar.prototype.updateProgress
+
+
+

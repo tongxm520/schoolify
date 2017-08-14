@@ -562,6 +562,19 @@ div.bookmark-button-wrapper button.bookmark-button {
 .course-wrapper .course-content .vert-mod .vert:after, .course-wrapper .courseware-results-wrapper .vert-mod .vert:after {
     clear: both;
 }
+
+.nav-skip {
+    background: #fff none repeat scroll 0 0;
+    border-bottom: 1px solid #fcfcfc;
+    display: block;
+    height: 1px;
+    left: 0;
+    overflow: hidden;
+    padding: 15px 10px;
+    position: absolute;
+    top: -600px;
+    width: 1px;
+}
 /**************video***************************************/
 
 

@@ -923,3 +923,42 @@
     </div>
   </div>
 </div>
+find element by attribute jquery
+jQuery(".subtitles .subtitles-menu li").each(function () {
+  alert($(this).attr("data-index")); 
+});
+
+
+
+-getAttribute()
+
+GetAttribute() retrieves the corresponding value of an attribute. If the attribute does not exist, an empty string is returned. For example:
+
+<img id="myimage" src="test.gif">
+
+<script type="text/javascript">
+//returns "test.gif"
+var getvalue=document.getElementById("myimage").getAttribute("src")
+</script>
+
+-setAttribute()
+
+As the name implies, setAttribute() dynamically modifies the value of an element's attribute. The method takes two parameters- the name of the attribute to set, and its new value. Using the same <IMG> example above:
+
+<script type="text/javascript">
+//image src is now "another.gif"
+document.getElementById("myimage").setAttribute("src","another.gif")
+</script>
+
+-removeAttribute()
+
+A whole new concept, removeAttribute() allows you to remove entire HTML attributes from an element! This is particularly handy when an attribute contains multiple values which you wish to all erase:
+
+<div id="adiv" style="width:200px;height:30px;background-color:yellow">Some Div</div>
+
+<script type="text/javascript">
+//adiv now contains no style at all
+document.getElementById("adiv").removeAttribute("style")
+</script>
+
+

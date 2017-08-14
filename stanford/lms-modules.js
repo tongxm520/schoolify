@@ -19616,7 +19616,9 @@ window.WordCloud = function(el) {
     };
     return VideoCaption
   })
-})(RequireJS.define); (function(define) {
+})(RequireJS.define); 
+
+(function(define) {
   "use strict";
   define("video/09_play_placeholder.js", [],
   function() {
