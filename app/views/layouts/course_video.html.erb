@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <!--meta http-equiv="X-UA-Compatible" content="IE=edge" /-->
+  <title>Schoolify</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  
+  <%= stylesheet_link_tag "course?time=#{Time.now.to_i}" %>
+  <%= stylesheet_link_tag "css/ionicons?time=#{Time.now.to_i}" %>
+
+  <%if params["controller"]=="welcome" and params["action"]=="index"%>
+  <link href="assets/videocss/video.js/dist/video-js-new.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+  <script src="assets/videojs/video.js/dist/video.js?time=<%=Time.now.to_i%>"></script>
+  <script src="assets/videojs/video.js/dist/ie8/videojs-ie8.min.js?time=<%=Time.now.to_i%>"></script>
+  <script src="assets/navigation.js?time=<%=Time.now.to_i%>"></script>
+  <link href="assets/video-skin.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+  <link href="assets/videojs-matrix.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+  <link href="assets/nav.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+  <link href="assets/course-content.css?time=<%=Time.now.to_i%>" rel="stylesheet">
+  <script src="assets/jquery.scrollTo-1.4.2-min.js?time=<%=Time.now.to_i%>"></script>
+  <script src="assets/course-video.js?time=<%=Time.now.to_i%>"></script>
+  <%end%>
+</head>
+<body class="view-in-course">
+<div id="su-header">
+  <div class="su-container">
+    <a href="http://localhost:3000">
+      <img width="152" height="23" alt="Schoolify Center" src="/assets/schoolify.png">
+    </a>
+  </div>
+</div>
+
+<header class="global slim" id="global-navigation">
+  <nav aria-label="Global" class="nav-wrapper">
+		<h1 class="logo">
+		  <a href="/"> 
+		    <img height="50" alt="Lagunita, Courses List" src="/assets/logo.png">
+		  </a>
+		</h1>
+
+    <%if params["controller"]=="welcome" and params["action"]=="index"%>
+		<h2 class="course-header"><span class="provider">ComputerScience:</span>
+		  <span class="course-number">MMDS</span>
+		  <span class="course-name">Mining Massive Datasets</span>
+		</h2>
+    <%end%>
+
+		<ol class="user">
+		  <li class="primary">
+		    <a class="user-link" href="/dashboard">
+		      <span class="sr">Dashboard for:</span>
+		      <img alt="Profile image for simontung" src="/assets/head.png" class="user-image-frame">
+		      <div class="label-username">simontung</div>
+		    </a>
+		  </li>
+		  <li class="primary">
+		    <button aria-expanded="false" aria-haspopup="true" class="dropdown ion-arrow-down-b"><span class="sr">More options dropdown</span></button>
+		    <ul role="menu" aria-label="More Options" class="dropdown-menu">
+		        <li><a href="/dashboard">Dashboard</a></li>
+		        <li><a href="/u/simontung">Profile</a></li>
+		        <li><a href="/account/settings">Account</a></li>
+		      <li><a role="menuitem" href="/logout">Sign Out</a></li>
+		    </ul>
+		  </li>
+		</ol>
+  </nav>
+</header>
+
+<!--div class="proctored_exam_status">
+	<div class="exam-timer">
+	  <div class="exam-text">
+	    You are taking "
+	    <a href="/courses/course-v1:ComputerScience+MMDS+SelfPaced/jump_to/block-v1:ComputerScience+MMDS+SelfPaced+type@sequential+block@580e203abd3843389833fc4040d55549">
+	      To The Final; Read Directions FIRST
+	    </a>
+	    " as a timed exam. The timer on the right shows the time remaining in
+	    the exam. To receive credit on a problem, you must click "Check" or "Final
+	    Check" on it before you select "End My Exam".
+	  </div>
+	  <div class="pull-right turn_in_exam" id="turn_in_exam_id">
+	    <span>
+	      <button class="exam-button-turn-in-exam btn btn-pl-primary">
+	        End My Exam
+	      </button>
+	    </span>
+	    <span aria-live="assertive" class="sr timer-announce">
+	      you have 2 hours and 30 minutes remaining
+	    </span>
+	    <span id="time_remaining_id">
+	      <b>
+	        2:29:49
+	      </b>
+	    </span>
+	  </div>
+	</div>
+</div-->
+
+<%= yield %>
+</body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function() { 
+  jQuery('.dropdown').click(function(){
+    if(jQuery('.dropdown').attr('aria-expanded')==='true'){
+      jQuery('.dropdown').removeClass('active');
+      jQuery('.dropdown-menu').removeClass('expanded');
+      jQuery('.dropdown').attr('aria-expanded','false');
+    }else if(jQuery('.dropdown').attr('aria-expanded')==='false'){
+      jQuery('.dropdown').addClass('active');
+      jQuery('.dropdown-menu').addClass('expanded');
+      jQuery('.dropdown').attr('aria-expanded','true');
+    } 
+  });
+});
+</script>
+
+

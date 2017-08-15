@@ -1,3 +1,5 @@
+#rails runner script/load_course.rb
+
 require 'nokogiri'
 
 HTML_NAV="#{Rails.root.to_s}/stanford/navigation.html"

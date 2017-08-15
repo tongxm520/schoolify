@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
 
     @captions=Lecture.new.extract_captions
 
-    render layout: "default"
+    render layout: "course_video"
   end
 
   def custom

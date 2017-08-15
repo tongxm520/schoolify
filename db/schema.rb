@@ -70,9 +70,21 @@ ActiveRecord::Schema.define(:version => 20170703124333) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name",       :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "name",                      :null => false
+    t.string   "email"
+    t.string   "encrypted_password"
+    t.string   "salt"
+    t.string   "remember_token"
+    t.datetime "remember_token_expires_at"
+    t.string   "activation_code"
+    t.datetime "activated_at"
+    t.string   "logo_path"
+    t.string   "logo_name"
+    t.string   "small_logo_path"
+    t.string   "medium_logo_path"
+    t.string   "large_logo_path"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
 end
