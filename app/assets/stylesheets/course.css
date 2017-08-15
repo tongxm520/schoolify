@@ -14,10 +14,6 @@ body.view-in-course .wrapper-course-material {
     width: 100%;
 }
 
-nav, section {
-    display: block;
-}
-
 .wrapper-course-material ol.course-tabs:after {
     clear: both;
     content: "";
@@ -33,17 +29,6 @@ body.view-in-course .wrapper-course-material .course-material .course-tabs {
     border-top-right-radius: 4px;
     padding: 15px 0;
 }
-nav ul, nav ol {
-    list-style: outside none none;
-    margin: 0;
-    padding: 0;
-}
-
-ul, ol {
-    margin: 1em 0;
-    padding: 0 0 0 40px;
-}
-
 
 .wrapper-course-material ol.course-tabs li a.active {
     background-color: transparent;
@@ -69,16 +54,6 @@ ul, ol {
     padding-left: 15px;
 }
 
-a, a:visited {
-    color: #4f7573;
-    font: inherit;
-    text-decoration: none;
-    transition: all 0.1s linear 0s;
-}
-a {
-    color: #005584;
-}
-
 .wrapper-course-material ol.course-tabs li a{
   font-size: 14px;
   line-height: 20.72px;
@@ -102,16 +77,9 @@ a {
     float: left;
     list-style: outside none none;
 }
-ul li, ol li {
-    font-family: "Source Sans","Open Sans",Verdana,Geneva,sans-serif,sans-serif !important;
-}
 
 .wrapper-course-material ol.course-tabs li {
     list-style: outside none none;
-}
-
-ul li, ol li {
-    font-family: "Source Sans","Open Sans",Verdana,Geneva,sans-serif,sans-serif !important;
 }
 
 /******.sr**********************************************/
@@ -296,34 +264,18 @@ header.global h1.logo {
     margin: -2px 39px 0 0;
     position: relative;
 }
-body, h1, h2, h3, h4, h5, h6, p, label {
-    font-family: Verdana,Geneva,sans-serif,sans-serif;
-    text-align: left;
-}
-h1 {
-    color: #313533;
-    letter-spacing: 1px;
-}
+
 /******h1.logo**********************************************/
 
 /******h1.logo img**********************************************/
 header.global.slim h1.logo img {
     height: 30px;
 }
-img {
-    max-width: 100%;
-}
-img {
-    border: 0 none;
-    vertical-align: middle;
-}
+
 header.global.slim h1.logo a {
     line-height: 1em;
 }
-a, a:visited {
-    color: #4f7573;
-    font: inherit;
-}
+
 /******h1.logo img**********************************************/
 
 
