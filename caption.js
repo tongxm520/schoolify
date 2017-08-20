@@ -664,3 +664,73 @@ VideoCaption.prototype = {
 })(RequireJS.define);
 
 
+
+//Override the default confirm dialog by rails
+$.rails.allowAction = function(link){
+  if (link.data("confirm") == undefined){
+    return true;
+  }
+  $.rails.showConfirmationDialog(link);
+  return false;
+}
+//User click confirm button
+$.rails.confirmed = function(link){
+  link.data("confirm", null);
+  link.trigger("click.rails");
+}
+//Display the confirmation dialog
+$.rails.showConfirmationDialog = function(link){
+  var message = link.data("confirm");
+  $("#dialog-confirm").dialog({
+    resizable: false,
+    height: "auto",
+    width: 400,
+    modal: true,
+    buttons: {
+      "确定": function() {
+        $(this).dialog("close");
+        $.rails.confirmed(link);
+      },
+      "取消": function() {
+        $(this).dialog("close");
+      }
+    }
+  });
+  $("#dialog-confirm-content").html(message);
+  $("#dialog-confirm").dialog("open");
+}
+
+jQuery(document).ready( function(){       
+  jQuery("#myButton").click(showDialog);
+  $myDialog = jQuery('#dialog-confirm');
+  $myDialog.dialog({ 
+    resizable: false,
+    height: "auto",
+    width: 400,
+    modal: true,
+    autoOpen: false,
+    title:'Hello World',
+    overlay: { opacity: 0.5, background: 'black'},
+    buttons: {
+      "确定": function() {
+        $(this).dialog("close");
+        //$.rails.confirmed(link);
+      },
+      "取消": function() {
+        $(this).dialog("close");
+      }
+    }
+    });
+  }
+);
+
+var showDialog = function() {
+  $myDialog.show(); 
+  $myDialog.dialog("open");
+}
+
+var closeDialog = function() {
+  $myDialog.dialog("close");
+}
+
+

@@ -4662,6 +4662,7 @@ body.touch-based-device .xmodule_display.xmodule_CourseModule .sequence-nav ol l
     text-align: center;
     transition: none 0s ease 0s ;
     width: 100%;
+    color: #4f7573
 }
 .xmodule_display.xmodule_SequenceModule .sequence-nav ol li a .icon {
     color: #5a5a5a;

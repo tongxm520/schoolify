@@ -55,13 +55,14 @@ As ScallioXTX said, you can combine these two things server-side. Call one PHP s
 =======================================================
 rails g model Course title:string subtitle:string category_id:integer user_id:integer
 rails g model Chapter title:string course_id:integer position:integer
-rails g model Section title:string chapter_id:integer position:integer course_id:integer type:string
+rails g model Section title:string chapter_id:integer position:integer course_id:integer
 rails g model Paragraph title:string section_id:integer chapter_id:integer course_id:integer bookmark_id:integer video_only:boolean content:text content_type:string position:integer
 rails g model Bookmark course_id:integer paragraph_id:integer user_id:integer
 
 rails g model User name:string
 rails g model Category name:string course_count:integer
-
+rails g model Homework
+rails g model Outline
 
 rails g controller courses
 rails g controller admin/courses
@@ -124,15 +125,58 @@ https://www.stanford.edu/academics/ 部分加载
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 =======================================================
+
+when add a chapter, the position increase 1
+adjust position the newly created chapter by move up or drag to the proper location
+=======================================================
+arr.each_with_index do |e,i|
+  puts "#{i}=>#{e}"
+end
+
+i=0
+arr.each do |e|
+  puts "#{i}=>#{e}"
+  i+=1
+end
+
+=======================================================
+params.require(:course).permit(:category_id, :subtitle,:title,:user_id)
+error=>no implicit conversion of Symbol into String
+install gem 'strong_parameters'
+
+=======================================================
 todo list:
 register and login
 rich text edit
 upload image
+add outline and homework to nav list
+ajax pagination
+javascript lastChild jquery last-child
+share to weibo, qq zone,renren
+weibo login
 
 
-
-
-
+rails3.2.22 only support fields_for to implement first level nested
+=======================================================
+//baidu=>javascript find by class
+function getElementsByClass(matchClass){
+  var elems=document.getElementsByTagName('*'),i;
+  for(i in elems){
+   if((' '+elems[i].className+' ').indexOf(' '+matchClass+' ')>-1){
+     console.log(elems[i].innerHTML);
+   }
+  }
+}
+======================================================= 
+jQuery(function(){}) vs (function(){})(jQuery)
+======================================================= 
+$("select#test").change({msg:"ok"},function(event){
+  myHandler(event.data.msg);
+});
+======================================================= 
+<div></div>
+div should appear with pairs
+one more or one less will cause js error
 
 
 

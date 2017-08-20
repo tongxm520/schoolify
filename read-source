@@ -76,3 +76,22 @@ def cyberbrowser
     end
 end
 
+bundle install=>
+You may host gems in your user home folder, that does not need root permissions:
+bundle install --path ~/.gem
+
+Your user account isn't allowed to install to the system Rubygems.
+You can cancel this installation and run: bundle install --path vendor/bundle
+
+to install the gems into ./vendor/bundle/, or you can enter your password
+and install the bundled gems to Rubygems using sudo.
+fix=>sudo bundle install
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+<p class="chapter-field" id="ch-<%=i%>">
+  <%=f.hidden_field :position,:name=>"course[chapters_attributes][#{i}][position]",:id=>"course_chapters_attributes_#{i}_position",:value => i%>
+  <label for="chapter-<%=i%>">篇章名称</label><br />
+  <!--span class="folder ion-minus-round" id="<%=i%>" title="折叠"></span-->
+  <span class="folder ion-plus-round" id="folder-<%=i%>" title="展开"></span>
+  <%=f.text_field :title,:name=>"course[chapters_attributes][#{i}][title]",:id=>"chapter-#{i}"%> 
+  <span class="action">
+    <span class="add ion-android-add circle"></span>
+    <span data-info="<%=@chapter_info%>" id="<%=i%>" class="remove ion-android-remove circle" data-confirm="<%=@chapter_confirm%>"></span>
+  </span>
+</p>
+
+<%#j=1%>
+<%#f.fields_for :sections do |builder|%>
+	<%#=render "admin/sections/section_fields",:f=>builder,:j=>j%>
+	<%#j+=1%>
+<%#end%>
+
+<div id="chapter-<%=i%>-sections" class="sections hide">
+	<%3.times do |el|%>
+	<p class="section-field" id="ch-<%=i%>-sec-<%=el+1%>">
+		<input type="hidden" value="<%=el+1%>" name="course[chapters_attributes][<%=i%>][sections_attributes][<%=el+1%>][position]" id="chapter_<%=i%>_section_<%=el+1%>_position">
+		<label for="chapter_<%=i%>_section_<%=el+1%>_title">小节名称</label><br>
+		<input type="text" size="30" name="course[chapters_attributes][<%=i%>][sections_attributes][<%=el+1%>][title]" id="chapter_<%=i%>_section_<%=el+1%>_title"> 
+		<span class="action">
+		  <span id="<%=i%>_<%=el+1%>" class="add ion-android-add circle"></span>
+		  <span data-info="<%=@section_info%>" id="<%=i%>-<%=el+1%>" class="remove ion-android-remove circle" data-confirm="<%=@section_confirm%>"></span>
+		</span>
+	</p>
+	<%end%>
+</div>
+
+
+
+
+

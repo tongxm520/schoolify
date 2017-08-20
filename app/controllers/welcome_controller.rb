@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
     ids=@chapters.map &:id
     @chapter_hash=Section.where(['chapter_id in (?)', ids]).order("position asc").group_by &:chapter_id
 
-    @captions=Lecture.new.extract_captions
+    @captions=Section.new.extract_captions
 
     render layout: "course_video"
   end

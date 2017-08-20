@@ -6,7 +6,7 @@ img {
     vertical-align: middle;
 }
 
-a, a:visited {
+a:visited {
     color: #4f7573;
     font: inherit;
     text-decoration: none;

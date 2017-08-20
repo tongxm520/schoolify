@@ -44,11 +44,11 @@ chapter_hash.each_pair do |k,v|
   i+=1
   v.each_with_index do |e,j|
     if e.split(/\s/)[0].strip == "Outline"
-      Section.create(:title=>e,:chapter_id=>ch.id,:position=>j+1,:course_id=>course.id,:type=>"Outline")
+      Outline.create(:title=>e,:chapter_id=>ch.id,:position=>j+1)
     elsif e.split(/\s/)[0].strip == "Homework:"
-      Section.create(:title=>e,:chapter_id=>ch.id,:position=>j+1,:course_id=>course.id,:type=>"Homework")
+      Homework.create(:title=>e,:chapter_id=>ch.id,:position=>j+1)
     else
-      Section.create(:title=>e,:chapter_id=>ch.id,:position=>j+1,:course_id=>course.id,:type=>"Lecture")
+      Section.create(:title=>e,:chapter_id=>ch.id,:position=>j+1)
     end
   end
 end

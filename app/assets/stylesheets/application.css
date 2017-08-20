@@ -11,3 +11,7 @@
  *= require_self
  *= require global
  */
+
+@import "jquery-ui-1.12.1-css/jquery-ui";
+
+

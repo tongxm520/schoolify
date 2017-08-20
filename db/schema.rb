@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170703124333) do
+ActiveRecord::Schema.define(:version => 20170816064040) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "course_id",    :null => false
@@ -45,6 +45,22 @@ ActiveRecord::Schema.define(:version => 20170703124333) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "homeworks", :force => true do |t|
+    t.string   "title",      :null => false
+    t.integer  "chapter_id", :null => false
+    t.integer  "position",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "outlines", :force => true do |t|
+    t.string   "title",      :null => false
+    t.integer  "chapter_id", :null => false
+    t.integer  "position",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "paragraphs", :force => true do |t|
     t.string   "title",        :null => false
     t.integer  "chapter_id",   :null => false
@@ -62,9 +78,7 @@ ActiveRecord::Schema.define(:version => 20170703124333) do
   create_table "sections", :force => true do |t|
     t.string   "title",      :null => false
     t.integer  "chapter_id", :null => false
-    t.integer  "course_id",  :null => false
     t.integer  "position",   :null => false
-    t.string   "type",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

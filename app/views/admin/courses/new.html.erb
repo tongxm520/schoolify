@@ -1,14 +1,488 @@
 <div class="main">
-<h3><%=params["controller"]%></h3>
+<%=form_for @course,:as=>:course,:url=>admin_courses_path, :method=>:post,:html=>{:name=>"create-course"} do |f|%>
+  <%#=@course.errors.full_messages%>
+  <p class="course-field">
+    <label for="course_title">课程名</label><br />
+    <%=f.text_field :title%>
+  </p>
+  <p class="course-field">
+    <label for="course_subtitle">副标题</label><br />
+    <%=f.text_field :subtitle%>
+  </p>
+  <div style="clear:both;"></div>
+  <div id="course-chapters">
+		<%i=1%>
+		<%=f.fields_for :chapters do |builder|%>
+		  <%=render "admin/chapters/chapter_fields",:f=>builder,:i=>i%>
+		  <%i+=1%>
+		<%end%>
+  </div>
+  <%=f.submit%>
+<%end%>
+<!--span id="myButton" data-confirm="删除后无法恢复，你确定删除吗?">Destroy</span>
+<div id="test_click" data-index="100" style="border:1px solid red;cursor: pointer;width: 100px;height:30px;text-align:center;">ClickMe</div>
+</div-->
+<div id="dialog-confirm" title="确认对话框" style="display:none;">
+  <div id="confirm-imgs"><img src="/assets/tips.png" ></div>
+  <div id="dialog-confirm-content">These items will deleted.Are you sure?</div>
+</div>
+
+<div id="info-dialog" title="Basic dialog" style="display:none;">
+  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
 </div>
 
 <style type="text/css">
 .main{
+  display: block;
   margin: 0 auto;
   max-width: 1180px;
-  border: 1px solid #393;
+  border: 2px solid #d1d5d3;
   padding: 0;
+  margin-top: 30px;
+  background-color: #E9EDF0;
+}
+
+.course-field{
+  margin-left: 10px;
+  float: left;
+}
+
+.chapter-field{
+  margin-left: 30px;
+}
+
+.section-field{
+  margin-left: 70px;
+}
+
+input[type=text]{
+    background-color: #fff;
+    border:solid 1px #d1d5d3;
+    color: #979797;
+    height: 28px;
+    padding-left:10px;
+    width: 270px;
+    box-shadow: 2px 2px 0 #828181 inset;
+}
+input[type=button]{
+    background-color: #1E1E1E;
+    color: #979797;
+    height: 24px;
+    width: 103px;
+    color: #bbbbbb;
+    text-transform:uppercase;
+    box-shadow:-1px 2px #6E6B6A inset;
+}
+
+input[type=button], input[type=text]{
+    border: 0;
+    border-radius:5px;
+    font-family: Sansation,Arial;
+}
+
+.add {
+  display: inline;
+  left: 40px;
+  margin-left: -30px;
+  cursor: pointer;
+}
+
+.remove {
+  display: inline;
+  left: 40px;
+  margin-left: 0;
+  cursor: pointer;
+}
+
+.action {
+  display: inline;
+  height: 30px;
+  position: absolute;
+  width: 140px;
+}
+
+.ion-android-add:before,.ion-android-remove:before {
+  font-size: 24px;
+  color: #8C1515;
+}
+
+/*设置此属性值为 absolute 会将对象拖离出正常的文档流绝对定位而不考虑它周围内容的布局。假如其他具有不同 z-index 属性的对象已经占据了给定的位置，他们之间不会相互影响，而会在同一位置层叠。此时对象不具有外补丁(margin)，但仍有内补丁( padding )和边框( border )。 */
+.circle {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #ff0;
+  text-align: center;
+  border: 2px solid #ba0;
+}
+
+.ion-minus-round:before{
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: center;
+}
+
+.ion-minus-round,.ion-plus-round{
+  cursor: pointer;
+}
+
+.ion-plus-round:before {
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: center;
+}
+
+.hide{
+  display: none;
+}
+
+#dialog-confirm #confirm-imgs{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#dialog-confirm #confirm-imgs img{
+    width:60px;
+    height:60px;
+}
+
+#dialog-confirm #dialog-confirm-content{
+    display: inline-block;
+}
+#dialog-confirm-content {
+    font-size:16px;
 }
 </style>
+
+<script type="text/javascript">
+var $remove_type;
+var $params;
+var $min_chapters_count=1;
+var $min_sections_count=1;
+
+$(document).ready(function(){
+  var folders = $(".folder");
+  for(var i=0;i<folders.length;i++){
+    $(folders[i]).click(function(){
+      folder_toggle(this);
+      //var sections = document.getElementById("chapter-"+this.id+"-sections");
+      //sections.style.display="none";
+    });
+  }
+
+  //alert($(".chapter-field>.action>.add").length); 
+  var adds=$(".chapter-field>.action>.add");
+  for(i=0;i<adds.length;i++){
+    $(adds[i]).click(function(){
+      add_chapter();
+    });
+  }
+
+  var removes=$(".chapter-field>.action>.remove");
+  for(i=0;i<removes.length;i++){
+    $(removes[i]).click(function(){
+      var chs=$("#course-chapters .chapter-field");
+      if(chs.length>$min_chapters_count){
+        $remove_type="remove_chapter";
+        $params=this.id;
+        showDialog(this.getAttribute("data-confirm"));
+      }else {
+        showInfoDialog(this.getAttribute("data-info"));
+      }     
+    });
+  }
+
+  add_section_click();
+  remove_section_click();
+
+  /*$("#test_click").click({obj: this},function(event){
+    alert($(event.data.obj).attr("data-index"));
+    alert($(this).attr("data-index"));
+  });*/
+
+  $myDialog = jQuery('#dialog-confirm');
+  $myDialog.dialog({ 
+    resizable: false,
+    height: "auto",
+    width: 400,
+    modal: true,
+    autoOpen: false,
+    title:'confirmed dialog',
+    overlay: { opacity: 0.5, background: 'black'},
+    show: {
+	    effect: "blind",
+	    duration: 1000
+	  },
+	  hide: {
+	    effect: "explode",
+	    duration: 1000
+	  },
+    buttons: {
+      "确定": function() {
+        $(this).dialog("close");
+        if($remove_type==="remove_chapter"){
+          remove_chapter($params);
+        }else if($remove_type==="remove_section"){
+          remove_section($params);
+        }
+      },
+      "取消": function() {
+        $(this).dialog("close");
+      }
+    }
+  });
+
+  $infoDialog = jQuery('#info-dialog');
+  $infoDialog.dialog({ 
+    resizable: false,
+    height: "auto",
+    width: 400,
+    modal: true,
+    autoOpen: false,
+    title:'info dialog',
+    overlay: { opacity: 0.5, background: 'black'},
+    show: {
+	    effect: "blind",
+	    duration: 1000
+	  },
+	  hide: {
+	    effect: "explode",
+	    duration: 1000
+	  }
+  });
+
+});
+
+var add_chapter=function(){
+  var course_chapters=document.getElementById("course-chapters");
+  var chapters = $("#course-chapters p.chapter-field");
+  //alert(chapters[chapters.length-1].innerHTML);
+  var last_ch=chapters[chapters.length-1];
+  var last_pos=$(last_ch).find("input[type=hidden]");
+  var curr_pos=parseInt(last_pos[0].value,10)+1;
+
+  var chapter_p=document.createElement("p");
+  chapter_p.setAttribute("class","chapter-field");
+  chapter_p.id="ch-"+curr_pos;
+  //alert(chapter_p.getAttribute("class"));
+  //alert(course_chapters.id);
+  //course_chapters.appendChild(chapter_p);
+  //alert(course_chapters.childNodes.length);
+
+  var pos=document.createElement("input");
+  pos.setAttribute("type","hidden");
+  pos.value=curr_pos;
+  pos.setAttribute("name","course[chapters_attributes]["+curr_pos+"][position]");
+  pos.id="course_chapters_attributes_"+curr_pos+"_position";
+  chapter_p.appendChild(pos);
+  
+  var label=document.createElement("label");
+  label.setAttribute("for","chapter-"+curr_pos);
+  label.innerHTML="篇章名称";
+  chapter_p.appendChild(label);
+  chapter_p.appendChild(document.createElement("br"));
+
+  var f_span=document.createElement("span");
+  f_span.setAttribute("title","折叠");
+  f_span.id="folder-"+curr_pos;
+  f_span.setAttribute("class","folder ion-minus-round");
+  $(f_span).click(function(){
+    folder_toggle(this);
+  });
+  chapter_p.appendChild(f_span);
+
+  var title=document.createElement("input");
+  title.setAttribute("type","text");
+  title.setAttribute("size","30");
+  title.setAttribute("name","course[chapters_attributes]["+curr_pos+"][title]");
+  title.id="chapter-"+curr_pos;
+  chapter_p.appendChild(title);
+
+  var _span=document.createElement("span");
+  _span.setAttribute("class","action");
+  add_span=document.createElement("span");
+  add_span.setAttribute("class","add ion-android-add circle");
+	$(add_span).click(function(){
+		add_chapter();
+	});
+  remove_span=document.createElement("span");
+  remove_span.setAttribute("class","remove ion-android-remove circle");
+  remove_span.setAttribute("data-confirm","<%=@chapter_confirm%>");
+  remove_span.setAttribute("data-info","<%=@chapter_info%>");
+
+  remove_span.id=curr_pos.toString();
+  $(remove_span).click(function(){
+    var chs=$("#course-chapters .chapter-field");
+    if(chs.length>$min_chapters_count){
+      $remove_type="remove_chapter";
+      $params=this.id;
+      showDialog(this.getAttribute("data-confirm"));
+    }else {
+      showInfoDialog(this.getAttribute("data-info"));
+    }
+	});
+  _span.appendChild(add_span);
+  _span.appendChild(remove_span);
+  chapter_p.appendChild(_span);
+  //alert(chapter_p.innerHTML);
+  course_chapters.appendChild(chapter_p);
+
+  var sections_div=document.createElement("div");
+  sections_div.id="chapter-"+curr_pos+"-sections";
+  sections_div.setAttribute("class","sections");
+
+  var section_p=create_section_p(curr_pos,1);
+  sections_div.appendChild(section_p);
+  course_chapters.appendChild(sections_div);
+};
+
+var folder_toggle=function(_this){
+  var div_id="#chapter-"+_this.id.split("-")[1]+"-sections";
+  if($(_this).hasClass("ion-minus-round")){
+    $(div_id).fadeOut();
+    $(_this).removeClass("ion-minus-round").addClass("ion-plus-round");
+    $(_this).attr("title","展开");
+  }else if($(_this).hasClass("ion-plus-round")){
+    $(div_id).removeClass("hide").fadeIn();
+    $(_this).removeClass("ion-plus-round").addClass("ion-minus-round");
+    $(_this).attr("title","折叠");
+  }
+};
+
+var add_section_click=function(){
+  var _sections=$(".sections");
+  for(var i=0;i<_sections.length;i++){
+    var ps=$(_sections[i]).find("p");
+    
+    for(var j=0;j<ps.length;j++){
+      var add_btns=$(ps[j]).find("span.add");
+		  $(add_btns[0]).click(function(){
+        add_section(this);
+		  });
+    }
+  }
+};
+
+var add_section=function(_this){
+  var add_id=_this.id;
+  var arr=add_id.split("_");//2_1
+  var chapter_id=arr[0];
+  var sections_div=document.getElementById("chapter-"+chapter_id+"-sections");
+  var new_ps=$(sections_div).find("p");
+	var last_p=new_ps[new_ps.length-1];
+	var last_id=$(last_p).find("input[type=text]")[0].id;
+	var new_arr=last_id.split("_");//chapter_2_section_1_title
+	var last_section_id=parseInt(new_arr[3],10)+1;
+  var section_p=create_section_p(chapter_id,last_section_id);
+  sections_div.appendChild(section_p);
+};
+
+var create_section_p=function(chapter_id,section_id){
+  var section_p=document.createElement("p");
+  section_p.setAttribute("class","section-field");
+  section_p.id="ch-"+chapter_id+"-sec-"+section_id;
+
+  pos=document.createElement("input");
+  pos.setAttribute("type","hidden");
+  pos.value=section_id;
+  pos.setAttribute("name","course[chapters_attributes]["+chapter_id+"][sections_attributes]["+section_id+"][position]");
+  pos.id="chapter_"+chapter_id+"_section_"+section_id+"_position";
+  section_p.appendChild(pos);
+  
+  label=document.createElement("label");
+  label.setAttribute("for","chapter_"+chapter_id+"_section_"+section_id+"_title");
+  label.innerHTML="小节名称";
+  section_p.appendChild(label);
+  section_p.appendChild(document.createElement("br"));
+
+  title=document.createElement("input");
+  title.setAttribute("type","text");
+  title.setAttribute("size","30");
+  title.setAttribute("name","course[chapters_attributes]["+chapter_id+"][sections_attributes]["+section_id+"][title]");
+  title.id="chapter_"+chapter_id+"_section_"+section_id+"_title";
+  section_p.appendChild(title);
+
+  _span=document.createElement("span");
+  _span.setAttribute("class","action");
+  add_span=document.createElement("span");
+  add_span.setAttribute("class","add ion-android-add circle");
+  add_span.id=chapter_id+"_"+section_id;
+  $(add_span).click(function(){
+    add_section(this);
+  });
+  remove_span=document.createElement("span");
+  remove_span.setAttribute("class","remove ion-android-remove circle");
+  remove_span.setAttribute("data-confirm","<%=@section_confirm%>");
+  remove_span.setAttribute("data-info","<%=@section_info%>");
+  remove_span.id=chapter_id+"-"+section_id;
+	$(remove_span).click(function(){
+		var btn_id=this.id;
+    var chapter_id=btn_id.split("-")[0];
+    var secs=$("#chapter-"+chapter_id+"-sections .section-field");
+    if(secs.length>$min_sections_count){
+      $remove_type="remove_section";
+      $params=this.id;
+      showDialog(this.getAttribute("data-confirm"));
+    }else {
+      showInfoDialog(this.getAttribute("data-info"));
+    }
+	});
+  _span.appendChild(add_span);
+  _span.appendChild(remove_span);
+  section_p.appendChild(_span);
+  return section_p;
+};
+
+var remove_chapter=function(chapter_id){
+  $("#ch-"+chapter_id).remove();
+  $("#chapter-"+chapter_id+"-sections").remove();
+};
+
+var remove_section_click=function(){
+  var _sections=$(".sections");
+  for(var i=0;i<_sections.length;i++){
+    var ps=$(_sections[i]).find("p");
+    
+    for(var j=0;j<ps.length;j++){
+      var remove_btns=$(ps[j]).find("span.remove");
+		  $(remove_btns[0]).click(function(){
+        var btn_id=this.id;
+        var chapter_id=btn_id.split("-")[0];
+        var secs=$("#chapter-"+chapter_id+"-sections .section-field");
+        if(secs.length>$min_sections_count){
+          $remove_type="remove_section";
+          $params=this.id;
+          showDialog(this.getAttribute("data-confirm"));
+        }else {
+          showInfoDialog(this.getAttribute("data-info"));
+        }        
+		  });
+    }
+  }
+};
+
+var remove_section=function(span_id){
+  var arr=span_id.split("-");
+  var chapter_id=arr[0];
+  var section_id=arr[1];
+  $("#ch-"+chapter_id+"-sec-"+section_id).remove();
+};
+
+var showDialog = function(msg) {
+  $("#dialog-confirm-content").html(msg);
+  $myDialog.show(); 
+  $myDialog.dialog("open");
+}
+
+var showInfoDialog= function(msg){
+  $("#info-dialog").html(msg);
+  $infoDialog.show(); 
+  $infoDialog.dialog("open");
+}
+
+</script>
 
 
