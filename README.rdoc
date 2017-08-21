@@ -61,12 +61,11 @@ rails g model Bookmark course_id:integer paragraph_id:integer user_id:integer
 
 rails g model User name:string
 rails g model Category name:string course_count:integer
-rails g model Homework
-rails g model Outline
 
 rails g controller courses
 rails g controller admin/courses
 rails g controller platform/courses
+rails g controller api/courses
 
 rails runner script/load_course.rb
 
@@ -153,8 +152,8 @@ add outline and homework to nav list
 ajax pagination
 javascript lastChild jquery last-child
 share to weibo, qq zone,renren
-weibo login
-
+integration to weibo login
+activity feed
 
 rails3.2.22 only support fields_for to implement first level nested
 =======================================================
@@ -177,6 +176,31 @@ $("select#test").change({msg:"ok"},function(event){
 <div></div>
 div should appear with pairs
 one more or one less will cause js error
+======================================================= 
+rails3 json jbuilder
+======================================================= 
+SecureRandom.hex(16)
+======================================================= 
+class Person < ActiveRecord::Base
+  has_one :address
+  accepts_nested_attributes_for :address
+end
+
+class Address < ActiveRecord::Base
+  belongs_to :person
+end
+
+def new
+  @person = Person.new
+  @person.build_address
+end
+
+def person_params
+  params.require(:person).permit(:name, :age, :gender, address_attributes: [:id, :street, :zip_code])
+end
+
+
+======================================================= 
 
 
 

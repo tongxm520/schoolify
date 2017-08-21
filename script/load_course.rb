@@ -43,13 +43,7 @@ chapter_hash.each_pair do |k,v|
   ch.save
   i+=1
   v.each_with_index do |e,j|
-    if e.split(/\s/)[0].strip == "Outline"
-      Outline.create(:title=>e,:chapter_id=>ch.id,:position=>j+1)
-    elsif e.split(/\s/)[0].strip == "Homework:"
-      Homework.create(:title=>e,:chapter_id=>ch.id,:position=>j+1)
-    else
-      Section.create(:title=>e,:chapter_id=>ch.id,:position=>j+1)
-    end
+    Section.create(:title=>e,:chapter_id=>ch.id,:position=>j+1)
   end
 end
 

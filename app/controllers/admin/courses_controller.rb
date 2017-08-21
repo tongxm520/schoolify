@@ -15,6 +15,7 @@ class Admin::CoursesController < ApplicationController
     logger.info("HTTP_HOST=> "+request.env['HTTP_HOST'])
     logger.info("REMOTE_ADDR=> "+request.env['REMOTE_ADDR'])
     #logger.info(response.inspect)
+
     render layout: "course_video"
   end
 
