@@ -198,9 +198,138 @@ end
 def person_params
   params.require(:person).permit(:name, :age, :gender, address_attributes: [:id, :street, :zip_code])
 end
+======================================================= 
+after add bootstrap.min.css,the whole page style will be influenced
+different css file influence each other
 
+/*
+.nav-utilities, .xmodule_display.xmodule_CourseModule .sequence-nav-button, .xmodule_display.xmodule_VideoModule .video .video-pre-roll, .xmodule_display.xmodule_VideoModule .a11y-menu-container .a11y-menu-list, .xmodule_display.xmodule_SequenceModule .sequence-nav-button, .modal-backdrop {
+    z-index: 1000;
+}
+
+bootstrap login-modal will lose focus when uncomment
+*/
+
+bootstrap reserved word=>
+dropdown
+dropdown-menu
 
 ======================================================= 
+rails Please fill out this field
+
+<%= text_field_tag :street, nil, :required => true %>
+When you provide options to the helper, you have to pass the value for value parameter.
+
+<%= f.text_field :street, :required => true %>
+<%=form.text_field :email, :required => true, :pattern => '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %>
+<%= f.email_field :email, id: 'user_email', type:'email', required: true, placeholder: "Email" %>  
+<%= f.text_field
+    id: "yourID",
+    class: "yourCLass",
+    placeholder: "Your message",
+    maxlength: 14,
+    required: true
+%>
+
+memory exhausted
+
+<%=f.text_field :title,:required=>true%>
+<input type="text" size="30" required="required" name="course[title]" id="course_title">
+
+I checked your screenshot, and that error message you see is in fact part of the new HTML5 protocol when you use the required attribute. The text you are seeing is in fact part of your browser, and will display different message based on the language of the users browser ... It is not anything in Foundation or the html.
+
+You can in fact change it by using a new function input.setCustomValidity(msg), but its a bit tedious and not native to Foundation in any way:
+
+http://stackoverflow.com/questions/5272433/html5-form-required-attribute-set-custom-validation-message
+http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#dom-cva-setcustomvalidity
+
+As far as I can see though, Foundation Abide already locks into the new html5 API with the required attribute, and will prevent it from displaying if you have added required Abide inputs correctly ... Perhaps we can look at your code? Are you adding the <div> wrappers and <small> error elements as you should be?
+
+$(document).ready(function() {
+var msg="";
+var elements = document.getElementsByTagName("INPUT");
+for (var i = 0; i < elements.length; i++) {
+    elements[i].oninvalid = function(e) {
+        e.target.setCustomValidity("");
+
+        switch(e.target.id){
+            case "password" :
+            msg="Bad password";
+            case "username" :
+            msg="Username cannot be blank";
+        }
+
+        if (!e.target.validity.valid) {
+            e.target.setCustomValidity(msg);
+        }
+    };
+    elements[i].oninput = function(e) {
+        e.target.setCustomValidity("");
+    };
+} })
+
+bootstrap input error custom
+
+======================================================= 
+Do the following:
+
+grep -rnw '/path/to/somewhere/' -e 'pattern'
+    -r or -R is recursive,
+    -n is line number, and
+    -w stands for match the whole word.
+    -l (lower-case L) can be added to just give the file name of matching files.
+
+Along with these, --exclude, --include, --exclude-dir or --include-dir flags could be used for efficient searching:
+
+    This will only search through those files which have .c or .h extensions:
+    grep --include=\*.{c,h} -rnw '/path/to/somewhere/' -e "pattern"
+
+    This will exclude searching all the files ending with .o extension:
+grep --exclude=*.o -rnw '/path/to/somewhere/' -e "pattern"
+
+    Just like exclude files, it's possible to exclude/include directories through --exclude-dir and --include-dir parameter. For example, this will exclude the dirs dir1/, dir2/ and all of them matching *.dst/:
+grep --exclude-dir={dir1,dir2,*.dst} -rnw '/path/to/somewhere/' -e "pattern"
+
+This works very well for me, to achieve almost the same purpose like yours.
+For more options check man grep.
+======================================================= 
+http://foundation.zurb.com/forum/signin?origin=http%3A%2F%2Ffoundation.zurb.com%2Fforum%2Fposts%2F8156-where-is-located-please-fill-out-this-field
+======================================================= 
+
+1>start from the little iteration, and then expand
+2>refactor first,and then add new features
+3>you mustn't copy code directly from web,put down the code word by word,inpiration comes 
+out while you are coding
+4>try to code more than comparing solution with doing nothing
+======================================================= 
+$('#contact_form').bootstrapValidator
+$('#registrationForm').formValidation
+
+<script type="text/javascript" src="validation.min.js"></script>
+$("#register-form").validate
+
+js order to be loaded
+
+
+rails g controller users --no-assets
+
+======================================================= 
+echo "export SENDGRID_API_KEY='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'" > sendgrid.env
+echo "sendgrid.env" >> .gitignore
+source ./sendgrid.env
+
+https://sendgrid.com
+tungsimon
+thunder520
+======================================================= 
+
+{"user"=>{"name"=>"simon", "real_name"=>"童小明", "email"=>"tong.xm520@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+
+curl -i -X POST -d "user[name]=jane&user[email]=tong.xm520@gmail.com&user[password]=admin123&user[password_confirmation]=admin123" http://localhost:3000/register
+======================================================= 
+document.getElementById("login-form")
+document.getElementsByClassName("dot-pic")
+document.getElementsByTagName("*")
 
 
 

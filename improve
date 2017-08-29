@@ -81,10 +81,31 @@ Angular/Javascript/jquery
 TDD/RSpec
 Front-end: HAML, SASS, Coffee Script, HTML5, JQuery, etc.
 了解Docker技术优先
+SHOULD HAVE: Experience working with Bootstrap
+SHOULD HAVE: Experience working with project management tools such as Jira and Trello
+
 
 elasticsearch 
 reactjs 
 bootstrap dialog
 
+gem 'elasticsearch-model', '~> 5.0.0'
+gem 'elasticsearch-rails', '~> 5.0.0'
+gem 'elasticsearch-dsl', '~> 0.1.2'
+
+js.coffee 
+css.scss
+angular.js
+=====================================================
+1>start from the little iteration, and then expand
+2>refactor first,and then add new features
+3>you mustn't copy code directly from web,put down the code word by word,inpiration comes 
+out while you are coding
+=====================================================
+
+segments/piece/fragment/snippet
+483 Snippets tagged with "login"
+
+html-beautify
 
 

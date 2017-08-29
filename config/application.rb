@@ -17,6 +17,7 @@ module Schoolify
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/lib)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -58,5 +59,10 @@ module Schoolify
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    #ActiveSupport::TimeZone.all.map(&:name)
+    #rails默认是utc，改成本地时间
+    config.time_zone = 'Beijing'
+    config.active_record.default_timezone = :local  
   end
 end

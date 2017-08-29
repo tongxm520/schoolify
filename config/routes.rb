@@ -58,6 +58,23 @@ Schoolify::Application.routes.draw do
     resources :courses
   end
 
+  controller :welcome do
+    post 'login' => :create
+    get 'logout' => :destroy
+    get 'homepage'=> :homepage
+    post 'register'=>:register
+    get 'confirm'=>:confirm
+    get 'reactivate'=>:reactivate
+    post 'identical_email'=>:identical_email
+    post 'reactive'=>:reactive
+  end
+
+  resources :users do
+    member do
+		  get 'activate'
+		end
+  end
+
   root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"

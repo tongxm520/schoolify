@@ -1,0 +1,349 @@
+<div class="slide-wrapper">
+<div class="slideshow-container">
+  <div class="mySlides faded">
+    <div class="numbertext">1 / 7</div>
+    <!--img src="/assets/img1_mountains.jpg" style="width:100%"-->
+    <div class="active-users">
+      <div class="featured-slide">
+        <img class="attachment-post-thumbnail" src="/assets/MaterialDesign-feature.png" />
+      </div>
+      <div class="course-intro">
+				<hgroup>
+					<h3>FEATURED TUTORIAL</h3>
+					<h2><a href="javascript:void;">Android: An Introduction to Material Design with Kotlin</a>
+					</h2>
+				</hgroup>
+				<p>In this tutorial you'll learn how to integrate Material Design into an existing app and create delightful interactions using the new animation APIs.</p><a href="javascript:void;" class="RWButton view-tutorial">VIEW TUTORIAL »</a>
+      </div>
+    </div>
+    <div class="text">Caption One</div>
+  </div>
+
+  <div class="mySlides faded">
+    <div class="numbertext">2 / 7</div>
+    <img src="/assets/img2_nature.jpg" style="width:100%">
+    <div class="text">Caption Two</div>
+  </div>
+
+  <div class="mySlides faded">
+    <div class="numbertext">3 / 7</div>
+    <img src="/assets/img3_fjords.jpg" style="width:100%">
+    <div class="text">Caption Three</div>
+  </div>
+
+  <div class="mySlides faded">
+    <div class="numbertext">4 / 7</div>
+    <img src="/assets/img4_lights.jpg" style="width:100%">
+    <div class="text">Caption Four</div>
+  </div>
+
+  <div class="mySlides faded">
+    <div class="numbertext">5 / 7</div>
+    <!--img src="/assets/img1_mountains.jpg" style="width:100%"-->
+    <div class="active-users">
+      <div class="featured-slide">
+        <img class="attachment-post-thumbnail" src="/assets/MaterialDesign-feature.png" />
+      </div>
+      <div class="course-intro">
+				<hgroup>
+					<h3>FEATURED TUTORIAL</h3>
+					<h2><a href="javascript:void;">Android: An Introduction to Material Design with Kotlin</a>
+					</h2>
+				</hgroup>
+				<p>In this tutorial you'll learn how to integrate Material Design into an existing app and create delightful interactions using the new animation APIs.</p><a href="javascript:void;" class="RWButton view-tutorial" >VIEW TUTORIAL »</a>
+      </div>
+    </div>
+    <div class="text">Caption Five</div>
+  </div>
+
+  <div class="mySlides faded">
+    <div class="numbertext">6 / 7</div>
+    <!--img src="/assets/img1_mountains.jpg" style="width:100%"-->
+    <div class="active-users">
+      <div class="featured-slide">
+        <img class="attachment-post-thumbnail" src="/assets/MaterialDesign-feature.png" />
+      </div>
+      <div class="course-intro">
+				<hgroup>
+					<h3>FEATURED TUTORIAL</h3>
+					<h2><a href="javascript:void;">Android: An Introduction to Material Design with Kotlin</a>
+					</h2>
+				</hgroup>
+				<p>In this tutorial you'll learn how to integrate Material Design into an existing app and create delightful interactions using the new animation APIs.</p><a href="javascript:void;" class="RWButton view-tutorial">VIEW TUTORIAL »</a>
+      </div>
+    </div>
+    <div class="text">Caption Six</div>
+  </div>
+
+  <div class="mySlides faded">
+    <div class="numbertext">7 / 7</div>
+    <!--img src="/assets/img1_mountains.jpg" style="width:100%"-->
+    <div class="active-users">
+      <div class="featured-slide">
+        <img class="attachment-post-thumbnail" src="/assets/MaterialDesign-feature.png" />
+      </div>
+      <div class="course-intro">
+				<hgroup>
+					<h3>FEATURED TUTORIAL</h3>
+					<h2><a href="javascript:void;">Android: An Introduction to Material Design with Kotlin</a>
+					</h2>
+				</hgroup>
+				<p>In this tutorial you'll learn how to integrate Material Design into an existing app and create delightful interactions using the new animation APIs.</p><a href="javascript:void;" class="RWButton view-tutorial">VIEW TUTORIAL »</a>
+      </div>
+    </div>
+    <div class="text">Caption Seven</div>
+  </div>  
+
+  <a class="prev-one" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next-one" onclick="plusSlides(1)">&#10095;</a>
+</div>
+<br>
+<div style="text-align:center">
+  <span class="dot-pic" onclick="currentSlide(1)"></span>
+  <span class="dot-pic" onclick="currentSlide(2)"></span>
+  <span class="dot-pic" onclick="currentSlide(3)"></span>
+  <span class="dot-pic" onclick="currentSlide(4)"></span>
+  <span class="dot-pic" onclick="currentSlide(5)"></span>
+  <span class="dot-pic" onclick="currentSlide(6)"></span>
+  <span class="dot-pic" onclick="currentSlide(7)"></span>
+</div> 
+</div>
+<% if flash[:notice] %>
+  <p id="notice"><%=sanitize flash[:notice] %></p>
+<% end %>
+
+<script type="text/javascript">
+var slideIndex;
+currentSlide(1);
+
+window.onload = function(){
+  setInterval(function(){displaySlides();}, 5000);
+}
+
+function displaySlides(){
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot-pic");
+
+  for(i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+
+  for(i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+
+  slideIndex++;
+
+  if(slideIndex> slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+} 
+
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot-pic");
+  if(n > slides.length) {slideIndex = 1}
+  if(n < 1) {slideIndex = slides.length}
+  for(i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for(i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+} 
+</script>
+
+<style type="text/css">
+.slideshow-container,.slideshow-container * {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1180px;
+  position: relative;
+  margin: auto;
+}
+
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev-one, .next-one {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next-one {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev-one:hover, .next-one:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot-pic {
+  cursor:pointer;
+  height: 13px;
+  width: 13px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot-pic:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.faded {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+/******************************************************/
+.active-users {
+  display:table;
+  height: 413px;
+  background: #1C2022;
+}
+
+.active-users h3{
+  color: #f1992b;
+  font-size: 16px;
+  line-height: 30px;
+  margin-top: 50px;
+}
+
+.active-users h2 {
+    font-size: 26px;
+    color: #fff;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+
+.active-users a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    line-height: 40px;
+}
+
+.active-users p {
+    color: #ececec;
+    font-family: "Open Sans",sans-serif;
+    line-height: 23px;
+}
+
+.view-tutorial {
+    float: right;
+    margin-top: 16px;
+    margin-right: 20px;
+}
+
+.RWButton {
+    background-color: #ef8f27;
+    border-radius: 5px;
+    font-family: "Open Sans",sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    padding: 6px 13px 5px;
+}
+
+.course-intro {
+  vertical-align: middle;
+  text-align: center;
+  display: table-cell;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.featured-slide .attachment-post-thumbnail {
+    border: 2px solid #fff;
+    display: inline-block;
+    float: left;
+    margin: 0 10px 5px 0;
+}
+
+.featured-slide {
+  overflow: hidden;
+  padding: 0 10px 0 40px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.clearfix:after,.clearfix:before{
+  clear: both;
+}
+
+.active-users img {
+    max-height: 246px;
+    height: 175px;
+}
+
+.slide-wrapper{
+  width:100%;
+  background-color: #1C2022;
+}
+</style>
+

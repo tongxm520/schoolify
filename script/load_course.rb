@@ -27,7 +27,8 @@ end
 
 #puts chapter_hash.inspect
 
-user=User.create(:name=>"simon")
+user=User.create(:name=>"simon",:real_name=>"马士兵",:email=>"mashibing@gmail.com",
+   :password=>"admin123",:password_confirmation=>"admin123")
 category=Category.create(:name=>"ComputerScience")
 user_id=user.id
 category_id=category.id

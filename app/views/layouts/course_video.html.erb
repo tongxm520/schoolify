@@ -8,9 +8,17 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   
+
+  <%= stylesheet_link_tag "css_login/bootstrap.min?time=#{Time.now.to_i}" %>
+  <%= stylesheet_link_tag "css_login/modal_login?time=#{Time.now.to_i}" %>
+  <%= javascript_include_tag "js_login/bootstrap.min?time=#{Time.now.to_i}" %>
+  <%= javascript_include_tag "js_login/bootstrapvalidator.min?time=#{Time.now.to_i}"%>
+  <%= javascript_include_tag "js_login/toggle_form?time=#{Time.now.to_i}" %>
+
+
   <%= stylesheet_link_tag "course?time=#{Time.now.to_i}" %>
   <%= stylesheet_link_tag "css/ionicons?time=#{Time.now.to_i}" %>
-
+  
   <%if params["controller"]=="welcome" and params["action"]=="index"%>
   <link href="assets/videocss/video.js/dist/video-js-new.css?time=<%=Time.now.to_i%>" rel="stylesheet">
   <script src="assets/videojs/video.js/dist/video.js?time=<%=Time.now.to_i%>"></script>
@@ -48,17 +56,18 @@
 		</h2>
     <%end%>
 
+    <%if logged_in?%>
 		<ol class="user">
 		  <li class="primary">
 		    <a class="user-link" href="/dashboard">
 		      <span class="sr">Dashboard for:</span>
 		      <img alt="Profile image for simontung" src="/assets/head.png" class="user-image-frame">
-		      <div class="label-username">simontung</div>
+		      <div class="label-username"><%=current_user.name%></div>
 		    </a>
 		  </li>
 		  <li class="primary">
-		    <button aria-expanded="false" aria-haspopup="true" class="dropdown ion-arrow-down-b"><span class="sr">More options dropdown</span></button>
-		    <ul role="menu" aria-label="More Options" class="dropdown-menu">
+		    <button aria-expanded="false" aria-haspopup="true" class="drop_down ion-arrow-down-b"><span class="sr">More options dropdown</span></button>
+		    <ul role="menu" aria-label="More Options" class="drop_down-menu">
 		        <li><a href="/dashboard">Dashboard</a></li>
 		        <li><a href="/u/simontung">Profile</a></li>
 		        <li><a href="/account/settings">Account</a></li>
@@ -66,6 +75,9 @@
 		    </ul>
 		  </li>
 		</ol>
+    <%else%>
+    <a href="javascript:void;" class="to_right circle-corner" role="button" data-toggle="modal" data-target="#login-modal">Signin/Signup</a>
+    <%end%>
   </nav>
 </header>
 
@@ -98,24 +110,30 @@
 	</div>
 </div-->
 
+<%=render :partial => "welcome/login"%>
 <%= yield %>
 </body>
 </html>
 
+
 <script type="text/javascript">
 $(document).ready(function() { 
-  jQuery('.dropdown').click(function(){
-    if(jQuery('.dropdown').attr('aria-expanded')==='true'){
-      jQuery('.dropdown').removeClass('active');
-      jQuery('.dropdown-menu').removeClass('expanded');
-      jQuery('.dropdown').attr('aria-expanded','false');
-    }else if(jQuery('.dropdown').attr('aria-expanded')==='false'){
-      jQuery('.dropdown').addClass('active');
-      jQuery('.dropdown-menu').addClass('expanded');
-      jQuery('.dropdown').attr('aria-expanded','true');
+  jQuery('.drop_down').click(function(){
+    if(jQuery('.drop_down').attr('aria-expanded')==='true'){
+      jQuery('.drop_down').removeClass('active');
+      jQuery('.drop_down-menu').removeClass('expanded');
+      jQuery('.drop_down').attr('aria-expanded','false');
+    }else if(jQuery('.drop_down').attr('aria-expanded')==='false'){
+      jQuery('.drop_down').addClass('active');
+      jQuery('.drop_down-menu').addClass('expanded');
+      jQuery('.drop_down').attr('aria-expanded','true');
     } 
   });
 });
+
 </script>
 
+<style type="text/css">
+
+</style>
 

@@ -358,14 +358,14 @@ header.global .user .user-link .label-username {
 /*****user-link***********************************************/
 
 
-/*****dropdown***********************************************/
-#global-navigation .nav-wrapper .user .primary button.dropdown {
+/*****drop_down***********************************************/
+#global-navigation .nav-wrapper .user .primary button.drop_down {
     background: transparent none repeat scroll 0 0;
     padding: 5px 10px 10px;
     cursor: pointer;
 }
 
-header.global .user .dropdown {
+header.global .user .drop_down {
     background: #fff none repeat scroll 0 0;
     border: medium none;
     box-shadow: none;
@@ -381,10 +381,10 @@ header.global .user > .primary {
     margin: 0;
     position: relative;
 }
-/*****dropdown***********************************************/
+/*****drop_down***********************************************/
 
-/*****dropdown-menu***********************************************/
-header.global .user .dropdown-menu:before {
+/*****drop_down-menu***********************************************/
+header.global .user .drop_down-menu:before {
     background: transparent none repeat scroll 0 0;
     border-color: #fcfcfc #fcfcfc transparent transparent;
     border-style: solid;
@@ -406,10 +406,10 @@ header.global .user .dropdown-menu:before {
 }
 
 
-header.global .user .dropdown-menu.expanded {
+header.global .user .drop_down-menu.expanded {
     display: block;
 }
-header.global .user .dropdown-menu {
+header.global .user .drop_down-menu {
     background: #fff none repeat scroll 0 0;
     border: 1px solid #c8c8c8;
     border-radius: 4px;
@@ -435,7 +435,7 @@ ul, ol {
 }
 
 
-header.global .user .dropdown-menu li > a {
+header.global .user .drop_down-menu li > a {
     border: 1px solid transparent;
     border-radius: 3px;
     box-sizing: border-box;
@@ -451,8 +451,8 @@ header.global .user .dropdown-menu li > a {
     width: 100%;
 }
 
-header.global .user .dropdown-menu li > a:hover, 
-header.global .user .dropdown-menu li > a:focus {
+header.global .user .drop_down-menu li > a:hover, 
+header.global .user .drop_down-menu li > a:focus {
     color: #313533;
     text-decoration: none;
 }
@@ -462,14 +462,14 @@ a, a:visited {
     text-decoration: none;
 }
 
-header.global .user .dropdown-menu li {
+header.global .user .drop_down-menu li {
    border-bottom: 1px dashed #E1E5E3;
 }
 
-header.global .user .dropdown-menu li:last-child { border-bottom: none }
+header.global .user .drop_down-menu li:last-child { border-bottom: none }
 
 
-/*****dropdown-menu***********************************************/
+/*****drop_down-menu***********************************************/
 
 
 /*********paragraph bookmark icon*********************************/
@@ -583,12 +583,15 @@ body.view-in-course .course-license {
 }
 
 
+/*
 .nav-utilities, .xmodule_display.xmodule_CourseModule .sequence-nav-button, .xmodule_display.xmodule_VideoModule .video .video-pre-roll, .xmodule_display.xmodule_VideoModule .a11y-menu-container .a11y-menu-list, .xmodule_display.xmodule_SequenceModule .sequence-nav-button, .modal-backdrop {
     z-index: 1000;
 }
 
+login-modal will lose focus when uncomment
+*/
 
-.light-button, div.history-controls input[type="submit"], a.light-button, .gray-button, input[type="reset"], input[type="submit"], input[type="button"],button.check.Final.Submit, button.save, .button, form input[type="reset"], form input[type="submit"], form input[type="button"], form button, form .button,.xmodule_display.xmodule_SequenceModule  button.sequence-nav-button {
+/*.light-button, div.history-controls input[type="submit"], a.light-button, .gray-button, input[type="reset"], input[type="submit"], input[type="button"],button.check.Final.Submit, button.save, .button, form input[type="reset"], form input[type="submit"], form input[type="button"], form button, form .button,*/.xmodule_display.xmodule_SequenceModule  button.sequence-nav-button {
     background-clip: padding-box;
     background-color: #f1f1f1;
     background-image: linear-gradient(#f1f1f1, #d9d1d1);
@@ -754,5 +757,37 @@ div#seq_content .vert-mod  {
 }
 
 /**************course-video***************************************/
+
+.circle-corner {
+    background: #f83659 none repeat scroll 0 0;
+    border-radius: 40px;
+    box-shadow: 0 2px 10px 0 #2d2e33;
+    color: inherit;
+    display: inline-block;
+    font-family: "Avenir Next";
+    font-size: 20px;
+    padding: 11px 24px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+}
+
+.to_right{
+  float: right;
+}
+
+a.circle-corner:link, a.circle-corner:visited, a.circle-corner:hover, a.circle-corner:active {
+    cursor: pointer;
+}
+
+a.circle-corner:hover {
+    color: #fff;
+    background-color: #494d55;
+}
+a.circle-corner {
+    text-decoration: none;
+}
 
 
