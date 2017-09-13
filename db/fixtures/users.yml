@@ -1,0 +1,30 @@
+<% SALT = "NaCl" unless defined?(SALT) %>
+one:
+  id: 1
+  name: dave
+  real_name: dave
+  email: "dave@gmail.com"
+  activated_at: <%=5.hours.ago%>
+  encrypted_password: <%= User.encrypt_password('8355724', SALT) %>
+  salt: <%= SALT %>
+
+two:
+  id: 2
+  name: simon
+  real_name: simon
+  email: "simon@163.com"
+  activated_at: <%=2.hours.ago%>
+  encrypted_password: <%= User.encrypt_password('admin123', SALT) %>
+  salt: <%= SALT %>
+
+three:
+  id: 3
+  name: bob
+  real_name: bob
+  email: "bob@163.com"
+  activated_at: <%=4.hours.ago%>
+  encrypted_password: <%= User.encrypt_password('admin123', SALT) %>
+  salt: <%= SALT %>
+
+
+

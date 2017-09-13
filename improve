@@ -35,6 +35,8 @@ API implementation
 Heroku
 Docker
 AWS services
+vue.js
+
 ------------------------------------------------------------
 Automated Tests: You have experience writing automated tests in Ruby and Javascript.
 Front-end Development Skills: Our application suite utilizes quite a bit of Javascript (CoffeeScript). 
@@ -94,8 +96,10 @@ gem 'elasticsearch-rails', '~> 5.0.0'
 gem 'elasticsearch-dsl', '~> 0.1.2'
 
 js.coffee 
-css.scss
 angular.js
+
+css.scss  css.sass  css.less
+Luckily, the web development community has solved this problem. We now have CSS pre-processors such as Less, Sass and Stylus. They give us a number of benefits over plain CSS
 =====================================================
 1>start from the little iteration, and then expand
 2>refactor first,and then add new features
@@ -107,5 +111,22 @@ segments/piece/fragment/snippet
 483 Snippets tagged with "login"
 
 html-beautify
+
+
+=====================================================
+我们使用的团队工具：Git / Bitbucket / JIRA / Slack / Skype / Email
+Senior Ruby on Rails Developer
+
+我们希望你
+熟练的 Ruby 编写/架构/重构能力, 实践使用各种主流 Gem，当然你会其他语言如 JS/Go/Erlang/ R 等就更好。
+熟悉 Ruby on Rails 和 Sinatra 等 Web 框架或者库的开发和部署， 熟悉各种前端技能更好。
+熟悉各种常见的数据库 MySql, Redis 等。
+熟悉 Unix / Linux 环境，我们的服务器在 SoftLayer，用过的话更好。
+熟悉 Docker 生态环境以及能使用其独立完成 High Availability 的方案。
+熟悉配置自动化部署工具，Ansible / Chef / Puppet 等。
+熟练配置各种监控服务，Datadog / Boundary 等。
+有责任心，这是我们对开发者的基本要求，自控自我驱动完成工作中的挑战。
+Team Player。
+
 
 

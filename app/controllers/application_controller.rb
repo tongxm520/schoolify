@@ -6,11 +6,17 @@ class ApplicationController < ActionController::Base
 
   def authorize
     unless User.find_by_id(session[:user_id])
-      respond_to do |format|
-        redirect_to homepage_url,:notice =>"Please log in" 
-        #TODO:Open a rails form with Twitter Bootstrap modals 
+      redirect_to homepage_url,:notice =>"Please log in" 
+      #TODO:Open a rails form with Twitter Bootstrap modals
+      #respond_to do |format| 
         #format.js {render 'welcome/ajaxlogin'}
-      end
+      #end
     end
   end
 end
+
+=begin
+Rails 3 returning a HTTP 406 Not Acceptable?
+
+Remove respond_to do |format| blocks. Because you are not specifying to what format are you responding, e.g. format.html { #your code here } . Check documentation of respond_to how to use it properly.
+=end
