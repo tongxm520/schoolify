@@ -146,16 +146,7 @@ error=>no implicit conversion of Symbol into String
 install gem 'strong_parameters'
 
 =======================================================
-todo list:
-register and login
-rich text edit
-upload image
-add outline and homework to nav list
-ajax pagination
-javascript lastChild jquery last-child
-share to weibo, qq zone,renren
-integration to weibo login
-activity feed
+
 
 rails3.2.22 only support fields_for to implement first level nested
 =======================================================
@@ -329,6 +320,17 @@ document.getElementById("login-form")
 document.getElementsByClassName("dot-pic")
 document.getElementsByTagName("*")
 
-
+======================================================= 
+todo list:
+register and login
+rich text edit
+upload image
+add outline and homework to nav list
+ajax pagination
+javascript lastChild jquery last-child
+share to weibo, qq zone,renren
+integration to weibo login
+activity feed
+captcha
 
 

@@ -40,7 +40,7 @@ module AuthenticationSystem
   # Store the URI of the current request in the session.
   # We can return to this location by calling #redirect_back_or_default.
   def store_location
-    session[:return_to] = request.request_uri if request.request_method==:get and not request.xhr? and not skipped?(request)
+    session[:return_to] = request.original_url if request.request_method=="GET" and !request.xhr? and not skipped?(request)
   end
   
   # Redirect to the URI stored by the most recent store_location call or
@@ -55,7 +55,7 @@ module AuthenticationSystem
   private
 
   def skipped?(request)
-    if SKIP_LOCATIONS.index(request.request_uri)
+    if SKIP_LOCATIONS.index(request.original_fullpath)
       true
     else
       key=request.params[:controller]

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :authorize
 
   def authorize
-    unless User.find_by_id(session[:user_id])
+    unless authorized?
       redirect_to homepage_url,:notice =>"Please log in" 
       #TODO:Open a rails form with Twitter Bootstrap modals
       #respond_to do |format| 

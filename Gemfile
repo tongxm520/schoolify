@@ -32,6 +32,16 @@ end
 gem 'jquery-rails'
 gem 'strong_parameters', '0.2.3'
 
+
+gem 'faraday', '0.10.1'
+gem 'jwt', '1.5.6'
+gem 'multi_json', '1.12.1'
+gem 'multi_xml', '0.6.0'
+gem 'rack', '1.4.7'
+gem 'multipart-post','2.0.0'
+gem 'oauth2','1.3.0'
+
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
