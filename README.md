@@ -331,6 +331,7 @@ javascript lastChild jquery last-child
 share to weibo, qq zone,renren
 integration to weibo login
 activity feed
-captcha
+captcha gem
+
 
 

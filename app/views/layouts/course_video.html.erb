@@ -8,13 +8,13 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   
-
+  <%if params[:controller]!="admin/courses"%>
   <%= stylesheet_link_tag "css_login/bootstrap.min?time=#{Time.now.to_i}" %>
   <%= stylesheet_link_tag "css_login/modal_login?time=#{Time.now.to_i}" %>
   <%= javascript_include_tag "js_login/bootstrap.min?time=#{Time.now.to_i}" %>
   <%= javascript_include_tag "js_login/bootstrapvalidator.min?time=#{Time.now.to_i}"%>
   <%= javascript_include_tag "js_login/toggle_form?time=#{Time.now.to_i}" %>
-
+  <%end%>
 
   <%= stylesheet_link_tag "course?time=#{Time.now.to_i}" %>
   <%= stylesheet_link_tag "css/ionicons?time=#{Time.now.to_i}" %>
