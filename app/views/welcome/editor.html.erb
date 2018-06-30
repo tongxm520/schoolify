@@ -1,0 +1,70 @@
+<%= javascript_include_tag "ckeditor_4.9.2_full/ckeditor" %>
+<%#= javascript_include_tag "ckeditor_4.9.2_full/plugins/uploadwidget/dev/filereaderplugin" %>
+<%= javascript_include_tag "ckeditor_4.9.2_full/samples/js/sample" %>
+
+<main>
+	<div class="adjoined-bottom">
+		<div class="grid-container">
+			<div class="grid-width-100">
+				<div id="editor">
+					<h1>Hello world!</h1>
+					<p>I'm an instance of <a href="https://ckeditor.com">CKEditor</a>.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<script type="text/javascript">
+	initSample();
+</script>
+
+<style type="text/css">
+.adjoined-bottom:before {
+    background: #0287d0 none repeat scroll 0 0;
+    content: "";
+    height: 50%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
+.adjoined-bottom {
+    position: relative;
+}
+
+[class*="grid-width"]:after, .grid-container:after, [class*="grid-width"]:before, .grid-container:before {
+    content: "";
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+}
+[class*="grid-width"]:after, .grid-container:after {
+    clear: both;
+}
+
+main .grid-container {
+    max-width: 1052px;
+}
+
+.grid-container {
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+[class*="grid-width"] {
+    box-sizing: border-box;
+    float: left;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+.grid-width-100 {
+    width: 100%;
+}
+
+</style>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170703124333) do
+ActiveRecord::Schema.define(:version => 20180619101015) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "course_id",    :null => false
@@ -40,9 +40,17 @@ ActiveRecord::Schema.define(:version => 20170703124333) do
     t.string   "title",       :null => false
     t.string   "subtitle",    :null => false
     t.integer  "category_id", :null => false
-    t.integer  "user_id",     :null => false
+    t.integer  "teacher_id",  :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "description"
+    t.string   "course_logo"
+  end
+
+  create_table "faculties", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "paragraphs", :force => true do |t|
@@ -67,8 +75,34 @@ ActiveRecord::Schema.define(:version => 20170703124333) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "students", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "studies", :force => true do |t|
+    t.integer  "student_id", :null => false
+    t.integer  "course_id",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "teachers", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "faculty_id", :null => false
+    t.date     "birth",      :null => false
+    t.string   "company"
+    t.string   "mobile",     :null => false
+    t.string   "occupation", :null => false
+    t.string   "skill",      :null => false
+    t.text     "profile",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
-    t.string   "name",                      :null => false
+    t.string   "name",                                         :null => false
     t.string   "real_name"
     t.string   "email"
     t.string   "encrypted_password"
@@ -82,8 +116,9 @@ ActiveRecord::Schema.define(:version => 20170703124333) do
     t.string   "small_logo_path"
     t.string   "medium_logo_path"
     t.string   "large_logo_path"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.boolean  "admin",                     :default => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
 end

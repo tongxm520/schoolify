@@ -188,14 +188,14 @@ body.view-in-course .course-wrapper, body.view-in-course .profile-wrapper, body.
 
 body.view-in-course {
   margin: 0;
-  background-color: #fbfffd;
+  background-color: #eff0f0;
 }
 /******header**********************************************/
 body.view-in-course header.global, body.view-in-course header.global.slim {
     width: auto;
 }
 header.global.slim {
-    background: #e1e5e3 none repeat scroll 0 0;
+    background: #eff0f0 none repeat scroll 0 0;
     border-bottom: 1px solid #d1d5d3;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     height: auto;
@@ -739,14 +739,8 @@ login-modal will lose focus when uncomment
     border: 0 none;
 }
 
-.proctored_exam_status .exam-timer .pull-right {
-    float: right;
-}
-/********.proctored_exam_status******************/
 
-.xmodule_display.xmodule_CapaModule div.problem p.equality {
-    float: left;
-}
+/********.proctored_exam_status******************/
 
 div#seq_content .bookmark-button-wrapper button.bookmark-button {
   float:right;

@@ -1,0 +1,54 @@
+<%= stylesheet_link_tag "css_login/bootstrap.origin" %>
+
+<div id="courses-list">
+<div class="container">
+  <a id="new_course_btn" class="btn btn-success" href="<%=new_admin_course_path%>">
+	  <i class="folder ion-plus-round"></i> Add New Course
+  </a>
+	<br/>
+  <%@courses.each do |c|%>
+	<div class="row">
+		<div class="col-md-3">
+		  <a href="#" class="thumbnail">
+		    <!--img src="http://placehold.it/260x180" alt=""-->
+        <%= image_tag(c.course_logo_url(:thumb_medium),:alt=>c.title) %>
+		  </a>
+		</div>
+		<div class="col-md-9">
+		<h4><a href="#"><%=c.title%></a></h4>
+		  <p>
+		    <%=raw c.description%>
+		  </p>
+		  <p>
+        <a class="btn btn-info btn-sm" href="#">Read more</a>
+        <a class="btn btn-info btn-sm" href="<%=new_admin_course_chapter_path(c)%>">Add Chapter</a>
+      </p>
+		  <br/>
+		  <ul class="list-inline">
+		    <li><i class="glyphicon glyphicon-user"></i> by <a href="#"><%=@user_name%></a> | </li>
+		    <li><i class="glyphicon glyphicon-calendar"></i> <%=c.updated_at.strftime("%Y-%m-%d")%> |</li>   
+        <li><i class="glyphicon glyphicon-tags"></i> <%=c.category.name%> </li>
+		    <!--li><i class="glyphicon glyphicon-comment"></i> <a href="#">3 Comments</a> | </li>
+		    <li><i class="glyphicon glyphicon-share"></i> <a href="#">39 Shares</a></li-->
+		  </ul>
+		</div>
+	</div>
+	<hr>
+  <%end%>
+</div>
+</div>
+<!--search:Bootstrap v3.3 blog post list -->
+<style type="text/css">
+#courses-list > .container {
+  width: 1180px;
+}
+
+#new_course_btn{
+  margin-bottom: 15px;
+  margin-top: 15px;
+  color: #fff;
+  font-weight: bold;
+}
+</style>
+
+

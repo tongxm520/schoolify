@@ -1,0 +1,50 @@
+<%= stylesheet_link_tag "css_login/bootstrap.min" %>
+<%= stylesheet_link_tag "quiz" %>
+
+<div id="articles-tabs-container" class="">
+	<div class="container">
+		<ul role="tablist" id="articles-tabs" class="nav nav-tabs nav-justified">
+      <%if params["controller"]=="welcome" and params["action"]=="articles"
+        klass="active"
+      else
+        klass=""
+      end%>
+			<li class="<%=klass%>" role="presentation">
+				<a aria-controls="articles" href="/articles"><i class="fa fa-leanpub"></i> <span>Articles</span></a>
+			</li>
+      <%if params["controller"]=="welcome" and params["action"]=="edit_test"
+        klass="active"
+      else
+        klass=""
+      end%>
+			<li class="<%=klass%>" role="presentation">
+				<a aria-controls="edit-test" href="/edit_test"><i class="fa fa-pencil"></i> <span>Edit Test</span></a>
+			</li>
+      <%if params["controller"]=="welcome" and params["action"]=="test_scores"
+        klass="active"
+      else
+        klass=""
+      end%>
+			<li class="<%=klass%>" role="presentation">
+				<a aria-controls="test-scores" href="/test_scores"><i class="fa fa-wpforms"></i> <span>Test Scores</span></a>
+			</li>
+      <%if params["controller"]=="welcome" and params["action"]=="test_statistics"
+        klass="active"
+      else
+        klass=""
+      end%>
+			<li class="<%=klass%>" role="presentation">
+				<a aria-controls="test-statistics" href="/test_statistics"><i class="fa fa-pie-chart"></i> <span>Test Stat<span class="hidden-sm hidden-xs">istic</span>s</span></a>
+			</li>
+      <%if params["controller"]=="welcome" and params["action"]=="highlights"
+        klass="active"
+      else
+        klass=""
+      end%>
+			<li class="<%=klass%>" role="presentation">
+				<a aria-controls="test-statistics" href="/highlights"><i class="fa fa-magic"></i> <span>Highlights</span></a>
+			</li>
+		</ul>
+	</div>
+</div>
+

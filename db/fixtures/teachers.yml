@@ -1,0 +1,10 @@
+one:
+  id: 1
+  user_id: 2
+  faculty_id: 6
+  birth: "1986-10-8"
+  company: "欧特克有限公司"
+  mobile: "15178690385"
+  occupation: "前端工程师"
+  skill: "html/css/javascript"
+  profile: "武汉大学毕业，熟悉css，能设计复杂的UI，熟悉js面向对象，熟悉jquery,vue.js,node.js,react.js"

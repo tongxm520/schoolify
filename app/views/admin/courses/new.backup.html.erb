@@ -1,0 +1,265 @@
+<%= javascript_include_tag "ckeditor_4.9.2_full/ckeditor" %>
+<%= javascript_include_tag "ckeditor_4.9.2_full/simplified" %>
+
+
+<div class="main">
+  <%=form_for @course,:as=>:course,:url=>admin_courses_path, :method=>:post,:html=>{:name=>"create-course",:enctype=>"multipart/form-data"} do |f|%>
+  <%#=@course.errors.full_messages%>
+  <p>
+    <%=select_tag "course[category_id]",options_for_select(category_options,
+			:selected=>(@course ? @course.category_id : 0)),:class=>"select-category"%>
+  </p>
+  <p>
+    <label for="course_title">课程名</label><br />
+    <%=f.text_field :title%>
+  </p>
+  <p>
+    <label for="course_subtitle">简称</label><br />
+    <%=f.text_field :subtitle%>
+  </p>
+
+  <div class="file-upload">
+		<button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger('click')">课程图片</button>
+		<div class="image-upload-wrap">
+      <%= f.file_field :course_logo, :class=>"file-upload-input",:accept=>"image/*",:onChange=>"readURL(this);"%>
+		  <div class="drag-text">
+		    <h3>拖拽图片到这里</h3>
+		  </div>
+		</div>
+		<div class="file-upload-content">
+		  <img class="file-upload-image" src="#" alt="your image" />
+		  <div class="image-title-wrap">
+		    <button type="button" onclick="removeUpload()" class="remove-image">删除 <span class="image-title">Uploaded Image</span></button>
+		  </div>
+		</div>
+  </div>
+
+  <p>
+    <label for="course_desc">课程介绍</label><br />
+		<div id="editor">
+			<h1>Hello world!</h1>
+			<p>I'm an instance of <a href="https://ckeditor.com">CKEditor</a>.</p>
+		</div>
+  </p>
+  
+  <%=f.submit "创建课程", :class=>"circle-corner"%>
+  <%end%>
+</div>
+<!-- 
+Limiting accepted file types
+
+Often you won't want the user to be able to pick any arbitrary type of file; instead, you often want them to select files of a specific type or types. For example, if your file input lets users upload a profile picture, you probably want them to select web-compatible image formats, such as JPEG or PNG.
+
+Acceptable file types can be specified with the accept attribute, which takes a comma-separated list of allowed file extensions or MIME types. Some examples:
+
+    accept="image/png" or accept=".png" — Accepts PNG files.
+    accept="image/png, image/jpeg" or accept=".png, .jpg, .jpeg" — Accept PNG or JPEG files.
+    accept="image/*" — Accept any file with an image/* MIME type. (Many mobile devices also let the user take a picture with the camera when this is used.)
+    accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" — accept anything that smells like an MS Word document.
+
+-->
+<script type="text/javascript">
+initSample();
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      $('.image-upload-wrap').hide();
+      $('.file-upload-image').attr('src', e.target.result);
+      $('.file-upload-content').show();
+      $('.image-title').html(input.files[0].name);
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    removeUpload();
+  }
+}
+
+function removeUpload() {
+  $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+  $('.file-upload-content').hide();
+  $('.image-upload-wrap').show();
+}
+
+$('.image-upload-wrap').bind('dragover', function () {
+	$('.image-upload-wrap').addClass('image-dropping');
+});
+
+$('.image-upload-wrap').bind('dragleave', function () {
+	$('.image-upload-wrap').removeClass('image-dropping');
+});
+</script>
+
+<style type="text/css">
+.main{
+  display: block;
+  margin: 0 auto;
+  max-width: 1180px;
+  border: 2px solid #d1d5d3;
+  padding: 20px;
+  margin-top: 30px;
+  background-color: #E9EDF0;
+}
+
+.main input.circle-corner {
+  padding: 5px 12px;
+  background: #1AA059 none repeat scroll 0 0;
+}
+
+.select-category {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    height: 35px;
+    line-height: 30px;
+    width: 380px;
+}
+
+
+input[type=text]{
+    background-color: #fff;
+    border:solid 1px #d1d5d3;
+    color: #979797;
+    height: 28px;
+    padding-left:10px;
+    width: 370px;
+    box-shadow: 2px 2px 0 #828181 inset;
+}
+input[type=button]{
+    background-color: #1E1E1E;
+    color: #979797;
+    height: 24px;
+    width: 103px;
+    color: #bbbbbb;
+    text-transform:uppercase;
+    box-shadow:-1px 2px #6E6B6A inset;
+}
+
+input[type=button], input[type=text]{
+    border: 0;
+    border-radius:5px;
+    font-family: Sansation,Arial;
+}
+
+/*************file upload*************************/
+body {
+  font-family: sans-serif;
+}
+
+.file-upload {
+  background-color: #ffffff;
+  width: 600px;
+  /*margin: 0 auto;*/
+  padding: 20px;
+}
+
+.file-upload-btn {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  background: #1FB264;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #15824B;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.file-upload-btn:hover {
+  background: #1AA059;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.file-upload-btn:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+.file-upload-content {
+  display: none;
+  text-align: center;
+}
+
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  margin-top: 20px;
+  border: 4px dashed #1FB264;
+  position: relative;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color: #1FB264;
+  border: 4px dashed #ffffff;
+}
+
+.image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.drag-text {
+  /*text-align:center;*/
+  width: 30%;
+  margin: 0 auto;
+}
+
+.drag-text h3 {
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #15824B;
+  padding: 60px 0;
+}
+
+.file-upload-image {
+  max-height: 200px;
+  max-width: 200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.remove-image {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  background: #cd4535;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #b02818;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.remove-image:hover {
+  background: #c13b2a;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.remove-image:active {
+  border: 0;
+  transition: all .2s ease;
+}
+/*************file upload*************************/
+</style>
+
+

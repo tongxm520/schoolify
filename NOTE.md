@@ -8,7 +8,7 @@ ControlBar.prototype.options_ = {
   children: ['playToggle', 'currentTimeDisplay', 'timeDivider', 'durationDisplay', 'progressControl', 'liveDisplay', 'remainingTimeDisplay', 'customControlSpacer', 'playbackRateMenuButton', 'chaptersButton', 'descriptionsButton', 'subtitlesButton', 'captionsButton', 'audioTrackButton', 'fullscreenToggle', 'volumeMenuButton']
 };
 =====================================================
-<div class="second" </div>
+<div class="second" ></div>
 <div class="first" ></div>
 .second {
   float: right;
@@ -74,6 +74,7 @@ rails runner script/load_course.rb
 
 rake routes
 ActiveRecord::Base.log.info()
+logger.info
 =======================================================
 Video.js Auto loading subtitles/captions
 
@@ -321,17 +322,7 @@ document.getElementsByClassName("dot-pic")
 document.getElementsByTagName("*")
 
 ======================================================= 
-todo list:
-register and login
-rich text edit
-upload image
-add outline and homework to nav list
-ajax pagination
-javascript lastChild jquery last-child
-share to weibo, qq zone,renren
-integration to weibo login
-activity feed
-captcha gem
+
 
 
 

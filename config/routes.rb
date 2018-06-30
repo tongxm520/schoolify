@@ -55,7 +55,13 @@ Schoolify::Application.routes.draw do
 
   resources :courses
   namespace :admin do
-    resources :courses
+    resources :courses do
+      resources :chapters
+    end
+  
+    resources :chapters do
+      resources :sections
+    end
   end
 
   controller :welcome do
@@ -67,6 +73,13 @@ Schoolify::Application.routes.draw do
     get 'reactivate'=>:reactivate
     post 'identical_email'=>:identical_email
     post 'reactive'=>:reactive
+    get 'editor'=>:editor
+    post 'upload' =>:upload
+    get 'articles' => :articles
+    get 'edit_test' => :edit_test
+    get 'test_scores' => :test_scores
+    get 'test_statistics' => :test_statistics
+    get 'highlights' => :highlights
   end
 
   resources :users do

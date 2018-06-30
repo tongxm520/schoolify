@@ -18,6 +18,9 @@ class User < ActiveRecord::Base
   
   before_create	:make_activation_code
 
+  has_one :student
+  has_one :teacher
+
   # 'password' is a virtual attribute
   def password=(password)
     @password = password

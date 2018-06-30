@@ -16,6 +16,7 @@ two:
   activated_at: <%=2.hours.ago%>
   encrypted_password: <%= User.encrypt_password('admin123', SALT) %>
   salt: <%= SALT %>
+  admin: true
 
 three:
   id: 3

@@ -12,7 +12,7 @@
   <%= stylesheet_link_tag "css_login/bootstrap.min?time=#{Time.now.to_i}" %>
   <%= stylesheet_link_tag "css_login/modal_login?time=#{Time.now.to_i}" %>
   <%= javascript_include_tag "js_login/bootstrap.min?time=#{Time.now.to_i}" %>
-  <%= javascript_include_tag "js_login/bootstrapvalidator.min?time=#{Time.now.to_i}"%>
+  <%= javascript_include_tag "bootstrapvalidator/dist/js/bootstrapValidator.min?time=#{Time.now.to_i}"%>
   <%= javascript_include_tag "js_login/toggle_form?time=#{Time.now.to_i}" %>
   <%end%>
 
@@ -35,7 +35,7 @@
 <body class="view-in-course">
 <div id="su-header">
   <div class="su-container">
-    <a href="http://localhost:3000">
+    <a href="/">
       <img width="152" height="23" alt="Schoolify Center" src="/assets/schoolify.png">
     </a>
   </div>
@@ -71,6 +71,9 @@
 		        <li><a href="/dashboard">Dashboard</a></li>
 		        <li><a href="/u/simontung">Profile</a></li>
 		        <li><a href="/account/settings">Account</a></li>
+            <%if current_user.teacher%>
+            <li><a href="/admin/courses">Admin</a></li>
+            <%end%>
 		      <li><a role="menuitem" href="/logout">Sign Out</a></li>
 		    </ul>
 		  </li>

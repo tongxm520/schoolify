@@ -15,6 +15,7 @@ class CreateUsers < ActiveRecord::Migration
 			t.string   "small_logo_path"
 			t.string   "medium_logo_path"
 			t.string   "large_logo_path"
+      t.boolean :admin, :default=>false
       t.timestamps
     end
   end

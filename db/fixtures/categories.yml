@@ -1,0 +1,42 @@
+one:
+  id: 1
+  name: "HumanitiesSciences"
+
+two:
+  id: 2
+  name: "Engineering"
+
+three:
+  id: 3
+  name: "Medicine"
+
+four:
+  id: 4
+  name: "ComputerScience"
+
+five:
+  id: 5
+  name: "机器学习"
+
+six:
+  id: 6
+  name: "古典文学"
+
+seven:
+  id: 7
+  name: "高等数学"
+
+eight:
+  id: 8
+  name: "平面设计"
+
+nine:
+  id: 9
+  name: "三维动画"
+
+ten:
+  id: 10
+  name: "Philosophy"
+
+
+

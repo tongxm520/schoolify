@@ -29,7 +29,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails','3.1.4'
 gem 'strong_parameters', '0.2.3'
 
 
@@ -40,6 +40,9 @@ gem 'multi_xml', '0.6.0'
 gem 'rack', '1.4.7'
 gem 'multipart-post','2.0.0'
 gem 'oauth2','1.3.0'
+gem 'mini_magick','4.8.0'
+gem 'rake','12.3.1'
+gem 'carrierwave','0.11.0'
 
 
 # To use ActiveModel has_secure_password

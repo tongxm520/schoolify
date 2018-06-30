@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  skip_before_filter :authorize,:except=>[:index]  
+  skip_before_filter :authorize,:except=>[:index,:editor,:upload]  
 
   def index
     @course=Course.first
@@ -91,7 +91,64 @@ class WelcomeController < ApplicationController
     is_available=User.find_by_email(params[:user][:email])
     render :json => {:valid=>!is_available }.to_json
   end
-  
+
+  def editor
+  end
+
+  #{"fileName": "bar-chart.png","uploaded": 1,"url": "/userfiles/images/bar-chart.png"}
+  #{"uploaded": 0,"error": { "message": "The file is too big."} }
+  def upload
+    unless params[:upload]
+      render :text => {:uploaded=>0,:error=>{:message=>"params[:upload] is required"}}.to_json
+      return
+    end
+    if ["image/png","image/bmp","image/jpeg","image/gif"].exclude?(params[:upload].content_type)
+      @message="The image must be in JPEG or PNG or BMP or GIF format. "
+      @text={:uploaded=>0,:error=>{:message=>@message}}.to_json
+    elsif !params[:upload].tempfile
+      @message="You may be attempting to hack our server."
+      @text={:uploaded=>0,:error=>{:message=>@message}}.to_json
+    elsif params[:upload].tempfile.size > 1.megabyte
+      @message="The image size must be less than 1M."
+      @text={:uploaded=>0,:error=>{:message=>@message}}.to_json
+    else
+      begin
+		    filename,imagepath = Teacher.set_uploaded_file(params,current_user.teacher.id,Course.first.id) 
+		  rescue Exception => e
+		    logger.error "=============>#{e.message}"
+		    render :text => {:uploaded=>0,:error=>{:message=>e.message}}.to_json
+		    return
+      end 
+      @text={:uploaded=>1,:fileName=>filename,:url=>imagepath}.to_json
+    end
+    render :text => @text
+  end
+
+  #/online/publications/58784/units/66267
+  def articles
+    render layout: "course_video"
+  end
+
+  #/online/publications/58784/units/66267/edit_test
+  def edit_test
+    render layout: "course_video"
+  end
+
+  #/online/publications/58784/units/66267/test_scores
+  def test_scores
+    render layout: "course_video"
+  end
+
+  #/online/publications/58784/units/66267/test_summary
+  def test_statistics
+    render layout: "course_video"
+  end
+
+  #/online/publications/58784/units/66267/highlights
+  def highlights
+    render layout: "course_video"
+  end
+
   private
 
   def user_params

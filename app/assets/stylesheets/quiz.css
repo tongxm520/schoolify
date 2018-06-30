@@ -1,0 +1,35 @@
+#articles-tabs-container {
+    background-color: #1ca8de;
+    border-bottom: 1px solid #2eb1e0;
+    margin-bottom: 20px;
+}
+
+#articles-tabs-container > .container {
+  width: 1180px;
+}
+
+*::-moz-placeholder {
+    color: #999999;
+    opacity: 1;
+}
+
+.container:before, .container:after, .row:before, .row:after {
+    content: normal;
+}
+
+#articles-tabs li.active > a {
+    background-color: #eff0f0;
+    color: #6a6c68;
+}
+#articles-tabs li > a {
+    background-color: transparent;
+    border: 0 none;
+    border-radius: 0;
+    color: #ffffff;
+    margin-bottom: -1px;
+    text-transform: uppercase;
+}
+
+
+
+

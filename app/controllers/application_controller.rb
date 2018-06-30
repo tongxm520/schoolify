@@ -1,12 +1,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   include AuthenticationSystem
+  skip_before_filter  :verify_authenticity_token
 
   before_filter :authorize
 
   def authorize
-    unless authorized?
-      redirect_to homepage_url,:notice =>"Please log in" 
+    unless authorized? 
+      if request.xhr?     
+        render :json => { :notice =>"Please log in" }.to_json
+      else
+        redirect_to homepage_url,:notice =>"Please log in"
+      end 
+      
       #TODO:Open a rails form with Twitter Bootstrap modals
       #respond_to do |format| 
         #format.js {render 'welcome/ajaxlogin'}
