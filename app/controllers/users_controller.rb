@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :authorize,:only=>[:activate]  
+  skip_before_filter :authorize,:only=>[:activate] 
 
   def activate
     user = User.find_by_activation_code(params[:id]) unless params[:id].blank?

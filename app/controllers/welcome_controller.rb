@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  skip_before_filter :authorize,:except=>[:index,:editor,:upload]  
+  skip_before_filter :authorize,:except=>[:index,:editor,:upload] 
 
   def index
     @course=Course.first
@@ -28,7 +28,13 @@ class WelcomeController < ApplicationController
     arr = User.authenticate(params[:email],params[:password])
     if arr[0]&&arr[1]
       self.current_user= arr[1]
-      render :json => { :data => "ok", :path=>user_path(arr[1]) }.to_json
+      if session[:return_to]
+        path=session[:return_to]
+        session[:return_to] = nil
+      else
+        path=user_path(arr[1])
+      end
+      render :json => { :data => "ok", :path=>path }.to_json
     elsif !arr[0]&&arr[1]
       render :json => { :data => "inactivate", :email=>arr[1].email }.to_json
     elsif arr[0]&&!arr[1]

@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20180619101015) do
   create_table "chapters", :force => true do |t|
     t.string   "title",      :null => false
     t.integer  "course_id",  :null => false
-    t.integer  "position",   :null => false
+    t.integer  "position"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20180619101015) do
     t.integer  "bookmark_id",  :null => false
     t.boolean  "video_only",   :null => false
     t.text     "content",      :null => false
-    t.integer  "position",     :null => false
+    t.integer  "position"
     t.string   "content_type", :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(:version => 20180619101015) do
   create_table "sections", :force => true do |t|
     t.string   "title",      :null => false
     t.integer  "chapter_id", :null => false
-    t.integer  "position",   :null => false
+    t.integer  "position"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

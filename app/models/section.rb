@@ -3,6 +3,9 @@ class Section < ActiveRecord::Base
   belongs_to :chapter
   has_many :paragraphs,:dependent=>:destroy
 
+  validates :title , format: {with: /^[\u4e00-\u9fa5]{3,25}$|^[a-zA-Z0-9_';\:\-\,\(\)\[\]\?\.]+( [a-zA-Z0-9_';\:\-\,\(\)\[\]\?\.]+)*$/,message: "必须由空格a-zA-Z0-9'_;:-,()[]?.或3到25个汉字组成"}
+  validates :title ,length: {maximum: 75,message: "章节名称必须少于75个字符"}
+
   def extract_captions
     path="#{Rails.root.to_s}/public/uploads/Distributed+File+Systems+(15_50).vtt"
 

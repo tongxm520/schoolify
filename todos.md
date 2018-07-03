@@ -130,7 +130,6 @@ Tree.prototype._template = {
 	}
 }
 
-
 Tree.prototype.buildTree
 Tree.prototype._renderNode = function (node, previousNode) {
 	node.$el.append(this._template.button.add.clone());
@@ -171,13 +170,12 @@ Tree.prototype.forEachIdentifier
 Tree.prototype.addNode
 
 
-<form name="create-section" method="post" id="create-section-111" class="new_chapter" action="/admin/chapters/222/sections" accept-charset="UTF-8">
-  <input type="text" size="30" name="section[title]" id="section_title" class="form-control">
+<form name="create-section" method="post" id="" class="new_chapter" action="/admin/chapters/222/sections" accept-charset="UTF-8">
+  <input type="text" size="30" name="section[title]" id="">
   <button class="cancel btn">Cancel</button>	
   <button class="save btn">Save</button>
 </form>
 
-
-
+http://192.168.1.107:3000/admin/courses/2/chapters/new
 
 

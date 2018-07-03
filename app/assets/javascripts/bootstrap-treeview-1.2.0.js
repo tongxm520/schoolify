@@ -17,6 +17,8 @@
  * limitations under the License.
  * ========================================================= */
 
+$hidden_add_btn=false;
+
 ;(function ($, window, document, undefined) {
 
 	/*global jQuery, console*/
@@ -70,7 +72,9 @@
 		onNodeUnselected: undefined,
 		onSearchComplete: undefined,
 		onSearchCleared: undefined,
-    onAddButtonClicked: undefined
+    onAddButtonClicked: undefined,
+    onEidtButtonClicked: undefined,
+    onRemoveButtonClicked: undefined
 	};
 
 	_default.options = {
@@ -144,7 +148,9 @@
 			// Search methods
 			search: $.proxy(this.search, this),
 			clearSearch: $.proxy(this.clearSearch, this),
-      addNode: $.proxy(this.addNode, this)
+      addNode: $.proxy(this.addNode, this),
+      editNode: $.proxy(this.editNode, this),
+      deleteNode: $.proxy(this.deleteNode, this)
 		};
 	};
 
@@ -202,6 +208,8 @@
 		this.$element.off('searchComplete');
 		this.$element.off('searchCleared');
     this.$element.off('addButtonClicked');
+    this.$element.off('editButtonClicked');
+    this.$element.off('removeButtonClicked');
 	};
 
 	Tree.prototype.subscribeEvents = function () {
@@ -244,6 +252,14 @@
 
     if (typeof (this.options.onAddButtonClicked) === 'function') {
 			this.$element.on('addButtonClicked', this.options.onAddButtonClicked);
+		}
+
+    if (typeof (this.options.onEditButtonClicked) === 'function') {
+			this.$element.on('editButtonClicked', this.options.onEditButtonClicked);
+		}
+
+    if (typeof (this.options.onRemoveButtonClicked) === 'function') {
+			this.$element.on('removeButtonClicked', this.options.onRemoveButtonClicked);
 		}
 
 		if (typeof (this.options.onSearchComplete) === 'function') {
@@ -360,6 +376,7 @@
 		var node = this.nodes[nodeId];
 
 		if (!node) {
+      return false;
 			console.log('Error: node does not exist');
 		}
 		return node;
@@ -525,10 +542,12 @@
 				.addClass(node.state.selected ? 'node-selected' : '')
 				.addClass(node.searchResult ? 'search-result' : '') 
 				.attr('data-nodeid', node.nodeId)
-        .attr('id', node.id)	
-    
-      if(node.state.empty) {
-        treeItem.append('<form class="create-section" name="create-section" method="post" id="'+node.id+'_form"  action="/admin/chapters/222/sections" accept-charset="UTF-8"><input type="text" size="30" name="section[title]" id="section_title" /><button class="btn green">Add</button> <button class="btn green">Cancel</button></form>');
+        .attr('id', node.id);
+	
+      if(node.state.editing) {
+        replaceTreeItem(node,treeItem);
+      }else if(node.state.empty){          
+        createTreeItem(node,treeItem);
       }else{
         treeItem.attr('style', _this.buildStyleOverride(node));
 
@@ -625,13 +644,29 @@
 		    }
 						  
 				treeItem.mouseenter(function(){
-					treeItem.children('button.btn').removeClass('node-hidden');
+          if($hidden_add_btn==false){
+					  treeItem.children('button.btn.add-btn').removeClass('node-hidden');
+          }
+          treeItem.children('button.btn.edit-btn').removeClass('node-hidden');
+          treeItem.children('button.btn.remove-btn').removeClass('node-hidden');
 				}).mouseleave(function(){
-					treeItem.children('button.btn').addClass('node-hidden');
+          if($hidden_add_btn==false){
+					  treeItem.children('button.btn').addClass('node-hidden');
+          }
+          treeItem.children('button.btn.edit-btn').addClass('node-hidden');
+          treeItem.children('button.btn.remove-btn').addClass('node-hidden');
 				});
 
 				treeItem.find(".add-btn").click(function(){
 		      _this.$element.trigger('addButtonClicked', $.extend(true, {}, node));
+				});
+
+        treeItem.find(".edit-btn").click(function(){
+		      _this.$element.trigger('editButtonClicked', $.extend(true, {}, node));
+				});
+
+        treeItem.find(".remove-btn").click(function(){
+		      _this.$element.trigger('removeButtonClicked', $.extend(true, {}, node));
 				});
       }
 
@@ -639,7 +674,7 @@
 			_this.$wrapper.append(treeItem);
 
 			// Recursively add child nodes
-			if (node.nodes && node.state.expanded && !node.state.disabled) {
+			if (node.nodes && node.state.expanded && (!node.state.disabled||node.state.editing)) {
 				return _this.buildTree(node.nodes, level);
 			}
 		});
@@ -723,9 +758,9 @@
 		link: '<a href="#" style="color:inherit;"></a>',
 		badge: '<span class="badge"></span>',
     button: {
-			add: '<button class="add-btn btn glyphicon glyphicon-plus-sign node-hidden red"></button>',
-			edit: '<button class="btn glyphicon glyphicon-edit node-hidden green"></button>',
-			remove: '<button class="btn glyphicon glyphicon-remove-sign node-hidden blue"></button>'
+			add: '<button title="Add Section" class="add-btn btn glyphicon glyphicon-plus-sign node-hidden red"></button>',
+			edit: '<button title="Edit" class="edit-btn btn glyphicon glyphicon-edit node-hidden green"></button>',
+			remove: '<button title="Remove" class="remove-btn btn glyphicon glyphicon-remove-sign node-hidden blue"></button>'
 		}
 	};
 
@@ -756,14 +791,81 @@
 		@param {Object|Number} identifier - A valid node or node id
 		@returns {Array} nodes - Sibling nodes
 	*/
-	Tree.prototype.getSiblings = function (identifier) {
+	/*Tree.prototype.getSiblings = function (identifier) {
 		var node = this.identifyNode(identifier);
 		var parent = this.getParent(node);
 		var nodes = parent ? parent.nodes : this.tree;
 		return nodes.filter(function (obj) {
 				return obj.nodeId !== node.nodeId;
 			});
-	};
+	};*/
+
+  /**
+    方法具体实现,在获取兄弟节点时 稍微改动了原方法 默认不返回当前节点
+    如下 覆盖原来的就可以了
+      Returns an array of sibling nodes for a given node, if valid otherwise returns undefined.
+      @param {Object|Number} identifier - A valid node or node id
+      @returns {Array} nodes - Sibling nodes
+      isAll 是否包括本身节点
+  */
+  Tree.prototype.getSiblings = function (identifier,isAll) {
+    var node = this.identifyNode(identifier);
+    var parent = this.getParent(node);
+    var nodes = parent ? parent.nodes : this.tree;
+    return nodes.filter(function (obj) {
+      return isAll?true:obj.nodeId !== node.nodeId;
+    });
+  };
+
+   /**
+    编辑节点
+    */  
+  Tree.prototype.editNode = function (identifiers, options) {  
+    this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {  
+      this.setEditNode(node, options);   
+    }, this));  
+    this.setInitialStates({ nodes: this.tree }, 0);  
+    this.render();  
+  }  
+     
+  Tree.prototype.setEditNode = function (node, options) {
+    if(options) {
+      $.extend(node, options);
+    };  
+  };
+
+  /**
+    *删除节点
+  */  
+  Tree.prototype.deleteNode = function (identifiers, options) {        
+    this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+      this.setDeleteNode( node, options);
+    }, this));   
+  };
+ 
+	Tree.prototype.setDeleteNode = function (node, options) {
+		var parentNode = this.getParent(node);
+		//如果不是根节点
+		if(parentNode){
+			for(var i =0; i < parentNode.nodes.length; i++){
+				if(parentNode.nodes[i].nodeId == node.nodeId){
+				  parentNode.nodes.splice(i, 1);
+				}
+			}
+		}else{
+			//获取兄弟节点数组
+			var sibNodes = this.getSiblings(node,true);
+			if(sibNodes != null){
+				for(var i=0;i<sibNodes.length; i ++){
+				  if(node.nodeId == sibNodes[i].nodeId){
+				    this.tree.splice(i, 1);
+				  }
+				}
+			}
+		}
+		this.setInitialStates({ nodes: this.tree }, 0);
+		this.render();
+	};   
 
   /**
   给节点添加子节点
@@ -776,7 +878,7 @@
     }, this));
     this.setInitialStates({ nodes: this.tree }, 0);
     this.render();
-	}
+	};
  
   /**
     *  添加子节点
@@ -789,8 +891,11 @@
 		    this.tree.push(options.node);
 		  };
     }else{
+      if(typeof node==='string'){
+        node=this.nodes[node];
+      }
       if(node.nodes == null) node.nodes = [];
-		  if(options.node) {
+		  if(options.node) {        
 		    node.nodes.push(options.node);
 		  };
     }
@@ -1157,7 +1262,6 @@
 		Identifies a node from either a node id or object
 	*/
 	Tree.prototype.identifyNode = function (identifier) {
-    //alert(this.nodes[identifier]);
 		return ((typeof identifier) === 'number') ?
 						this.nodes[identifier] :
 						identifier;
@@ -1313,5 +1417,143 @@
 	};
 
 })(jQuery, window, document);
+
+//获取字符长度
+function strLen(str){
+	var ii=0;
+	var strLen = str.length;
+	for (var i=0;i<strLen;i++){
+		if (str.charCodeAt(i)>255){ii+=2;} 
+		else{ii++;}
+	}
+	return ii;
+}
+
+function replaceTreeItem(node,item){
+  var url,input_name,_item;
+  var chapter_flag=true;
+
+  if(/\d+\-\d+/.test(node.id)){
+    url="/admin/sections/"+node.id.split("-")[1];
+    input_name="section[title]";
+    chapter_flag=false;
+  }else{
+    url="/admin/chapters/"+node.id;
+    input_name="chapter[title]";
+  }
+  var edit_form='<form name="edit-record" method="post" id="'+node.id+'_edit_form'+'" class="edit-record" action="'+url+'" accept-charset="UTF-8"><input type="text" size="30" name="'+input_name+'" id="'+node.id+'_input_name'+'" >	<button class="edit-btn save btn green">Save</button> <button class="cancel-edit cancel btn green">Cancel</button> </form>';
+  if(item===undefined){
+    _item=$("#"+node.id);
+  }else if(typeof item==="object"){
+    _item=item;
+  }
+
+  if(_item===undefined){
+    return;
+  }
+
+  _item.html(edit_form);
+  _item.find("#"+node.id+"_input_name").val(node.text);
+  _item.find(".edit-btn").click(function(){
+    var title=$("#"+node.id+"_input_name").val();
+    if(chapter_flag){
+      if(!(/^[\u4e00-\u9fa5]{3,20}$|^[a-zA-Z0-9_'\:\-\,\(\)\[\]\?]+( [a-zA-Z0-9_'\:\-\,\(\)\[\]\?]+)*$/.test(title))){
+			 swal("章节标题错误!", "必须由空格a-zA-Z0-9'_:-,()[]?或3到20个汉字组成", "error");
+			 return;
+		 }
+
+		 if(strLen(title)>55){
+			 swal("章节标题错误!", "章节名称必须少于55个字符", "error");
+			 return;
+		 }
+    }else{
+      if(!(/^[\u4e00-\u9fa5]{3,25}$|^[a-zA-Z0-9_';\:\-\,\(\)\[\]\?\.]+( [a-zA-Z0-9_';\:\-\,\(\)\[\]\?\.]+)*$/.test(title))){
+        swal("小节标题错误!", "必须由空格a-zA-Z0-9'_;:-,()[]?.或3到25个汉字组成", "error");
+			  return;
+		  }
+
+		  if(strLen(title)>75){
+        swal("小节标题错误!", "章节名称必须少于75个字符", "error");
+			  return;
+		  }
+    }
+
+    var data = $("#"+node.id+"_edit_form").serialize();
+		$.ajax({
+			type: 'put',
+			url: $("#"+node.id+"_edit_form").attr("action"),
+			data: data,
+			dataType: 'json',
+			success: function(result,status){
+				if(status==="success"){
+					if(result.data==="ok"){
+            $("#coursetree").treeview("editNode", [node.nodeId, 
+              { text: result.title,
+                state: {disabled: false,editing: false,leaf:node.state.leaf,
+                empty:false,expanded: node.state.expanded} }]);
+					}else {
+            swal(result.message);
+          }
+				}
+			}
+		});     
+  });
+
+  _item.find(".cancel-edit").click(function(){
+    $("#coursetree").treeview("editNode", [node.nodeId, {state: {disabled: false,editing: false,leaf:node.state.leaf,empty:false,expanded: node.state.expanded} }]);
+  });
+}
+
+function createTreeItem(node,item){
+  var ids=node.id.split("_");
+  var parent_id=ids[0];
+  var parent_node_id=ids[1];
+
+  item.append('<form class="create-section" name="create-section" method="post" id="'+node.id+'_form"  action="/admin/chapters/'+parent_id+'/sections" accept-charset="UTF-8"><input type="text" size="30" name="section[title]" id="section_'+node.id+'" /><button class="add-section btn green">Add</button> <button class="cancel-section btn green">Cancel</button></form>');
+  item.find(".add-section").click(function(){
+    var title=$("#section_"+node.id).val();
+		if(!(/^[\u4e00-\u9fa5]{3,25}$|^[a-zA-Z0-9_';\:\-\,\(\)\[\]\?\.]+( [a-zA-Z0-9_';\:\-\,\(\)\[\]\?\.]+)*$/.test(title))){
+      swal("小节标题错误!", "必须由空格a-zA-Z0-9'_;:-,()[]?.或3到25个汉字组成", "error");
+			return;
+		}
+
+		if(strLen(title)>75){
+      swal("小节标题错误!", "章节名称必须少于75个字符", "error");
+			return;
+		}
+
+    var data = $("#"+node.id+"_form").serialize();
+		$.ajax({
+			type: 'post',
+			url: $("#"+node.id+"_form").attr("action"),
+			data: data,
+			dataType: 'json',
+			success: function(result,status){
+				if(status==="success"){
+					if(result.data==="ok"){
+					  var singleNode = {
+							text: result.title,
+							id: parent_id+"-"+result.id,
+							state: {
+								leaf: true,
+								expanded: false,
+								empty: false,
+                editing: false
+							}
+						};
+            $("#coursetree").treeview("deleteNode",[node.nodeId]); 
+					  $("#coursetree").treeview("addNode", [parent_node_id, { node: singleNode }]);   
+            $hidden_add_btn=false;
+					}
+				}
+			}
+		}); 
+	});
+
+  item.find(".cancel-section").click(function(){
+    $hidden_add_btn=false;
+    $("#coursetree").treeview("deleteNode",[node.nodeId]);
+  }); 
+}
 
 

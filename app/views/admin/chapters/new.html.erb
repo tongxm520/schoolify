@@ -1,10 +1,12 @@
+<%= stylesheet_link_tag "sweetalert" %>
+<%= javascript_include_tag "sweetalert"%>
 <%= stylesheet_link_tag "css_login/bootstrap.origin" %>
 <%= javascript_include_tag "bootstrap-treeview-1.2.0"%>
 
 <div id="chapter-new">
 	<div class="container">
 		<a id="new_chapter_btn" class="new_chapter btn btn-success" href="javascript:;">
-			<i class="folder ion-plus-round"></i> Add New Chapter
+			<i class="folder ion-plus-round"></i>Add New Chapter
 		</a>
     <%=form_for @chapter,:url=>admin_course_chapters_path, :method=>:post,:html=>{:name=>"create-chapter",:id=>"create-chapter",:class=>"new_chapter node-hidden"} do |f|%>
       <%=f.text_field :title ,:class=>"form-control"%>
@@ -12,7 +14,7 @@
       <button class="save btn">Save</button>
     <%end%>
     <div style="clear:both;"></div>
-		<div class="row" style="margin-top:15px;">
+		<div class="row">
 			<div class="col-sm-10">
 				<div class="treeview" id="coursetree"></div>
 			</div>
@@ -83,16 +85,54 @@ $('#coursetree').treeview({
 		    leaf: true,
         expanded: false,
         empty: true,
-        disabled: true
+        disabled: true,
+        editing: false
 		  }
 	  };
     //alert(node.nodeId);
     //alert(node.id);
+    $hidden_add_btn=true;
     $("#coursetree").treeview("addNode", [node.nodeId, { node: singleNode  }]);
     //alert($(event.target).html());
   },
-  onNodeSelected: function(event,node){
-    //alert($(event.target).html());
+  onEditButtonClicked: function(event,node){
+    var _node=$("#coursetree").treeview("getNode",[node.nodeId]);
+    _node.state.editing=true;
+    _node.state.disabled=true;
+    //alert(JSON.stringify(_node));
+    $("#coursetree").treeview("unselectNode", [node.nodeId]);
+    replaceTreeItem(node);
+  },
+  onRemoveButtonClicked: function(event,node){
+    swal({
+      title: "Are you sure?",
+      text: "Your will not be able to recover this record!",
+      type: "info",
+      showCancelButton: true,
+      closeOnConfirm: false,
+      showLoaderOnConfirm: true
+    }, function () {
+      if(/\d+\-\d+/.test(node.id)){
+        url="/admin/sections/"+node.id.split("-")[1];
+      }else{
+        url="/admin/chapters/"+node.id;
+      }
+      $.ajax({
+				type: 'delete',
+				url: url,
+				dataType: 'json',
+				success: function(result,status){
+				  if(status==="success"){
+				    if(result.data==="ok"){
+              $("#coursetree").treeview("deleteNode",[node.nodeId]);
+				      swal("Deleted!", "Your record has been deleted.", "success");
+				    }else {
+              swal("Delete Error", result.message, "error");
+            }
+				  }
+				}
+		  });
+    });
   }
 });
 
@@ -108,22 +148,51 @@ $("#create-chapter > .cancel").click(function(){
 });
 
 $("#create-chapter > .save").click(function(){
-	var singleNode = {
-	  text: "Hello world",
-    id: "100",
-	  state: {
-      leaf: false,
-      expanded: true,
-      empty: false
+  var title=$("#chapter_title").val();
+  if(!(/^[\u4e00-\u9fa5]{3,20}$|^[a-zA-Z0-9_'\:\-\,\(\)\[\]\?]+( [a-zA-Z0-9_'\:\-\,\(\)\[\]\?]+)*$/.test(title))){
+    swal("章节标题错误!", "必须由空格a-zA-Z0-9'_:-,()[]?或3到20个汉字组成", "error");
+    return;
+  }
+
+  if(strLen(title)>55){
+    swal("章节标题错误!", "章节名称必须少于55个字符", "error");
+    return;
+  }
+
+  var data = $("#create-chapter").serialize();
+  $.ajax({
+    type: 'post',
+    url: $("#create-chapter").attr("action"),
+    data: data,
+    dataType: 'json',
+    success: function(result,status){
+      if(status==="success"){
+        if(result.data==="ok"){
+          var singleNode = {
+						text: result.title,
+						id: result.id,
+						state: {
+							leaf: false,
+							expanded: true,
+							empty: false,
+              editing: false
+						}
+					};
+          $("#coursetree").treeview("addNode", [-1, { node: singleNode }]);
+          $("#chapter_title").val("");
+        }else {alert(result.message);}
+      }
     }
-	};
-  $("#coursetree").treeview("addNode", [-1, { node: singleNode }]);
+  });
 });
 
 });
 
-//var tree = $('#coursetree').treeview(true);
+//$("#coursetree").treeview("deleteNode",[[7,8]]);//批量删除
+
+//var tree=$('#coursetree').data('treeview');
 //tree;
+
 </script>
 
 <style type="text/css">
@@ -144,6 +213,7 @@ $("#create-chapter > .save").click(function(){
 
 .new_chapter{
   margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .new_chapter.node-hidden {
@@ -159,6 +229,7 @@ $("#create-chapter > .save").click(function(){
 
 form.new_chapter{
   width:600px;
+  display:inline-block;
 }
 
 form.new_chapter .btn{
@@ -169,11 +240,11 @@ form.new_chapter .btn{
   font-weight: bold;
 }
 
-form.create-section{
+form.create-section,form.edit-record{
   display: inline-block;
 }
 
-.btn.glyphicon.node-hidden {
+.btn.node-hidden {
   display: none;
 }
 

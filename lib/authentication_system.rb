@@ -1,7 +1,7 @@
 module AuthenticationSystem
 
-  SKIP_LOCATIONS=['/login','/logout','/register','/users/forgot']
-  SKIP_ACTIONS={"welcome"=>["login"]}
+  SKIP_LOCATIONS=['/login','/logout','/register','/users/forgot','/homepage','/confirm','/reactivate']
+  SKIP_ACTIONS={"welcome"=>["login"],"users"=>["activate"]}
 
   protected
   def self.included(base)
@@ -56,13 +56,13 @@ module AuthenticationSystem
 
   def skipped?(request)
     if SKIP_LOCATIONS.index(request.original_fullpath)
-      true
+      return true
     else
       key=request.params[:controller]
       if SKIP_ACTIONS.has_key?(key) and SKIP_ACTIONS[key].index(request.params[:action])
-        true
+        return true
       else
-        false
+        return false
       end      
     end
   end    

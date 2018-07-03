@@ -56,12 +56,14 @@ Schoolify::Application.routes.draw do
   resources :courses
   namespace :admin do
     resources :courses do
-      resources :chapters
+      resources :chapters,only: %i(new create)
     end
   
-    resources :chapters do
-      resources :sections
+    resources :chapters, :only => [:destroy,:update] do
+      resources :sections,only: %i(create)
     end
+
+    resources :sections, :only => [:destroy,:update]
   end
 
   controller :welcome do

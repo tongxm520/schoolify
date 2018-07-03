@@ -3,13 +3,14 @@ class ApplicationController < ActionController::Base
   include AuthenticationSystem
   skip_before_filter  :verify_authenticity_token
 
-  before_filter :authorize
+  before_filter  :authorize
 
   def authorize
     unless authorized? 
       if request.xhr?     
         render :json => { :notice =>"Please log in" }.to_json
       else
+        store_location
         redirect_to homepage_url,:notice =>"Please log in"
       end 
       

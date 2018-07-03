@@ -3,8 +3,8 @@ class Course < ActiveRecord::Base
   has_many :chapters,:dependent=>:destroy
   belongs_to :category
   belongs_to :teacher
-  attr_accessible :chapters_attributes
-  accepts_nested_attributes_for :chapters, :reject_if => lambda { |a| a[:title].blank? }
+  #attr_accessible :chapters_attributes
+  #accepts_nested_attributes_for :chapters, :reject_if => lambda { |a| a[:title].blank? }
 
   validates :category_id, inclusion: { in: Category.all.map {|e| e.id}, message: "%{value} is invalid." }
   validates :title , format: {with: /^[\u4e00-\u9fa5]{3,16}$|^[a-zA-Z0-9_']+( [a-zA-Z0-9_']+)*$/,message: '必须由个字母、数字、下划线、空格、单引号或3到16个汉字组成'}
@@ -33,6 +33,8 @@ class Course < ActiveRecord::Base
     # It's mandatory to specify the nested attributes that should be whitelisted.
     # If you use `permit` with just the key that points to the nested attributes hash,
     # it will return an empty hash.
-    params.require(:course).permit(:chapters_attributes=>[:title,:position])
+    #params.require(:course).permit(:chapters_attributes=>[:title,:position])
+    params.require(:course).permit(:category_id, :subtitle, :title,
+    :teacher_id,:description,:course_logo)
   end
 end

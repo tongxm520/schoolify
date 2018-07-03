@@ -52,9 +52,6 @@ class Admin::CoursesController < ApplicationController
   end
 end
 
-=begin
-Parameters: {"utf8"=>"✓", "authenticity_token"=>"u6/+kcQtQb/61nASFnThQ4TYEiNLfOS8WkObLNo1UVM=", "course"=>{"title"=>"hello world", "subtitle"=>"hey kitty", "chapters_attributes"=>{"0"=>{"position"=>"1", "title"=>"turn on the computer", "sections_attributes"=>{"0"=>{"position"=>"0", "title"=>"ch one section one"}, "1"=>{"position"=>"1", "title"=>"ch one section two"}, "2"=>{"position"=>"2", "title"=>"ch one section three"}}}, "1"=>{"position"=>"2", "title"=>"open the browser", "sections_attributes"=>{"0"=>{"position"=>"0", "title"=>"chapter two section one"}, "1"=>{"position"=>"1", "title"=>"chapter two section two"}, "2"=>{"position"=>"2", "title"=>"chapter two section three"}}}, "2"=>{"position"=>"3", "title"=>"visit google", "sections_attributes"=>{"0"=>{"position"=>"0", "title"=>"chapter three 1111"}, "1"=>{"position"=>"1", "title"=>"chapter three 2222"}, "2"=>{"position"=>"2", "title"=>"chapter three 3333"}}}}}, "commit"=>"Create Course"}
-=end
 
 
 
