@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "css_login/bootstrap.origin" %>
+<%= javascript_include_tag "jquery.lazyload"%>
 
 <div id="courses-list">
 <div class="container">
@@ -11,7 +12,8 @@
 		<div class="col-md-3">
 		  <a href="#" class="thumbnail">
 		    <!--img src="http://placehold.it/260x180" alt=""-->
-        <%= image_tag(c.course_logo_url(:thumb_medium),:alt=>c.title) %>
+        <%#= image_tag(c.course_logo_url(:thumb_medium),:alt=>c.title) %>
+        <%= image_tag("big-loading.gif",:alt=>c.title,:class=>"lazy","data-original".to_sym=>c.course_logo_url(:thumb_medium),:onError=>"error(this,'error')") %>
 		  </a>
 		</div>
 		<div class="col-md-9">
@@ -50,5 +52,18 @@
   font-weight: bold;
 }
 </style>
+<script type="text/javascript">
+/*setTimeout(function() {
+  $("img.lazy").lazyload();
+}, 5000); */
 
+function error(_this, status){
+  _this.onerror=null;
+  _this.src='/assets/broken-image.png';
+}
+
+$(function() {
+  $("img.lazy").lazyload();
+});
+</script>
 

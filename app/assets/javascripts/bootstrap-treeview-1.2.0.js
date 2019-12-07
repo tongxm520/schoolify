@@ -637,11 +637,16 @@ $hidden_add_btn=false;
 					});
 				}
 
+        
+        if(node.state.leaf==true){
+		      treeItem.append(_this.template.button.addPara);
+		    }
 		    treeItem.append(_this.template.button.remove);
 				treeItem.append(_this.template.button.edit);
 		    if(node.state.leaf==false){
 		      treeItem.append(_this.template.button.add);
 		    }
+        
 						  
 				treeItem.mouseenter(function(){
           if($hidden_add_btn==false){
@@ -649,12 +654,14 @@ $hidden_add_btn=false;
           }
           treeItem.children('button.btn.edit-btn').removeClass('node-hidden');
           treeItem.children('button.btn.remove-btn').removeClass('node-hidden');
+          treeItem.children('button.btn.para-btn').removeClass('node-hidden');
 				}).mouseleave(function(){
           if($hidden_add_btn==false){
 					  treeItem.children('button.btn').addClass('node-hidden');
           }
           treeItem.children('button.btn.edit-btn').addClass('node-hidden');
           treeItem.children('button.btn.remove-btn').addClass('node-hidden');
+          treeItem.children('button.btn.para-btn').addClass('node-hidden');
 				});
 
 				treeItem.find(".add-btn").click(function(){
@@ -760,7 +767,8 @@ $hidden_add_btn=false;
     button: {
 			add: '<button title="Add Section" class="add-btn btn glyphicon glyphicon-plus-sign node-hidden red"></button>',
 			edit: '<button title="Edit" class="edit-btn btn glyphicon glyphicon-edit node-hidden green"></button>',
-			remove: '<button title="Remove" class="remove-btn btn glyphicon glyphicon-remove-sign node-hidden blue"></button>'
+			remove: '<button title="Remove" class="remove-btn btn glyphicon glyphicon-remove-sign node-hidden blue"></button>',
+      addPara: '<button title="Add Paragraph" class="para-btn btn glyphicon glyphicon-plus-sign node-hidden red"></button>'
 		}
 	};
 

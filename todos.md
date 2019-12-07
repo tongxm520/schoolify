@@ -1,17 +1,3 @@
-todo list:
-register and login
-rich text edit
-upload image
-add outline and homework to nav list
-ajax pagination
-javascript lastChild jquery last-child
-share to weibo, qq zone,renren
-integration to weibo login
-activity feed
-login/register captcha gem
-https://www.elastic.co/products/elasticsearch
-
-
 
 https://app.studiesweekly.com/online/publications/58784/units/66267/edit_test
 https://app.studiesweekly.com/online/
@@ -177,5 +163,30 @@ Tree.prototype.addNode
 </form>
 
 http://192.168.1.107:3000/admin/courses/2/chapters/new
+
+
+#Show loading image while Page is loading using jQuery 
+
+todo list:
+register and login
+rich text edit
+upload image
+add outline and homework to nav list
+ajax pagination
+javascript lastChild jquery last-child
+share to weibo, qq zone,renren
+integration to weibo login
+activity feed
+login/register captcha gem
+https://www.elastic.co/products/elasticsearch
+apply to be a teacher
+teacher privilege
+
+
+
+
+
+
+
 
 
