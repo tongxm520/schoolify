@@ -23,6 +23,11 @@ rails runner script/load_course.rb
 <option value="Question">试卷</option>
 </select>
 
+The solution!
+Long story short you have to remove all tracked files and add them back in using the below commands
 
+git rm -r --cached .
+git add .
+git commit -m ".gitignore is now working"
 
 
