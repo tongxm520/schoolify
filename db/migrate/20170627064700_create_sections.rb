@@ -4,6 +4,7 @@ class CreateSections < ActiveRecord::Migration
       t.string :title, :null=>false
       t.integer :chapter_id, :null=>false
       t.integer :position
+      t.string :content_type,:null=>false #Question/Course
 
       t.timestamps
     end

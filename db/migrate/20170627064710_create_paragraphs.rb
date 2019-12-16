@@ -5,9 +5,9 @@ class CreateParagraphs < ActiveRecord::Migration
       t.integer :chapter_id, :null=>false
       t.integer :section_id, :null=>false
       t.integer :course_id, :null=>false
-      t.integer :bookmark_id, :null=>false
-      t.boolean :video_only, :null=>false
-      t.text :content, :null=>false
+      t.string :video_path
+      t.string :srt_path
+      t.text :content
       t.integer :position
       t.string :content_type, :null=>false #Form/Video/Text
 

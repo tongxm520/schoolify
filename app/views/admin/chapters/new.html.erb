@@ -133,6 +133,13 @@ $('#coursetree').treeview({
 				}
 		  });
     });
+  },
+  onAddParaButtonClicked: function(event, node){
+    //alert(node.id);
+    if(/\d+\-\d+/.test(node.id)){
+      url="/admin/sections/"+node.id.split("-")[1]+"/edit";
+    }
+    window.open(url,'_blank');
   }
 });
 
@@ -277,6 +284,14 @@ form.create-section,form.edit-record{
 
 .list-group-item.node-hidden {
   display: none;
+}
+
+.select-type {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    height: 35px;
+    line-height: 30px;
+    width: 100px;
 }
 </style>
 

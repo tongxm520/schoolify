@@ -117,8 +117,6 @@ section.introduction h1.sr {
     display: table;
 }
 body.view-in-course .container {
-    max-width: none;
-    min-width: initial;
     padding: 0 2%;
     width: auto;
 }

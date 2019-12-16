@@ -58,9 +58,9 @@ ActiveRecord::Schema.define(:version => 20180619101015) do
     t.integer  "chapter_id",   :null => false
     t.integer  "section_id",   :null => false
     t.integer  "course_id",    :null => false
-    t.integer  "bookmark_id",  :null => false
-    t.boolean  "video_only",   :null => false
-    t.text     "content",      :null => false
+    t.string   "video_path"
+    t.string   "srt_path"
+    t.text     "content"
     t.integer  "position"
     t.string   "content_type", :null => false
     t.datetime "created_at",   :null => false
@@ -68,11 +68,12 @@ ActiveRecord::Schema.define(:version => 20180619101015) do
   end
 
   create_table "sections", :force => true do |t|
-    t.string   "title",      :null => false
-    t.integer  "chapter_id", :null => false
+    t.string   "title",        :null => false
+    t.integer  "chapter_id",   :null => false
     t.integer  "position"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "content_type", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "students", :force => true do |t|

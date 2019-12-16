@@ -74,7 +74,8 @@ $hidden_add_btn=false;
 		onSearchCleared: undefined,
     onAddButtonClicked: undefined,
     onEidtButtonClicked: undefined,
-    onRemoveButtonClicked: undefined
+    onRemoveButtonClicked: undefined,
+    onAddParaButtonClicked: undefined
 	};
 
 	_default.options = {
@@ -210,6 +211,7 @@ $hidden_add_btn=false;
     this.$element.off('addButtonClicked');
     this.$element.off('editButtonClicked');
     this.$element.off('removeButtonClicked');
+    this.$element.off('addParaButtonClicked');
 	};
 
 	Tree.prototype.subscribeEvents = function () {
@@ -260,6 +262,10 @@ $hidden_add_btn=false;
 
     if (typeof (this.options.onRemoveButtonClicked) === 'function') {
 			this.$element.on('removeButtonClicked', this.options.onRemoveButtonClicked);
+		}
+
+    if (typeof (this.options.onAddParaButtonClicked) === 'function') {
+			this.$element.on('addParaButtonClicked', this.options.onAddParaButtonClicked);
 		}
 
 		if (typeof (this.options.onSearchComplete) === 'function') {
@@ -674,6 +680,10 @@ $hidden_add_btn=false;
 
         treeItem.find(".remove-btn").click(function(){
 		      _this.$element.trigger('removeButtonClicked', $.extend(true, {}, node));
+				});
+
+        treeItem.find(".para-btn").click(function(){
+		      _this.$element.trigger('addParaButtonClicked', $.extend(true, {}, node));
 				});
       }
 
@@ -1517,7 +1527,7 @@ function createTreeItem(node,item){
   var parent_id=ids[0];
   var parent_node_id=ids[1];
 
-  item.append('<form class="create-section" name="create-section" method="post" id="'+node.id+'_form"  action="/admin/chapters/'+parent_id+'/sections" accept-charset="UTF-8"><input type="text" size="30" name="section[title]" id="section_'+node.id+'" /><button class="add-section btn green">Add</button> <button class="cancel-section btn green">Cancel</button></form>');
+  item.append('<form class="create-section" name="create-section" method="post" id="'+node.id+'_form"  action="/admin/chapters/'+parent_id+'/sections" accept-charset="UTF-8"><input type="text" size="30" name="section[title]" id="section_'+node.id+'" /><select name="section[content_type]" class="select-type" ><option value="Course">课程</option><option value="Question">试卷</option></select><button class="add-section btn green">Add</button> <button class="cancel-section btn green">Cancel</button></form>');
   item.find(".add-section").click(function(){
     var title=$("#section_"+node.id).val();
 		if(!(/^[\u4e00-\u9fa5]{3,25}$|^[a-zA-Z0-9_';\:\-\,\(\)\[\]\?\.]+( [a-zA-Z0-9_';\:\-\,\(\)\[\]\?\.]+)*$/.test(title))){

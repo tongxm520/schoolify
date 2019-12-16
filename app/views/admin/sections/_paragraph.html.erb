@@ -1,0 +1,62 @@
+<div class="para-new">
+	<div class="container">
+		<a id="new_para_btn" class="new_para btn btn-success" href="javascript:;">
+			<i class="folder ion-plus-round"></i>Add New Paragraph
+		</a>
+
+    <div id="newParaPanel" class="panel panel-default panel-new-para hidden">
+			<div class="panel-heading clearfix">
+				<h4 class="panel-title pull-left">
+					New Paragraph
+				</h4>
+				<a id="cancelNewPara" class="close">
+					<i class="folder ion-close-round"></i>
+				</a>
+			</div>
+      <div class="panel-body">
+		    <div class="new-para">
+          <select class="form-control" id="para_type">
+						<option disabled="" selected="">choose a paragraph type</option>
+						<option value="video">Video</option>
+						<option value="text">Text</option>
+					</select>
+        </div>
+      </div>
+    </div>
+    
+    <div style="clear:both;"></div>
+		<div class="row">
+			<div class="col-sm-10">
+				<div style="border: 1px solid red">How are you recently?</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style type="text/css">
+#new_para_btn{
+  color: #fff;
+  font-weight: bold;
+}
+
+.new_para{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.panel-new-para.hidden{
+  display: none;
+}
+</style>
+<script type="text/javascript">
+$('body').on('click', '#new_para_btn', function() {
+	$(this).hide();
+	$("#newParaPanel").removeClass("hidden");
+});
+
+$('body').on('click', '#cancelNewPara', function() {
+  $("#para_type").prop('selectedIndex', 0)
+	$('#newParaPanel').addClass("hidden");
+	$('#new_para_btn').show();
+});
+</script>
+

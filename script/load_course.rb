@@ -56,7 +56,7 @@ chapter_hash.each_pair do |k,v|
   i+=1
   v.each_with_index do |e,j|
     count+=1
-    Section.create(:title=>e,:chapter_id=>ch.id,:position=>j+1)
+    Section.create(:title=>e,:chapter_id=>ch.id,:position=>j+1,:content_type=>"Course")
   end
 end
 

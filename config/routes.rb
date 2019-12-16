@@ -63,7 +63,7 @@ Schoolify::Application.routes.draw do
       resources :sections,only: %i(create)
     end
 
-    resources :sections, :only => [:destroy,:update]
+    resources :sections, :only => [:destroy,:update,:edit]
   end
 
   controller :welcome do

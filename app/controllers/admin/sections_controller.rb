@@ -51,6 +51,13 @@ class Admin::SectionsController < ApplicationController
       render :json => {:data=>'error',:message=>section.errors[:title] }.to_json
     end
   end
+
+  def edit
+    @section=Section.find(params[:id])
+    @chapter=@section.chapter
+    @course=@chapter.course
+    render layout: "course_video"
+  end
 end
 
 

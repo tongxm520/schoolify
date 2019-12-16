@@ -1,0 +1,70 @@
+<div class="para-new">
+	<div class="container">
+    <div class="form-group">
+			<a id="new_question_btn" class="new_question btn btn-success">
+				<i class="folder ion-plus-round"></i> Add New Question
+			</a>
+	  </div>
+
+		<div id="newQuestionWrapper">
+			<div id="newQuestionPanel" class="hidden panel panel-default panel-new-question">
+				<div class="panel-heading clearfix">
+					<h4 class="panel-title pull-left">
+						New Question
+					</h4>
+					<a id="cancel_new_question" class="close">
+						<i class="folder ion-close-round"></i>
+					</a>
+				</div>
+				<div class="panel-body">
+					<div class="new-question">
+						<select class="form-control" id="question_type">
+							<option disabled="" selected="">choose a question type</option>
+							<option value="questions_mc">Multiple Choice</option>
+							<option value="questions_true_false">True/False</option>
+							<option value="questions_open">Open Ended</option>
+							<option value="questions_check_all">Check All That Apply</option>
+							<option value="questions_rfib">Fill in The Blank</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+
+  </div>
+</div>
+
+<style type="text/css">
+#new_question_btn{
+  color: #fff;
+  font-weight: bold;
+}
+
+.new_question{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.panel-new-question.hidden{
+  display: none;
+}
+</style>
+
+
+<script type="text/javascript">
+$('body').on('click', '#new_question_btn', function() {
+	$(this).hide();
+	$("#newQuestionPanel").removeClass("hidden");
+});
+
+$('body').on('click', '#cancel_new_question', function() {
+  $("#question_type").prop('selectedIndex', 0)
+	$('#newQuestionPanel').addClass("hidden");
+	$('#new_question_btn').show();
+});
+</script>
+
+
+
+
+

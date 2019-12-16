@@ -155,6 +155,26 @@ Tree.prototype.getSiblings
 Tree.prototype.forEachIdentifier
 Tree.prototype.addNode
 
+################################################
+addPara: '<button title="Add Paragraph" class="para-btn btn glyphicon glyphicon-plus-sign node-hidden red"></button>'
+
+if (typeof (this.options.onAddParaButtonClicked) === 'function') {
+	this.$element.on('addParaButtonClicked', this.options.onAddParaButtonClicked);
+}
+
+treeItem.find(".para-btn").click(function(){
+  _this.$element.trigger('addParaButtonClicked', $.extend(true, {}, node));
+});
+
+this.$element.off('addParaButtonClicked');
+
+$('#tree').treeview({
+data:[],
+onAddParaButtonClicked:function(event, node){...},
+//...
+});
+################################################
+
 
 <form name="create-section" method="post" id="" class="new_chapter" action="/admin/chapters/222/sections" accept-charset="UTF-8">
   <input type="text" size="30" name="section[title]" id="">

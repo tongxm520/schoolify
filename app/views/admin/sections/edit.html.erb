@@ -1,0 +1,134 @@
+<%= stylesheet_link_tag "css_login/bootstrap.origin" %>
+
+<div class="title">
+	<div class="container">
+    <div class="locate">
+			<span><%=@course.title%></span> >
+			<span><%=@chapter.title%></span> >
+			<span><%=@section.title%></span>
+    </div>
+	</div>
+</div>
+<%if @section.content_type=="Course"%>
+  <%=render :partial => "paragraph" %>
+<%else%>
+  <%=render :partial => "question" %>
+<%end%>
+
+
+<style type="text/css">
+.title > .container {
+  width: 1170px;
+}
+
+.para-new > .container {
+  width: 1170px;
+}
+
+.para-new > .container > div{
+  background-color:#EFF0F0;
+  border: none;
+  box-shadow: none;
+}
+
+.locate{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+/****************************************************/
+*::before, *::after {
+    box-sizing: border-box;
+}
+*::before, *::after {
+    box-sizing: border-box;
+}
+.panel {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.panel, .panel-heading {
+    border: 0 none;
+    border-radius: 0;
+}
+.panel-default {
+    border-color: #ddd;
+}
+.panel {
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 22px;
+}
+
+.clearfix::before, .clearfix::after{
+    content: " ";
+    display: table;
+}
+
+.clearfix::after {
+    clear: both;
+}
+
+.panel-default .panel-heading {
+    background-color: #999999;
+}
+.panel .panel-heading {
+    border-bottom: 0 none;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 0;
+}
+
+.panel-body {
+    flex: 1 1 auto;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.form-control {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 16px;
+    height: 36px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+
+button, select {
+    text-transform: none;
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+}
+
+.pull-left {
+    float: left !important;
+}
+.panel-title {
+    font-size: 18px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.close {
+    color: #000;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+    opacity: 0.2;
+    text-shadow: 0 1px 0 #fff;
+}
+</style>
+
+
