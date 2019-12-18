@@ -119,7 +119,7 @@ class WelcomeController < ApplicationController
       @text={:uploaded=>0,:error=>{:message=>@message}}.to_json
     else
       begin
-		    filename,imagepath = Teacher.set_uploaded_file(params,current_user.teacher.id,Course.first.id) 
+		    filename,imagepath = Teacher.set_uploaded_file(params,current_user.teacher.id) 
 		  rescue Exception => e
 		    logger.error "=============>#{e.message}"
 		    render :text => {:uploaded=>0,:error=>{:message=>e.message}}.to_json

@@ -53,6 +53,8 @@ Schoolify::Application.routes.draw do
   match 'skins' => 'welcome#skins'
   match 'origin' => 'welcome#origin'
 
+  post 'upload_file' => 'admin/sections#upload_file'
+
   resources :courses
   namespace :admin do
     resources :courses do

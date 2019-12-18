@@ -58,6 +58,32 @@ class Admin::SectionsController < ApplicationController
     @course=@chapter.course
     render layout: "course_video"
   end
+
+  def upload_file
+    @section=Section.find(params[:section_id])
+    @chapter=@section.chapter
+
+    path=(Schoolify::RootPath.split("/") << current_user.teacher.id << "courses" << @chapter.course_id << "videos").join("/")
+    FileUtils.mkdir_p(path)
+    
+    key=Time.now.strftime("%Y%m%d%H%M%S")
+    basename=File.basename(params[:video].original_filename,".*")
+    ext_name=params[:video].original_filename.split(".")[-1]
+    video_name="#{basename}_#{key}.#{ext_name}"
+    save_video = "#{path}/#{video_name}"
+    video_path=["","uploads","teachers",current_user.teacher.id,"courses",@chapter.course_id,"videos","#{video_name}"].join("/")
+    FileUtils.mv params[:video].tempfile.path, save_video
+
+    key=Time.now.strftime("%Y%m%d%H%M%S")
+    basename=File.basename(params[:srt].original_filename,".*")
+    ext_name=params[:srt].original_filename.split(".")[-1]
+    srt_name="#{basename}_#{key}.#{ext_name}"
+    save_srt = "#{path}/#{srt_name}"
+    srt_path=["","uploads","teachers",current_user.teacher.id,"courses",@chapter.course_id,"videos","#{srt_name}"].join("/")
+    FileUtils.mv params[:srt].tempfile.path, save_srt
+
+    redirect_to edit_admin_section_path(params[:section_id])
+  end
 end
 
 

@@ -43,7 +43,7 @@ gem 'oauth2','1.3.0'
 gem 'mini_magick','4.8.0'
 gem 'rake','12.3.1'
 gem 'carrierwave','0.11.0'
-
+gem 'unicorn','5.1.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

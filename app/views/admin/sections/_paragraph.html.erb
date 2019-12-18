@@ -1,3 +1,6 @@
+<%= javascript_include_tag "jquery.form"%>
+<%= javascript_include_tag "jquery.nginxUploadProgress"%>
+
 <div class="para-new">
 	<div class="container">
 		<a id="new_para_btn" class="new_para btn btn-success" href="javascript:;">
@@ -17,10 +20,44 @@
 		    <div class="new-para">
           <select class="form-control" id="para_type">
 						<option disabled="" selected="">choose a paragraph type</option>
-						<option value="video">Video</option>
-						<option value="text">Text</option>
+						<option value="Video">课程视频</option>
+						<option value="Text">课程文本</option>
 					</select>
         </div>
+
+        <div class="upload-video">
+          <div id="uploader">
+				    <form id="upload" enctype="multipart/form-data" action="/upload_file" method="post">
+              <input type="hidden" id="section-id" name="section_id" value="<%=params[:id]%>">
+              <dl>
+						    <dt for="course_video">Course Video</dt>
+								<dd>
+									<fieldset>
+										<input name="video" type="file"/>
+									</fieldset>
+								</dd>
+              </dl>
+							 
+              <dl>
+								<dt for="video_srt">Video Srt File</dt>
+								<dd>
+									<fieldset>
+										<input name="srt" type="file"/> 
+									</fieldset>
+								</dd>	
+              </dl>
+        
+						  <input type="submit" class="btn btn-success" value="Upload"/>
+				    </form>
+          </div>
+				    
+				  <div id="uploading"> 
+				    <div id="progress" class="bar"> 
+				      <div id="progressbar">&nbsp;</div>
+				    </div> 
+				  </div>
+        </div>
+
       </div>
     </div>
     
@@ -30,6 +67,7 @@
 				<div style="border: 1px solid red">How are you recently?</div>
 			</div>
 		</div>
+
 	</div>
 </div>
 <style type="text/css">
@@ -46,6 +84,29 @@
 .panel-new-para.hidden{
   display: none;
 }
+
+.upload-video{
+  margin-top: 15px;
+}
+
+.bar {
+  width: 300px;
+}
+
+#progress {
+  background: #eee;
+  border: 1px solid #222;
+}
+
+#progressbar {
+  width: 0px;
+  height: 24px;
+  background: #333;
+}
+
+#uploading{
+  margin-top: 15px;
+}
 </style>
 <script type="text/javascript">
 $('body').on('click', '#new_para_btn', function() {
@@ -58,5 +119,18 @@ $('body').on('click', '#cancelNewPara', function() {
 	$('#newParaPanel').addClass("hidden");
 	$('#new_para_btn').show();
 });
+
+$('#para_type').change(function() {
+	var selectIndex=this.selectedIndex;
+  //var selectValue=this.options[selectIndex].text;
+  var selectValue=this.options[selectIndex].value;
+  alert(selectValue);
+	$(this).css('margin-bottom','15px');
+});
+
+$(function() {
+  jQuery.nginxUploadProgress();
+});
+
 </script>
 

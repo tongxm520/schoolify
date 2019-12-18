@@ -23,11 +23,42 @@ rails runner script/load_course.rb
 <option value="Question">试卷</option>
 </select>
 
-The solution!
+##.gitignore not working The solution!
 Long story short you have to remove all tracked files and add them back in using the below commands
-
 git rm -r --cached .
 git add .
 git commit -m ".gitignore is now working"
+
+#################################################
+cd /home/simon/Desktop/schoolify
+bundle install
+
+cd /home/simon/exercise
+cap unicorn:stop
+cd /home/simon/Desktop/schoolify
+sudo service schoolify_develop start
+
+cd /home/simon/exercise
+cap nginx:stop
+
+cd /home/simon/Desktop/schoolify
+sudo cp config/nginx_develop.cnf /etc/nginx/sites-enabled/exercise
+sudo service nginx start
+
+#bundler: failed to load command: unicorn (/usr/local/bin/unicorn)
+bundle exec unicorn -c config/unicorn_develop.rb -E development -D
+你先找到原有的unicorn进程，杀掉他。再重新启动unicorn。
+ps aux | grep unicorn
+kill -9  端口号
+重启unicorn
+
+Actually, the error message has already told you why:
+directory for pid=/home/simon/Desktop/schoolify/shared/pids/unicorn.pid not writable
+So, does the directory /home/simon/Desktop/schoolify/shared/pids exist? If not, you should call mkdir to create it.
+#################################################
+
+
+
+
 
 
