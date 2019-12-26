@@ -56,7 +56,7 @@ gem 'rack-cache','1.8.0'
 gem 'concurrent-ruby','1.0.5'
 gem 'tzinfo','0.3.52'
 gem 'thor','0.20.0'
-gem 'ffi','1.9.18'
+gem 'ffi','1.9.24'
 gem 'power_assert','1.1.0'
 gem 'sass','3.4.22'
 
