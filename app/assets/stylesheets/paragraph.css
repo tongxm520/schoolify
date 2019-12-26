@@ -1,0 +1,113 @@
+#new_para_btn{
+  color: #fff;
+  font-weight: bold;
+}
+
+.new_para{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.panel-new-para.hidden{
+  display: none;
+}
+
+.upload-video{
+  margin-top: 15px;
+}
+
+#uploading{
+  margin-top: 15px;
+}
+
+.upload-progress{
+  display: none;
+  position: relative;
+  border: 1px solid #ddd;
+  padding: 1px;
+  border-radius: 3px;
+}
+
+.bar {
+    background-color: #B4F5B4;
+    width: 0%;
+    height: 20px;
+    border-radius: 3px;
+}
+
+.percent {
+    position: absolute;
+    display: inline-block;
+    top: 3px;
+    left: 48%;
+}
+
+/**********************************************/
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+button, input {
+    line-height: normal;
+}
+
+button, input, select, textarea {
+    font-size: 100%;
+    margin: 0;
+}
+
+.uploadfile + label {
+    border: 1px solid #d3394c;
+    background-color: #f1e5e6;
+    padding: 0;
+}
+
+.uploadfile + label {
+    color: #d3394c;
+}
+
+.inputfile + label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.uploadfile + label span {
+    width: 450px;
+    min-height: 2em;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.uploadfile + label strong {
+    color: #f1e5e6;
+    background-color: #d3394c;
+    display: inline-block;
+}
+
+.uploadfile + label span, .uploadfile + label strong {
+    padding: 0.625rem 1.25rem;
+}
+
+b, strong {
+    font-weight: bold;
+}
+
+

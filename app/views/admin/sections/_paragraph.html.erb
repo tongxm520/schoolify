@@ -1,5 +1,8 @@
-<%= javascript_include_tag "jquery.form"%>
-<%= javascript_include_tag "jquery.nginxUploadProgress"%>
+<%= stylesheet_link_tag "sweetalert" %>
+<%= stylesheet_link_tag "paragraph" %>
+<%= javascript_include_tag "sweetalert"%>
+<%= javascript_include_tag "paragraph" ,:defer=>true%>
+<%= javascript_include_tag "browser-md5-file" %>
 
 <div class="para-new">
 	<div class="container">
@@ -27,35 +30,42 @@
 
         <div class="upload-video">
           <div id="uploader">
-				    <form id="upload" enctype="multipart/form-data" action="/upload_file" method="post">
+				    <form id="upload" enctype="multipart/form-data" method="post" >
               <input type="hidden" id="section-id" name="section_id" value="<%=params[:id]%>">
-              <dl>
-						    <dt for="course_video">Course Video</dt>
-								<dd>
-									<fieldset>
-										<input name="video" type="file"/>
-									</fieldset>
-								</dd>
-              </dl>
-							 
-              <dl>
-								<dt for="video_srt">Video Srt File</dt>
-								<dd>
-									<fieldset>
-										<input name="srt" type="file"/> 
-									</fieldset>
-								</dd>	
-              </dl>
+
+              <div class="form-group">
+                <label>Course Video: </label>
+                <div class="box"> 
+								  <input type="file" name="video" id="video" class="inputfile uploadfile" /> 
+								  <label for="video">
+									  <span id="video-name"></span> <strong>Choose a file...</strong>
+								  </label>
+                  <div id="video-md5"></div> 
+								</div>
+              </div>
+              
+							<div class="form-group">
+                <label>Video Srt File: </label>
+                <div class="box"> 
+								  <input type="file" name="srt" id="srt" class="inputfile uploadfile" /> 
+								  <label for="srt">
+									  <span id="srt-name"></span> <strong>Choose a file...</strong>
+								  </label>
+                  <div id="srt-md5"></div> 
+								</div>
+              </div>
         
-						  <input type="submit" class="btn btn-success" value="Upload"/>
+						  <input type="button" id="upload-btn" class="btn btn-success" value="Upload"/>
 				    </form>
           </div>
 				    
 				  <div id="uploading"> 
-				    <div id="progress" class="bar"> 
-				      <div id="progressbar">&nbsp;</div>
-				    </div> 
-				  </div>
+						<div class="upload-progress" id="upload-progress">
+						  <div id="bar" class="bar"></div>
+						  <div id="percent" class="percent">0%</div>
+						</div>
+            <div id="upload-msg"></div>
+				  </div>          
         </div>
 
       </div>
@@ -71,66 +81,147 @@
 	</div>
 </div>
 <style type="text/css">
-#new_para_btn{
-  color: #fff;
-  font-weight: bold;
-}
-
-.new_para{
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.panel-new-para.hidden{
-  display: none;
-}
-
-.upload-video{
-  margin-top: 15px;
-}
-
-.bar {
-  width: 300px;
-}
-
-#progress {
-  background: #eee;
-  border: 1px solid #222;
-}
-
-#progressbar {
-  width: 0px;
-  height: 24px;
-  background: #333;
-}
-
-#uploading{
-  margin-top: 15px;
-}
 </style>
 <script type="text/javascript">
-$('body').on('click', '#new_para_btn', function() {
-	$(this).hide();
-	$("#newParaPanel").removeClass("hidden");
+var bar = $('#bar');
+var percent = $('#percent');
+var section_id="<%=params[:id]%>";
+var files = [];
+var total_size=0;
+var loaded_size=0;
+var video_size=0;
+var chunk_size=10*1024*1024;//10M
+
+$(function (){
+  $('#upload-btn').click(function () {
+    var video = $('#video').val();
+    var srt = $('#srt').val();
+    if (video == '' || srt == '') {
+      swal("Empty file error!", "Please select video and srt file", "error");
+      return;
+    }
+
+    $('#upload-btn').attr('disabled', 'disabled');
+    $('#upload-msg').text('Uploading in progress...');
+
+    document.getElementById("upload-progress").style.display="block";
+    var percentVal = '0%';
+    bar.width(percentVal)
+    percent.html(percentVal);
+    
+    var inputfiles = document.querySelectorAll(".inputfile.uploadfile");
+    //document.querySelectorAll return NodeList not Array
+
+	  for(var i=0;i<inputfiles.length;i++){
+      //alert(inputfiles[i].files[0].name);
+      //alert(inputfiles[i].files[0].size);
+      total_size +=inputfiles[i].files[0].size;
+      sendUploadVideo(inputfiles[i].files[0],inputfiles[i].name);
+	  }
+
+    for(i=0;i<files.length;i++){
+      chunkedUploader(files[i].file,files[i].formData);
+    }
+  });
 });
 
-$('body').on('click', '#cancelNewPara', function() {
-  $("#para_type").prop('selectedIndex', 0)
-	$('#newParaPanel').addClass("hidden");
-	$('#new_para_btn').show();
-});
+var sendUploadVideo=function(file,type){
+	$.ajax({
+    async: false,
+    method: 'post',
+    dataType: 'json',
+    url: '/upload_video',
+    data: { filename: file.name,totalsize: file.size,section_id: section_id},
+    success: function(res) {
+      if(res.status=="ok"){
+        var obj = new Object();
+		    var formData = new FormData();
+		    formData.append('id', res.id);
+        formData.append('upload_type', type);
+        obj.formData=formData;
+        obj.file=file;
+		    files.push(obj);
+      }
+    }
+  });
+};
 
-$('#para_type').change(function() {
-	var selectIndex=this.selectedIndex;
-  //var selectValue=this.options[selectIndex].text;
-  var selectValue=this.options[selectIndex].value;
-  alert(selectValue);
-	$(this).css('margin-bottom','15px');
-});
+var upload=function(file,formData){
+  var type=formData.get("upload_type");
+  $.ajax({
+		url: "/chunk_upload",
+    async: false,
+		data: formData,
+		processData: false,
+		contentType: false,
+    dataType: 'json',
+		type: 'POST',
+		success: function (result) {
+      if(result.status=="uploading"){
+        loaded_size=result.uploaded_size;
+        updatePercent(video_size+loaded_size);
 
-$(function() {
-  jQuery.nginxUploadProgress();
-});
+        var formData = new FormData();
+		    formData.append('id', result.id);
+        formData.append('upload_type', type);
 
+        var file_size = file.size;
+				var range_start = result.uploaded_size;
+				var range_end = result.uploaded_size+chunk_size;
+				if(file_size-range_start<chunk_size){
+					range_end = file_size;
+				}
+				upload_file=blobSlice(file,range_start,range_end);
+				formData.append('file', upload_file);
+        upload(file,formData);
+      }else if(result.status=="complete"){
+        loaded_size=result.uploaded_size;
+        updatePercent(video_size+loaded_size);
+        $('#upload-msg').text(result.status);
+      }else if(result.status=="error"){
+        $('#upload-msg').text(result.status);
+      }else if(result.status=="video-complete"){
+        loaded_size=result.uploaded_size;
+        updatePercent(loaded_size);
+        video_size=result.uploaded_size;
+      }
+		  
+			//$('#upload-btn').removeAttr('disabled');
+		}
+	});
+};
+
+var blobSlice=function(blob,startByte,endByte){
+  if(blob.slice){
+    return blob.slice(startByte,endByte);
+  }
+  if(blob.mozSlice){
+    return blob.mozSlice(startByte,endByte);
+  }
+  if(blob.webkitSlice){
+    return blob.webkitSlice(startByte,endByte);
+  }
+  return null;
+};
+
+var chunkedUploader=function(file,formData){
+  var file_size = file.size;
+  var range_start = 0;
+  var range_end = chunk_size;
+  if(file_size<range_end){
+    range_end = file_size;
+  }
+  upload_file=blobSlice(file,range_start,range_end);
+  formData.append('file', upload_file);
+  upload(file,formData);
+}
+
+var updatePercent=function(loaded_size){
+  var percentComplete = loaded_size / total_size;
+	percentComplete = parseInt(percentComplete * 100);
+  var percentVal = percentComplete + '%';
+	bar.width(percentVal)
+  percent.html(percentVal);
+};
 </script>
 

@@ -75,30 +75,6 @@ http {
         track_uploads proxied 30s;
     }
 
-    location /chunk_upload {
-        upload_pass @unicorn_schoolify;
-        upload_pass_form_field ".*";
-
-        # you need to create 10 folders in /home/simon/uploads/X where X is 0 to 9
-        upload_store /home/simon/uploads 1; 
-
-        upload_resumable on;
-        upload_store_access user:rw group:rw all:r;
-        upload_max_file_size 0; # 0 for unlimited
-        upload_limit_rate 0; 
-        
-        upload_set_form_field "$upload_field_name[original_filename]"   "$upload_file_name";
-        upload_set_form_field "$upload_field_name[content_type]"       "$upload_content_type";
-        upload_set_form_field "$upload_field_name[tempfile]"   "$upload_tmp_path";
-        upload_aggregate_form_field "$upload_field_name[md5]"  "$upload_file_md5";
-        upload_aggregate_form_field "$upload_field_name[size]" "$upload_file_size";
-        # add params that you want to keep and pass on to your application        
-        upload_pass_form_field "^authenticity_token$|^utf8$"; 
-        upload_pass_form_field "^submit$|^description$";
- 
-        upload_cleanup 400 404 499 500-505;
-    }
-
     location ~ (.)/x-progress-id:(\w) {
       rewrite ^(.)/x-progress-id:(\w)  $1?X-Progress-ID=$2;
     }

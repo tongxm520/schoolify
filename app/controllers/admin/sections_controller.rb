@@ -63,26 +63,66 @@ class Admin::SectionsController < ApplicationController
     @section=Section.find(params[:section_id])
     @chapter=@section.chapter
 
+    #render :json => {:data=>'error' }.to_json
+    #return
+
     path=(Schoolify::RootPath.split("/") << current_user.teacher.id << "courses" << @chapter.course_id << "videos").join("/")
-    FileUtils.mkdir_p(path)
+    FileUtils.mkdir_p(path) unless File.exist?(path)
     
     key=Time.now.strftime("%Y%m%d%H%M%S")
-    basename=File.basename(params[:video].original_filename,".*")
-    ext_name=params[:video].original_filename.split(".")[-1]
+    basename=File.basename(params[:video][:original_filename],".*")
+    ext_name=params[:video][:original_filename].split(".")[-1]
     video_name="#{basename}_#{key}.#{ext_name}"
     save_video = "#{path}/#{video_name}"
     video_path=["","uploads","teachers",current_user.teacher.id,"courses",@chapter.course_id,"videos","#{video_name}"].join("/")
-    FileUtils.mv params[:video].tempfile.path, save_video
+    FileUtils.mv params[:video][:tempfile], save_video
 
     key=Time.now.strftime("%Y%m%d%H%M%S")
-    basename=File.basename(params[:srt].original_filename,".*")
-    ext_name=params[:srt].original_filename.split(".")[-1]
+    basename=File.basename(params[:srt][:original_filename],".*")
+    ext_name=params[:srt][:original_filename].split(".")[-1]
     srt_name="#{basename}_#{key}.#{ext_name}"
     save_srt = "#{path}/#{srt_name}"
     srt_path=["","uploads","teachers",current_user.teacher.id,"courses",@chapter.course_id,"videos","#{srt_name}"].join("/")
-    FileUtils.mv params[:srt].tempfile.path, save_srt
+    FileUtils.mv params[:srt][:tempfile], save_srt
 
-    redirect_to edit_admin_section_path(params[:section_id])
+    render :json => {:data=>'ok' }.to_json
+  end
+
+  #redirect_to edit_admin_section_path(params[:section_id])
+  def upload_video
+    paths=Paragraph.generate_file_path(params[:section_id],current_user.teacher.id,params[:filename])
+
+    @upload = Upload.new(
+      filename: params[:filename],
+      path: paths[0],
+      view_path: paths[1],
+      total_size: params[:totalsize]
+    )
+
+    if @upload.save
+      render json: { status: "ok",id: @upload.id, uploaded_size: @upload.uploaded_size }
+    else
+      render json: { status: "error",error: @upload.errors }
+    end
+  end
+
+  def chunk_upload
+    file = File.open(params[:file][:tempfile])
+    @upload = Upload.find(params[:id])
+    @upload.uploaded_size += file.size
+
+    if @upload.save
+      File.open(@upload.path, 'ab') { |f| f.write(file.read) }
+      if params[:upload_type]=="srt"&&@upload.uploaded_size==@upload.total_size
+        render json: {status: "complete",id: @upload.id, uploaded_size: @upload.uploaded_size}
+      elsif params[:upload_type]=="video"&&@upload.uploaded_size==@upload.total_size
+        render json: {status: "video-complete", id: @upload.id, uploaded_size: @upload.uploaded_size }
+      else
+        render json: {status: "uploading", id: @upload.id, uploaded_size: @upload.uploaded_size }
+      end
+    else
+      render json: {status: "error",error: @upload.errors }, status: 422
+    end
   end
 end
 

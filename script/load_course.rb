@@ -76,6 +76,16 @@ course.description="The PostgreSQL Global Development Group announces that the f
 course.course_logo= up_file
 
 course.save!
+chapter=course.chapters.create(:title=>"Getting Started")
+chapter.sections.create(:title=>"Pre-Course Survey",:content_type=>"Course")
+chapter.sections.create(:title=>"Navigating Your Mini-Course",:content_type=>"Course")
+
+chapter=course.chapters.create(:title=>"SQL")
+chapter.sections.create(:title=>"Basic SELECT Statement",:content_type=>"Course")
+chapter.sections.create(:title=>"Table Variables and Set Operators",:content_type=>"Course")
+chapter.sections.create(:title=>"Subqueries in WHERE Clause",:content_type=>"Course")
+chapter.sections.create(:title=>"Final Test",:content_type=>"Question")
+
 
 test_image = Rails.root.to_s+"/db/fixtures/images/five-different-colored-birds.jpeg"
 up_file = Rack::Test::UploadedFile.new(test_image, "image/jpeg")

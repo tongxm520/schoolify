@@ -54,6 +54,8 @@ Schoolify::Application.routes.draw do
   match 'origin' => 'welcome#origin'
 
   post 'upload_file' => 'admin/sections#upload_file'
+  post 'upload_video' => 'admin/sections#upload_video'
+  post 'chunk_upload' => 'admin/sections#chunk_upload'
 
   resources :courses
   namespace :admin do

@@ -57,7 +57,61 @@ directory for pid=/home/simon/Desktop/schoolify/shared/pids/unicorn.pid not writ
 So, does the directory /home/simon/Desktop/schoolify/shared/pids exist? If not, you should call mkdir to create it.
 #################################################
 
+location ~ (.)/x-progress-id:(\w) {
+    rewrite ^(.)/x-progress-id:(\w)  $1?X-Progress-ID=$2;
+}
 
+location / {
+  # proxy to upstream server
+  proxy_pass http://unicorn_schoolify;
+  proxy_redirect default;
+  try_files $uri/index.html $uri @unicorn_schoolify;
+
+  # track uploads in the 'proxied' zone
+  # remember connections for 30s after they finished
+  track_uploads proxied 30s;
+}
+
+
+chmod +x /path/to/upload.sh
+./upload.sh http://www.schoolify.com/upload_file http://www.schoolify.com/progress
+
+
+$ cd /home/simon/Downloads/stanford/nginx-1.10.3
+$ ./configure --add-module=../nginx-upload-module-2.2 --add-module=../masterzen-nginx-upload-progress-module-v0.9 --with-http_ssl_module --with-stream
+$ sudo make
+$ sudo make install
+
+$ cd /home/simon/Downloads/stanford/nginx-1.0.15
+$ ./configure --add-module=../nginx-upload-module-2.2 --add-module=/home/simon/nginx-upload-progress-module --with-http_ssl_module
+$ sudo make
+$ sudo make install
+
+
+rails g migration add_view_path_to_upload
+rails g migration change_integer_limit_in_uploads
+
+Digest::MD5.hexdigest(File.read("/home/simon/Downloads/stanford/2+-+1+-+Distributed+File+Systems+(15_50).mp4"))
+
+Digest::MD5.hexdigest(File.read("/home/simon/Downloads/stanford/2+-+1+-+Distributed+File+Systems+(15_50).srt"))
+
+ 
+登录mysql
+mysql -u root -p
+show databases;
+use school_dev;
+show create table uploads;
+uploads | CREATE TABLE `uploads` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `path` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `uploaded_size` bigint(20) DEFAULT '0',
+  `total_size` bigint(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `view_path` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 
 
 

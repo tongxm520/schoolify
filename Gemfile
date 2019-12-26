@@ -1,4 +1,9 @@
-source 'http://gems.ruby-china.org/'
+#gem sources
+#https://rubygems.org
+#gem sources -r https://rubygems.org
+#gem sources -a https://gems.ruby-china.com
+
+source 'https://gems.ruby-china.com'
 
 gem 'rails', '3.2.22'
 gem 'mysql2', '0.3.19'
@@ -26,7 +31,7 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier', '3.0.3'
 end
 
 gem 'jquery-rails','3.1.4'
@@ -44,6 +49,16 @@ gem 'mini_magick','4.8.0'
 gem 'rake','12.3.1'
 gem 'carrierwave','0.11.0'
 gem 'unicorn','5.1.0'
+
+
+#prevent install new versions
+gem 'rack-cache','1.8.0'
+gem 'concurrent-ruby','1.0.5'
+gem 'tzinfo','0.3.52'
+gem 'thor','0.20.0'
+gem 'ffi','1.9.18'
+gem 'power_assert','1.1.0'
+gem 'sass','3.4.22'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
