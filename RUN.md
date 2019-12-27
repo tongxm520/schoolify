@@ -114,5 +114,18 @@ uploads | CREATE TABLE `uploads` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 
 
+Vmware 清理磁盘空间
+虚拟机的磁盘空间为了以后使用方便其是只增长的，如果不清理是不会自动减少空间占用的。
+
+清理方法：
+
+1）打开虚拟机（安装过 vmware-tools），进入 shell 运行下面命令：
+$ vmware-toolbox-cmd disk shrink /
+
+2）虚拟机关机状态下
+打开 虚拟机-设置 
+在打开的窗口选择 常规 
+点击页面下端的“清理虚拟机”按钮
+
 
 

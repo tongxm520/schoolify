@@ -120,7 +120,11 @@ $(function (){
 	  }
 
     for(i=0;i<files.length;i++){
-      chunkedUploader(files[i].file,files[i].formData);
+      try{
+        chunkedUploader(files[i].file,files[i].formData);
+      }catch(err){
+        alert(err);
+      }
     }
   });
 });
