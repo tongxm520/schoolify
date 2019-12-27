@@ -3712,3 +3712,69 @@ I, [2019-12-26T21:07:48.155374 #7193]  INFO -- : worker=1 ready
 192.168.1.102 - - [27/Dec/2019 00:21:52] "POST /chunk_upload HTTP/1.0" 200 - 0.0400
 192.168.1.102 - - [27/Dec/2019 00:21:53] "POST /chunk_upload HTTP/1.0" 200 - 0.0683
 192.168.1.102 - - [27/Dec/2019 00:21:53] "POST /chunk_upload HTTP/1.0" 200 - 0.0171
+I, [2019-12-27T13:11:55.403915 #4496]  INFO -- : Refreshing Gem list
+I, [2019-12-27T13:11:57.316918 #4496]  INFO -- : unlinking existing socket=/home/simon/Desktop/schoolify/shared/sockets/unicorn.sock
+I, [2019-12-27T13:11:57.318023 #4496]  INFO -- : listening on addr=/home/simon/Desktop/schoolify/shared/sockets/unicorn.sock fd=9
+I, [2019-12-27T13:11:57.318224 #4496]  INFO -- : worker=0 spawning...
+I, [2019-12-27T13:11:57.319894 #4496]  INFO -- : worker=1 spawning...
+I, [2019-12-27T13:11:57.320046 #4500]  INFO -- : worker=0 spawned pid=4500
+I, [2019-12-27T13:11:57.320210 #4500]  INFO -- : worker=0 ready
+I, [2019-12-27T13:11:57.322356 #4496]  INFO -- : master process ready
+I, [2019-12-27T13:11:57.322575 #4503]  INFO -- : worker=1 spawned pid=4503
+I, [2019-12-27T13:11:57.322794 #4503]  INFO -- : worker=1 ready
+192.168.1.100 - - [27/Dec/2019 13:14:14] "GET / HTTP/1.0" 302 - 0.3815
+192.168.1.100 - - [27/Dec/2019 13:14:14] "GET /homepage HTTP/1.0" 200 - 0.5386
+192.168.1.100 - - [27/Dec/2019 13:14:14] "GET /js_login/bootstrap.min?time=1577423654.js HTTP/1.0" 200 43329 0.0480
+192.168.1.100 - - [27/Dec/2019 13:14:14] "GET /css_login/bootstrap.min?time=1577423654.css HTTP/1.0" 200 139676 0.0934
+192.168.1.100 - - [27/Dec/2019 13:14:15] "GET /course?time=1577423654.css HTTP/1.0" 200 30414 0.0546
+192.168.1.100 - - [27/Dec/2019 13:14:15] "GET /css/ionicons?time=1577423654.css HTTP/1.0" 200 57196 0.0530
+192.168.1.100 - - [27/Dec/2019 13:14:15] "GET /bootstrapvalidator/dist/js/bootstrapValidator.min?time=1577423654.js HTTP/1.0" 200 103247 0.0433
+192.168.1.100 - - [27/Dec/2019 13:14:15] "GET /css_login/modal_login?time=1577423654.css HTTP/1.0" 200 3283 0.0247
+192.168.1.100 - - [27/Dec/2019 13:14:15] "GET /js_login/toggle_form?time=1577423654.js HTTP/1.0" 200 8390 0.0409
+192.168.1.100 - - [27/Dec/2019 13:14:15] "GET /application.js?body=1 HTTP/1.0" 304 - 0.0201
+192.168.1.100 - - [27/Dec/2019 13:14:27] "POST /login HTTP/1.0" 200 - 0.0409
+192.168.1.100 - - [27/Dec/2019 13:14:27] "POST /login HTTP/1.0" 200 - 0.0650
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET / HTTP/1.0" 200 - 0.3267
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /application.js?body=1 HTTP/1.0" 304 - 0.0186
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /css_login/bootstrap.min?time=1577423667.css HTTP/1.0" 200 139676 0.0199
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /js_login/bootstrap.min?time=1577423667.js HTTP/1.0" 200 43329 0.0261
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /course?time=1577423667.css HTTP/1.0" 200 30414 0.0233
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /css/ionicons?time=1577423667.css HTTP/1.0" 200 57196 0.0292
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /videocss/video.js/dist/video-js-new.css?time=1577423667 HTTP/1.0" 200 46300 0.0336
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /videojs/video.js/dist/ie8/videojs-ie8.min.js?time=1577423667 HTTP/1.0" 200 27280 0.0316
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /navigation.js?time=1577423667 HTTP/1.0" 200 3174 0.0305
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /video-skin.css?time=1577423667 HTTP/1.0" 200 5622 0.0528
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /videojs/video.js/dist/video.js?time=1577423667 HTTP/1.0" 200 863045 0.1505
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /videojs-matrix.css?time=1577423667 HTTP/1.0" 200 370 0.0357
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /nav.css?time=1577423667 HTTP/1.0" 200 7466 0.0248
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /jquery.scrollTo-1.4.2-min.js?time=1577423667 HTTP/1.0" 200 3237 0.0272
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /course-video.js?time=1577423667 HTTP/1.0" 200 3622 0.0329
+192.168.1.100 - - [27/Dec/2019 13:14:27] "GET /course-content.css?time=1577423667 HTTP/1.0" 200 675092 0.0705
+192.168.1.100 - - [27/Dec/2019 13:14:34] "GET /admin/courses HTTP/1.0" 200 - 0.1028
+192.168.1.100 - - [27/Dec/2019 13:14:34] "GET /application.js?body=1 HTTP/1.0" 304 - 0.0158
+192.168.1.100 - - [27/Dec/2019 13:14:34] "GET /css_login/bootstrap.min?time=1577423674.css HTTP/1.0" 200 139676 0.0171
+192.168.1.100 - - [27/Dec/2019 13:14:34] "GET /course?time=1577423674.css HTTP/1.0" 200 30414 0.0099
+192.168.1.100 - - [27/Dec/2019 13:14:34] "GET /js_login/bootstrap.min?time=1577423674.js HTTP/1.0" 200 43329 0.0175
+192.168.1.100 - - [27/Dec/2019 13:14:34] "GET /css/ionicons?time=1577423674.css HTTP/1.0" 200 57196 0.0118
+192.168.1.100 - - [27/Dec/2019 13:14:37] "GET /admin/courses/2/chapters/new HTTP/1.0" 200 - 0.1132
+192.168.1.100 - - [27/Dec/2019 13:14:37] "GET /application.js?body=1 HTTP/1.0" 304 - 0.0095
+192.168.1.100 - - [27/Dec/2019 13:14:37] "GET /js_login/bootstrap.min?time=1577423677.js HTTP/1.0" 200 43329 0.0171
+192.168.1.100 - - [27/Dec/2019 13:14:37] "GET /css_login/bootstrap.min?time=1577423677.css HTTP/1.0" 200 139676 0.0357
+192.168.1.100 - - [27/Dec/2019 13:14:37] "GET /course?time=1577423677.css HTTP/1.0" 200 30414 0.0243
+192.168.1.100 - - [27/Dec/2019 13:14:37] "GET /css/ionicons?time=1577423677.css HTTP/1.0" 200 57196 0.0244
+192.168.1.100 - - [27/Dec/2019 13:14:37] "GET /bootstrap-treeview-1.2.0.js?body=1 HTTP/1.0" 304 - 0.0167
+192.168.1.100 - - [27/Dec/2019 13:14:40] "GET /admin/sections/135/edit HTTP/1.0" 200 - 0.1709
+192.168.1.100 - - [27/Dec/2019 13:14:41] "GET /application.js?body=1 HTTP/1.0" 304 - 0.0092
+192.168.1.100 - - [27/Dec/2019 13:14:41] "GET /css_login/bootstrap.min?time=1577423680.css HTTP/1.0" 200 139676 0.0211
+192.168.1.100 - - [27/Dec/2019 13:14:41] "GET /course?time=1577423680.css HTTP/1.0" 200 30414 0.0115
+192.168.1.100 - - [27/Dec/2019 13:14:41] "GET /js_login/bootstrap.min?time=1577423680.js HTTP/1.0" 200 43329 0.0278
+192.168.1.100 - - [27/Dec/2019 13:14:41] "GET /css/ionicons?time=1577423680.css HTTP/1.0" 200 57196 0.0136
+192.168.1.100 - - [27/Dec/2019 13:14:41] "GET /paragraph.css?body=1 HTTP/1.0" 304 - 0.0116
+192.168.1.100 - - [27/Dec/2019 13:14:41] "GET /browser-md5-file.js?body=1 HTTP/1.0" 304 - 0.0099
+192.168.1.100 - - [27/Dec/2019 13:14:41] "GET /paragraph.js?body=1 HTTP/1.0" 304 - 0.0200
+192.168.1.100 - - [27/Dec/2019 13:15:02] "POST /upload_video HTTP/1.0" 200 - 0.0744
+192.168.1.100 - - [27/Dec/2019 13:15:02] "POST /upload_video HTTP/1.0" 200 - 0.1151
+192.168.1.100 - - [27/Dec/2019 13:15:02] "POST /chunk_upload HTTP/1.0" 200 - 0.1515
+192.168.1.100 - - [27/Dec/2019 13:15:02] "POST /chunk_upload HTTP/1.0" 200 - 0.1106
+192.168.1.100 - - [27/Dec/2019 13:15:03] "POST /chunk_upload HTTP/1.0" 200 - 0.0924
+192.168.1.100 - - [27/Dec/2019 13:15:03] "POST /chunk_upload HTTP/1.0" 200 - 0.0144

@@ -147,7 +147,6 @@ var sendUploadVideo=function(file,type){
 };
 
 var upload=function(file,formData){
-  var type=formData.get("upload_type");
   $.ajax({
 		url: "/chunk_upload",
     async: false,
@@ -160,10 +159,6 @@ var upload=function(file,formData){
       if(result.status=="uploading"){
         loaded_size=result.uploaded_size;
         updatePercent(video_size+loaded_size);
-
-        var formData = new FormData();
-		    formData.append('id', result.id);
-        formData.append('upload_type', type);
 
         var file_size = file.size;
 				var range_start = result.uploaded_size;
