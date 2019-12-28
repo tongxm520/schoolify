@@ -1,6 +1,7 @@
 <%= stylesheet_link_tag "sweetalert" %>
 <%= stylesheet_link_tag "paragraph" %>
 <%= javascript_include_tag "sweetalert"%>
+<%= javascript_include_tag "jquery.form"%>
 <%= javascript_include_tag "paragraph" ,:defer=>true%>
 <%= javascript_include_tag "browser-md5-file" %>
 
@@ -30,7 +31,7 @@
 
         <div class="upload-video">
           <div id="uploader">
-				    <form id="upload" enctype="multipart/form-data" method="post" >
+				    <form id="upload" enctype="multipart/form-data" action="/upload_file" method="post" >
               <input type="hidden" id="section-id" name="section_id" value="<%=params[:id]%>">
 
               <div class="form-group">
@@ -39,8 +40,8 @@
 								  <input type="file" name="video" id="video" class="inputfile uploadfile" /> 
 								  <label for="video">
 									  <span id="video-name"></span> <strong>Choose a file...</strong>
-								  </label>
-                  <div id="video-md5"></div> 
+								  </label> 
+                  <div id="video-md5"></div>
 								</div>
               </div>
               
@@ -50,12 +51,12 @@
 								  <input type="file" name="srt" id="srt" class="inputfile uploadfile" /> 
 								  <label for="srt">
 									  <span id="srt-name"></span> <strong>Choose a file...</strong>
-								  </label>
-                  <div id="srt-md5"></div> 
+								  </label> 
+                  <div id="srt-md5"></div>
 								</div>
               </div>
         
-						  <input type="button" id="upload-btn" class="btn btn-success" value="Upload"/>
+						  <input type="submit" id="upload-btn" class="btn btn-success" value="Upload" onclick='return upload_video();'/>
 				    </form>
           </div>
 				    
@@ -83,144 +84,5 @@
 <style type="text/css">
 </style>
 <script type="text/javascript">
-var bar = $('#bar');
-var percent = $('#percent');
-var section_id="<%=params[:id]%>";
-var files = [];
-var total_size=0;
-var loaded_size=0;
-var video_size=0;
-var chunk_size=10*1024*1024;//10M
-
-$(function (){
-  $('#upload-btn').click(function () {
-    var video = $('#video').val();
-    var srt = $('#srt').val();
-    if (video == '' || srt == '') {
-      swal("Empty file error!", "Please select video and srt file", "error");
-      return;
-    }
-
-    $('#upload-btn').attr('disabled', 'disabled');
-    $('#upload-msg').text('Uploading in progress...');
-
-    document.getElementById("upload-progress").style.display="block";
-    var percentVal = '0%';
-    bar.width(percentVal)
-    percent.html(percentVal);
-    
-    var inputfiles = document.querySelectorAll(".inputfile.uploadfile");
-    //document.querySelectorAll return NodeList not Array
-
-	  for(var i=0;i<inputfiles.length;i++){
-      //alert(inputfiles[i].files[0].name);
-      //alert(inputfiles[i].files[0].size);
-      total_size +=inputfiles[i].files[0].size;
-      sendUploadVideo(inputfiles[i].files[0],inputfiles[i].name);
-	  }
-
-    for(i=0;i<files.length;i++){
-      try{
-        chunkedUploader(files[i].file,files[i].formData);
-      }catch(err){
-        alert(err);
-      }
-    }
-  });
-});
-
-var sendUploadVideo=function(file,type){
-	$.ajax({
-    async: false,
-    method: 'post',
-    dataType: 'json',
-    url: '/upload_video',
-    data: { filename: file.name,totalsize: file.size,section_id: section_id},
-    success: function(res) {
-      if(res.status=="ok"){
-        var obj = new Object();
-		    var formData = new FormData();
-		    formData.append('id', res.id);
-        formData.append('upload_type', type);
-        obj.formData=formData;
-        obj.file=file;
-		    files.push(obj);
-      }
-    }
-  });
-};
-
-var upload=function(file,formData){
-  $.ajax({
-		url: "/chunk_upload",
-    async: false,
-		data: formData,
-		processData: false,
-		contentType: false,
-    dataType: 'json',
-		type: 'POST',
-		success: function (result) {
-      if(result.status=="uploading"){
-        loaded_size=result.uploaded_size;
-        updatePercent(video_size+loaded_size);
-
-        var file_size = file.size;
-				var range_start = result.uploaded_size;
-				var range_end = result.uploaded_size+chunk_size;
-				if(file_size-range_start<chunk_size){
-					range_end = file_size;
-				}
-				upload_file=blobSlice(file,range_start,range_end);
-				formData.append('file', upload_file);
-        upload(file,formData);
-      }else if(result.status=="complete"){
-        loaded_size=result.uploaded_size;
-        updatePercent(video_size+loaded_size);
-        $('#upload-msg').text(result.status);
-      }else if(result.status=="error"){
-        $('#upload-msg').text(result.status);
-      }else if(result.status=="video-complete"){
-        loaded_size=result.uploaded_size;
-        updatePercent(loaded_size);
-        video_size=result.uploaded_size;
-      }
-		  
-			//$('#upload-btn').removeAttr('disabled');
-		}
-	});
-};
-
-var blobSlice=function(blob,startByte,endByte){
-  if(blob.slice){
-    return blob.slice(startByte,endByte);
-  }
-  if(blob.mozSlice){
-    return blob.mozSlice(startByte,endByte);
-  }
-  if(blob.webkitSlice){
-    return blob.webkitSlice(startByte,endByte);
-  }
-  return null;
-};
-
-var chunkedUploader=function(file,formData){
-  var file_size = file.size;
-  var range_start = 0;
-  var range_end = chunk_size;
-  if(file_size<range_end){
-    range_end = file_size;
-  }
-  upload_file=blobSlice(file,range_start,range_end);
-  formData.append('file', upload_file);
-  upload(file,formData);
-}
-
-var updatePercent=function(loaded_size){
-  var percentComplete = loaded_size / total_size;
-	percentComplete = parseInt(percentComplete * 100);
-  var percentVal = percentComplete + '%';
-	bar.width(percentVal)
-  percent.html(percentVal);
-};
 </script>
 

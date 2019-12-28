@@ -61,36 +61,20 @@ class Admin::SectionsController < ApplicationController
 
   def upload_file
     @section=Section.find(params[:section_id])
-    @chapter=@section.chapter
 
-    #render :json => {:data=>'error' }.to_json
-    #return
+    video=Paragraph.generate_file_path(@section,current_user.teacher.id,params[:video][:original_filename])
+    FileUtils.mv params[:video][:tempfile], video[0]
 
-    path=(Schoolify::RootPath.split("/") << current_user.teacher.id << "courses" << @chapter.course_id << "videos").join("/")
-    FileUtils.mkdir_p(path) unless File.exist?(path)
-    
-    key=Time.now.strftime("%Y%m%d%H%M%S")
-    basename=File.basename(params[:video][:original_filename],".*")
-    ext_name=params[:video][:original_filename].split(".")[-1]
-    video_name="#{basename}_#{key}.#{ext_name}"
-    save_video = "#{path}/#{video_name}"
-    video_path=["","uploads","teachers",current_user.teacher.id,"courses",@chapter.course_id,"videos","#{video_name}"].join("/")
-    FileUtils.mv params[:video][:tempfile], save_video
-
-    key=Time.now.strftime("%Y%m%d%H%M%S")
-    basename=File.basename(params[:srt][:original_filename],".*")
-    ext_name=params[:srt][:original_filename].split(".")[-1]
-    srt_name="#{basename}_#{key}.#{ext_name}"
-    save_srt = "#{path}/#{srt_name}"
-    srt_path=["","uploads","teachers",current_user.teacher.id,"courses",@chapter.course_id,"videos","#{srt_name}"].join("/")
-    FileUtils.mv params[:srt][:tempfile], save_srt
+    srt=Paragraph.generate_file_path(@section,current_user.teacher.id,params[:srt][:original_filename])
+    FileUtils.mv params[:srt][:tempfile], srt[0]
 
     render :json => {:data=>'ok' }.to_json
   end
 
   #redirect_to edit_admin_section_path(params[:section_id])
   def upload_video
-    paths=Paragraph.generate_file_path(params[:section_id],current_user.teacher.id,params[:filename])
+    @section=Section.find(params[:section_id])
+    paths=Paragraph.generate_file_path(@section,current_user.teacher.id,params[:filename])
 
     @upload = Upload.new(
       filename: params[:filename],

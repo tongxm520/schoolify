@@ -63,16 +63,16 @@ function upload_video() {
 
 $('input[name=video]').change(function(e) {
   $('#video-name').text($('#video')[0].files[0].name);
-  /*browserMD5File($('#video')[0].files[0], function (err, md5) {
+  browserMD5File($('#video')[0].files[0], function (err, md5) {
 		$('#video-md5').html(md5);
-	});*/
+	});
 });
 
 $('input[name=srt]').change(function(e) {
   $('#srt-name').text($('#srt')[0].files[0].name);
-  /*browserMD5File($('#srt')[0].files[0], function (err, md5) {
+  browserMD5File($('#srt')[0].files[0], function (err, md5) {
 		$('#srt-md5').html(md5);
-	});*/
+	});
 });
 
 /**
@@ -101,11 +101,5 @@ _blobSlice: $.support.blobSlice && function () {
 }
 
 slice = this._blobSlice;
-
-o.blob = slice.call(
-    file,
-    ub,
-    ub + mcs,
-    file.type
-);
+o.blob = slice.call(file,ub,ub + mcs,file.type);
 */

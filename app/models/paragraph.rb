@@ -4,9 +4,8 @@ class Paragraph < ActiveRecord::Base
 
   belongs_to :section
 
-  def self.generate_file_path(section_id,teacher_id,file_name)
-    @section=Section.find(section_id)
-    @chapter=@section.chapter
+  def self.generate_file_path(section,teacher_id,file_name)
+    @chapter=section.chapter
 
     path=(Schoolify::RootPath.split("/") << teacher_id << "courses" << @chapter.course_id << "videos").join("/")
     FileUtils.mkdir_p(path) unless File.exist?(path)
