@@ -27,7 +27,7 @@ rails runner script/load_course.rb
 Long story short you have to remove all tracked files and add them back in using the below commands
 git rm -r --cached .
 git add .
-git commit -m ".gitignore is now working"
+git commit -a -m ".gitignore is now working"
 
 #################################################
 cd /home/simon/Desktop/schoolify
