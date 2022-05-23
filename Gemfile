@@ -11,7 +11,7 @@ gem 'mysql2', '0.3.19'
 gem 'will_paginate', '3.0.5'
 gem 'test-unit','3.0.8'
 gem 'sprockets', '2.2.3'
-gem 'nokogiri', '1.5.11'
+gem 'nokogiri', '1.13.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
