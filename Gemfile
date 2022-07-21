@@ -54,7 +54,7 @@ gem 'unicorn','5.1.0'
 #prevent install new versions
 gem 'rack-cache','1.8.0'
 gem 'concurrent-ruby','1.0.5'
-gem 'tzinfo','0.3.52'
+gem 'tzinfo','0.3.61'
 gem 'thor','0.20.0'
 gem 'ffi','1.9.18'
 gem 'power_assert','1.1.0'
